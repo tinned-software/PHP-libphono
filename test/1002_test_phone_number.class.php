@@ -1,14 +1,14 @@
 <?php
-/*******************************************************************************
+/**
  *
- * @author     Apostolos Karakousis <apostolos.karakousis@tinned-software.net>
+ * @author Apostolos Karakousis <apostolos.karakousis@tinned-software.net>
  * @version 1.0.0
  *
  * @package general scripts
  *
  * Phone Number Tests
  *
-*******************************************************************************/
+**/
 
 echo "<b>Test '".basename(__FILE__)."' ... </b><br/>\n";
 
@@ -24,22 +24,24 @@ require_once(dirname(__FILE__).'/../src/classes/sqlite3.class.php');
  *         $log = new Debug_Logging(true, dirname(__FILE__)."/../../log/general_scripts_test", false);
  * log to global log
  *         $log = $GLOBALS['DBG']
+ * write in performance log:
+ *         $GLOBALS['PRF']->timer_start('T-'.crc32(__FILE__));
+ *         $GLOBALS['PRF']->memory_start('M-'.crc32(__FILE__));
+ *         $GLOBALS['PRF']->memory_show('Measurement at the beginning of file '.basename(__FILE__));
  */
 
 // global preparation for this script
-$log = new Debug_Logging(true, dirname(__FILE__)."/../../log/general_scripts_test", false);
+$log = $GLOBALS['DBG'];
 $log->info('*** Starting file '.basename(__FILE__));
 //$sql_db = new MySQL($conn_string, $debug_level, $GLOBALS['DBG']);
 $sql_db = new SQLite_3($GLOBALS['config_libphono_connection_string'], $GLOBALS['config_debug_level_class'], $GLOBALS['SQL']);
-
-
 
 class kTest
 {
     public $test_table = NULL;
     public $log = NULL;
     public $endresults_to_log = FALSE;
-
+    
     function kTest($log, $endresults_to_log = FALSE)
     {
         $this->log = $log;
@@ -58,16 +60,17 @@ class kTest
         $this->test_table[$test_number]["memory_peak"] = "";
         $this->test_table[$test_number]["duration"] = "";
         $this->test_table[$test_number]["performance"] = "";
-
-        if ($this->endresults_to_log === TRUE)
+        
+        if($this->endresults_to_log === TRUE)
         {
             $this->log->debug2("--------------------------------------------------------------");
             $this->log->debug2("TEST [$test_number] START");
             $this->log->debug2("--------------------------------------------------------------");
         }
-
+        
         $this->test_table[$test_number]["start_time"] = microtime(TRUE);
     }
+    
     function stop($test_number)
     {
         $this->test_table[$test_number]["stop_time"] = microtime(TRUE);
@@ -77,18 +80,19 @@ class kTest
         $this->test_table[$test_number]["duration"] = number_format($this->test_table[$test_number]["stop_time"] - $this->test_table[$test_number]["start_time"],8);
         $this->test_table[$test_number]["performance"] = number_format($this->test_table[$test_number]["operations_count"] / $this->test_table[$test_number]["duration"],3);
         $this->test_table[$test_number]["memory_consumption"] = $this->test_table[$test_number]["memory_stop"] - $this->test_table[$test_number]["memory_start"];
-
-        if ($this->endresults_to_log)
+        
+        if($this->endresults_to_log)
         {
             $this->log->debug2("--------------------------------------------------------------");
             $this->log->debug2("TEST [$test_number] STOP");
             $this->log->debug2("--------------------------------------------------------------");
         }
     }
+    
     function print_result($test_number, $result)
     {
         echo "Test [$test_number] : ".$this->test_table[$test_number]["description"]." : \t <b>";
-        if ($result === TRUE)
+        if($result === TRUE)
         {
             echo "<font color=green>PASSED</font></b><br/>\n";
         }
@@ -96,8 +100,8 @@ class kTest
         {
             echo "<font color=red>FAILED</font></b><br/>\n";
         }
-
-        if ($this->endresults_to_log === TRUE)
+        
+        if($this->endresults_to_log === TRUE)
         {
             $this->log->debug2("test number: ".$test_number);
             $this->log->debug2("description: ".$this->test_table[$test_number]["description"]);
@@ -114,6 +118,7 @@ class kTest
         }
         $this->log->debug2("--------------------------------------------------------------");
     }
+    
     function final_printout()
     {
         echo "<table border = 1>";
@@ -123,8 +128,8 @@ class kTest
         echo "<td>duration</td>";
         echo "<td>performance</td>";
         echo "</tr>";
-        for ($i = 1; $i<sizeof($this->test_table)+1; ++$i)
-
+        
+        for($i = 1; $i<sizeof($this->test_table)+1; ++$i)
         {
             echo "<tr>";
             echo "<td>".$i."</td>";
@@ -316,7 +321,7 @@ $test->stop($test_id);
 $test->print_result($test_id,
         isset($result) === TRUE && is_string($result) && $result === $test_normalized_number
 );
-if ($result !== $test_normalized_number)
+if($result !== $test_normalized_number)
 {
     echo "result of normalized_number_only() = '$result'<br>";
 }
@@ -340,7 +345,7 @@ $test->stop($test_id);
 $test->print_result($test_id,
         isset($result) === TRUE && is_string($result) && $result === $test_normalized_number
 );
-if ($result !== $test_normalized_number)
+if($result !== $test_normalized_number)
 {
     echo "result of normalized_number_only() = '$result'<br>";
 }
@@ -403,8 +408,6 @@ $test_international_number = $test_normalized_international_number = $test_norma
 $result_country_name = $result_input_number = $result_international_number = $result_normalized_international_number = $result_normalized_number = $result_local_number = NULL;
 $result = $number = NULL;
 
-
-
 // --------------------------------------------------------------------------------------------------------------------------------------------
 echo "<br>";
 $test->final_printout();
@@ -413,7 +416,5 @@ $test->final_printout();
 
 echo "<br>";
 echo "<b>Test '".basename(__FILE__)."' ... Finished.</b><br/><br/>\n";
-
-
 
 ?>

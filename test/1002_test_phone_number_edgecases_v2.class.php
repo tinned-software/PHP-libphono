@@ -1,14 +1,14 @@
 <?php
-/*******************************************************************************
+/**
  *
- * @author     Apostolos Karakousis <apostolos.karakousis@tinned-software.net>
+ * @author Apostolos Karakousis <apostolos.karakousis@tinned-software.net>
  * @version 0.1
  *
  * @package general scripts
  *
  * Phone Number Tests
  *
-*******************************************************************************/
+**/
 
 echo "<b>Test '".basename(__FILE__)."' ... </b><br/>\n";
 
@@ -24,11 +24,15 @@ require_once(dirname(__FILE__).'/../src/classes/sqlite3.class.php');
  *         $log = new Debug_Logging(true, dirname(__FILE__)."/../../log/general_scripts_test", false);
  * log to global log
  *         $log = $GLOBALS['DBG']
+ * write in performance log:
+ *         $GLOBALS['PRF']->timer_start('T-'.crc32(__FILE__));
+ *         $GLOBALS['PRF']->memory_start('M-'.crc32(__FILE__));
+ *         $GLOBALS['PRF']->memory_show('Measurement at the beginning of file '.basename(__FILE__));
  */
 
 // global preparation for this script
-$GLOBALS['DBG']->info('*** Starting file '.basename(__FILE__));
-
+$log = $GLOBALS['DBG'];
+$log->info('*** Starting file '.basename(__FILE__));
 //$sql_db = new MySQL($conn_string, $debug_level, $GLOBALS['DBG']);
 $sql_db = new SQLite_3($GLOBALS['config_libphono_connection_string'], $GLOBALS['config_debug_level_class'], $GLOBALS['SQL']);
 
@@ -37,12 +41,13 @@ class kTest
     public $test_table = NULL;
     public $log = NULL;
     public $endresults_to_log = FALSE;
-
+    
     function kTest($log, $endresults_to_log = FALSE)
     {
         $this->log = $log;
         $this->endresults_to_log = $endresults_to_log;
     }
+    
     function start($test_number, $test_description, $operations_count, $test_expected)
     {
         $this->test_table[$test_number]["description"] = $test_description;
@@ -56,8 +61,8 @@ class kTest
         $this->test_table[$test_number]["memory_peak"] = "";
         $this->test_table[$test_number]["duration"] = "";
         $this->test_table[$test_number]["performance"] = "";
-
-        if ($this->endresults_to_log === TRUE)
+        
+        if($this->endresults_to_log === TRUE)
         {
             $this->log->debug2("--------------------------------------------------------------");
             $this->log->debug2("TEST [$test_number] START");
@@ -66,6 +71,7 @@ class kTest
 
         $this->test_table[$test_number]["start_time"] = microtime(TRUE);
     }
+    
     function stop($test_number)
     {
         $this->test_table[$test_number]["stop_time"] = microtime(TRUE);
@@ -75,18 +81,19 @@ class kTest
         $this->test_table[$test_number]["duration"] = number_format($this->test_table[$test_number]["stop_time"] - $this->test_table[$test_number]["start_time"],8);
         $this->test_table[$test_number]["performance"] = number_format($this->test_table[$test_number]["operations_count"] / $this->test_table[$test_number]["duration"],3);
         $this->test_table[$test_number]["memory_consumption"] = $this->test_table[$test_number]["memory_stop"] - $this->test_table[$test_number]["memory_start"];
-
-        if ($this->endresults_to_log)
+        
+        if($this->endresults_to_log)
         {
             $this->log->debug2("--------------------------------------------------------------");
             $this->log->debug2("TEST [$test_number] STOP");
             $this->log->debug2("--------------------------------------------------------------");
         }
     }
+    
     function print_result($test_number, $result)
     {
         echo "Test [$test_number] : ".$this->test_table[$test_number]["description"]." : \t <b>";
-        if ($result === TRUE)
+        if($result === TRUE)
         {
             echo "<font color=green>PASSED</font></b><br/>\n";
         }
@@ -94,8 +101,8 @@ class kTest
         {
             echo "<font color=red>FAILED</font></b><br/>\n";
         }
-
-        if ($this->endresults_to_log === TRUE)
+        
+        if($this->endresults_to_log === TRUE)
         {
             $this->log->debug2("test number: ".$test_number);
             $this->log->debug2("description: ".$this->test_table[$test_number]["description"]);
@@ -112,6 +119,7 @@ class kTest
         }
         $this->log->debug2("--------------------------------------------------------------");
     }
+    
     function final_printout()
     {
         echo "<table border = 1>";
@@ -121,7 +129,7 @@ class kTest
         echo "<td>duration</td>";
         echo "<td>performance</td>";
         echo "</tr>";
-        for ($i = 1; $i<sizeof($this->test_table)+1; ++$i)
+        for($i = 1; $i<sizeof($this->test_table)+1; ++$i)
         {
             echo "<tr>";
             echo "<td>".$i."</td>";
@@ -129,16 +137,12 @@ class kTest
             echo "<td>".$this->test_table[$i]['duration']."</td>";
             echo "<td>".$this->test_table[$i]['performance']."</td>";
             echo "</tr>";
-
         }
         echo "</table>";
     }
 }
 
-
-$test = new kTest($GLOBALS['DBG'], FALSE);
-
-
+$test = new kTest($log, FALSE);
 
 // --------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -185,7 +189,6 @@ $tests = array(
     array(12, "USA","16148895544",        "16148895544","123",   "16148895544"),
     array(13, "USA","01143680123456",     "43680123456","123",   "43680123456"),
     //array(14, "USA","116148895544",        "16148895544","123",   "16148895544"),
-
 
     array(50, "AND","875274",               "376875274",     "123", "376875274"),
     array(51, "AND","00376875274",          "376875274",     "123", "376875274"),
@@ -241,7 +244,7 @@ $table .= '<tr>
     <td>google</td>
     </tr>';
 $debug_cases = array (404);
-foreach ($tests as $testcase)
+foreach($tests as $testcase)
 {
     $test_id                  = $testcase[0];
     $test_input_country       = $testcase[1];
@@ -252,13 +255,13 @@ foreach ($tests as $testcase)
 
     $test->start($test_id, $test_description." [$test_input_country '$test_input_number' expecting: '$test_expected_normalized']", 1, "");
         // setup
-        if (in_array($test_id, $debug_cases) === TRUE)
+        if(in_array($test_id, $debug_cases) === TRUE)
         {
-            $number = new Phone_Number(2, $GLOBALS['DBG'], $sql_db);
+            $number = new Phone_Number(2, $log, $sql_db);
         }
         else
         {
-            $number = new Phone_Number(0, $GLOBALS['DBG'], $sql_db);
+            $number = new Phone_Number(0, $log, $sql_db);
         }
         // input
         $number->set_input_number($test_input_number);
@@ -269,13 +272,13 @@ foreach ($tests as $testcase)
     $test->print_result($test_id,
             isset($result) === TRUE && is_string($result) && $result === $test_expected_normalized
     );
-
+    
     $table .= '<tr>
         <td>'.$test_id.'</td>
         <td>'.$test_input_country.'</td>
         <td>'.$test_input_number.'</td>
         <td>'.$test_expected_normalized.'</td>';
-        if ($result === $test_expected_normalized)
+        if($result === $test_expected_normalized)
         {
             $table .= '<td bgcolor="green">'.$result.'</td>';
         }
@@ -286,7 +289,7 @@ foreach ($tests as $testcase)
     $table .= '<td>'.$number->get_validated_input_number().'</td>
         <td>'.$number->get_normalized_international_number().'</td>
         <td>'.$number->get_international_number().'</td>';
-        if ($result === $test_google)
+        if($result === $test_google)
         {
             $table .= '<td bgcolor="green">'.$test_google.'</td>';
         }
@@ -294,26 +297,21 @@ foreach ($tests as $testcase)
         {
             $table .= '<td bgcolor="red">'.$test_google.'</td>';
         }
-
+        
     $table .= '</tr>';
     // reset
     $test_id = $description = $operations_count = $test_input_number = $test_input_country = $test_expected_normalized = $number = $result = NULL;
-
+    
 }
 $table .= "</table>";
 echo '<script src="sortable.js"></script>';
 echo "<hr>".$table;
 
-
 // --------------------------------------------------------------------------------------------------------------------------------------------
 echo "<br><hr> case 404 (colombia is a known issue)";
 //$test->final_printout();
-
 //echo "<pre>".print_r($test->test_table, TRUE)."</pre>";
 
 echo "<br>";
 echo "<b>Test '".basename(__FILE__)."' ... Finished.</b><br/><br/>\n";
-
-
-
 ?>
