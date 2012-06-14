@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>File Source for get_number_country.php</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+						<h1>Source for file get_number_country.php</h1>
+<p>Documentation is available at <a href="../deprecated/phone_number/_functions---get_number_country.php.html">get_number_country.php</a></p>
+<div class="src-code">
+<div class="src-code"><ol><li><div class="src-line"><a name="a1"></a><span class="src-php">&lt;?php</span></div></li>
+<li><div class="src-line"><a name="a2"></a><span class="src-doc">/**</span></div></li>
+<li><div class="src-line"><a name="a3"></a><span class="src-doc">&nbsp;*&nbsp;This&nbsp;script's&nbsp;functionality&nbsp;will&nbsp;be&nbsp;moved&nbsp;into&nbsp;the&nbsp;Phone_Number&nbsp;class&nbsp;itself</span></div></li>
+<li><div class="src-line"><a name="a4"></a><span class="src-doc">&nbsp;*&nbsp;in&nbsp;the&nbsp;next&nbsp;release&nbsp;of&nbsp;libphono.&nbsp;Relying&nbsp;on&nbsp;it&nbsp;is&nbsp;discouraged.</span></div></li>
+<li><div class="src-line"><a name="a5"></a><span class="src-doc">&nbsp;*&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a6"></a><span class="src-doc">&nbsp;*&nbsp;A&nbsp;script&nbsp;to&nbsp;find&nbsp;the&nbsp;country&nbsp;code&nbsp;for&nbsp;a&nbsp;particular&nbsp;telephone&nbsp;number</span></div></li>
+<li><div class="src-line"><a name="a7"></a><span class="src-doc">&nbsp;*&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a8"></a><span class="src-doc">&nbsp;*&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a9"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@author</span><span class="src-doc">&nbsp;Tyler&nbsp;Ashton</span></div></li>
+<li><div class="src-line"><a name="a10"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@version</span><span class="src-doc">&nbsp;1.0.3</span></div></li>
+<li><div class="src-line"><a name="a11"></a><span class="src-doc">&nbsp;*&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a12"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@package</span><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;deprecated</span></div></li>
+<li><div class="src-line"><a name="a13"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@subpackage</span><span class="src-doc">&nbsp;phone_number</span></div></li>
+<li><div class="src-line"><a name="a14"></a><span class="src-doc">&nbsp;*&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a15"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@todo</span><span class="src-doc">&nbsp;move&nbsp;this&nbsp;functionality&nbsp;into&nbsp;the&nbsp;phone&nbsp;number&nbsp;class&nbsp;(as&nbsp;a&nbsp;static&nbsp;method?)</span></div></li>
+<li><div class="src-line"><a name="a16"></a><span class="src-doc">&nbsp;*&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a17"></a><span class="src-doc">&nbsp;***/</span></div></li>
+<li><div class="src-line"><a name="a18"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a19"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a20"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a21"></a><span class="src-inc">include_once</span><span class="src-sym">(</span><span class="src-id">realpath</span><span class="src-sym">(</span><span class="src-id">dirname</span><span class="src-sym">(</span>__FILE__<span class="src-sym">)</span>.<span class="src-str">'/../classes/sqlite3.class.php'</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a22"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a23"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a24"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a25"></a><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'DBG'</span><span class="src-sym">]</span><span class="src-sym">-&gt;</span><span class="src-id">info</span><span class="src-sym">(</span><span class="src-str">'***&nbsp;Starting&nbsp;file&nbsp;'</span>.<a href="http://www.php.net/basename">basename</a><span class="src-sym">(</span>__FILE__<span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a26"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a27"></a><span class="src-doc">/**</span></div></li>
+<li><div class="src-line"><a name="a28"></a><span class="src-doc">&nbsp;*&nbsp;A&nbsp;function&nbsp;to&nbsp;determine&nbsp;the&nbsp;three&nbsp;letter&nbsp;country&nbsp;code&nbsp;of&nbsp;a&nbsp;particular&nbsp;telephone&nbsp;number</span></div></li>
+<li><div class="src-line"><a name="a29"></a><span class="src-doc">&nbsp;*&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a30"></a><span class="src-doc">&nbsp;*&nbsp;This&nbsp;function&nbsp;will&nbsp;initiate&nbsp;a&nbsp;CLI&nbsp;verification&nbsp;check&nbsp;for&nbsp;a&nbsp;particular&nbsp;user&nbsp;CLI.</span></div></li>
+<li><div class="src-line"><a name="a31"></a><span class="src-doc">&nbsp;*&nbsp;The&nbsp;function&nbsp;will&nbsp;generate&nbsp;and&nbsp;send&nbsp;the&nbsp;verification&nbsp;code&nbsp;using&nbsp;the&nbsp;appropriate</span></div></li>
+<li><div class="src-line"><a name="a32"></a><span class="src-doc">&nbsp;*&nbsp;method&nbsp;(&nbsp;via&nbsp;call&nbsp;or&nbsp;sms&nbsp;)&nbsp;and&nbsp;return&nbsp;the&nbsp;status&nbsp;of&nbsp;the&nbsp;call&nbsp;or&nbsp;sms.</span></div></li>
+<li><div class="src-line"><a name="a33"></a><span class="src-doc">&nbsp;*&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a34"></a><span class="src-doc">&nbsp;*&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a35"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@param&nbsp;</span><span class="src-doc-type">$number&nbsp;</span><span class="src-doc">string&nbsp;the&nbsp;full&nbsp;telephone&nbsp;number&nbsp;to&nbsp;check</span></div></li>
+<li><div class="src-line"><a name="a36"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@param&nbsp;</span><span class="src-doc-type">$number_country_code&nbsp;</span><span class="src-doc">string&nbsp;the&nbsp;leading&nbsp;country&nbsp;code&nbsp;of&nbsp;the&nbsp;number&nbsp;to&nbsp;check</span></div></li>
+<li><div class="src-line"><a name="a37"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@param&nbsp;</span><span class="src-doc-type">&amp;$error&nbsp;</span><span class="src-doc">boolean&nbsp;TRUE&nbsp;or&nbsp;FALSE&nbsp;depending&nbsp;on&nbsp;whether&nbsp;an&nbsp;error&nbsp;was&nbsp;encountered&nbsp;or&nbsp;not</span></div></li>
+<li><div class="src-line"><a name="a38"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@param&nbsp;</span><span class="src-doc-type">&amp;$error_list&nbsp;</span><span class="src-doc">array&nbsp;an&nbsp;array&nbsp;containing&nbsp;the&nbsp;error&nbsp;which&nbsp;was&nbsp;reported&nbsp;by&nbsp;the&nbsp;function</span></div></li>
+<li><div class="src-line"><a name="a39"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@return&nbsp;</span><span class="src-doc-type">mixed&nbsp;</span><span class="src-doc">ZZZ&nbsp;when&nbsp;no&nbsp;country&nbsp;found,&nbsp;three&nbsp;letter&nbsp;country&nbsp;code&nbsp;of&nbsp;the&nbsp;given&nbsp;phone&nbsp;number,&nbsp;or&nbsp;FALSE&nbsp;if&nbsp;an&nbsp;error&nbsp;ocurred</span></div></li>
+<li><div class="src-line"><a name="a40"></a><span class="src-doc">&nbsp;***/</span></div></li>
+<li><div class="src-line"><a name="a41"></a><span class="src-key">function&nbsp;</span><a href="../deprecated/phone_number/_functions---get_number_country.php.html#functionget_number_country">get_number_country</a><span class="src-sym">(</span><span class="src-var">$number</span><span class="src-sym">,&nbsp;</span><span class="src-var">$number_country_code</span><span class="src-sym">,&nbsp;</span><span class="src-sym">&amp;</span><span class="src-var">$error</span><span class="src-sym">,&nbsp;</span><span class="src-sym">&amp;</span><span class="src-var">$error_list</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line"><a name="a42"></a><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a43"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if</span><span class="src-sym">(</span>isset<span class="src-sym">(</span><span class="src-var">$number</span><span class="src-sym">)&nbsp;</span>===&nbsp;<span class="src-id">FALSE&nbsp;</span>||&nbsp;isset<span class="src-sym">(</span><span class="src-var">$number_country_code</span><span class="src-sym">)&nbsp;</span>===&nbsp;<span class="src-id">FALSE</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line"><a name="a44"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a45"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'DBG'</span><span class="src-sym">]</span><span class="src-sym">-&gt;</span><span class="src-id">error</span><span class="src-sym">(</span><span class="src-str">'missing&nbsp;parameters,&nbsp;cannot&nbsp;continue&nbsp;to&nbsp;process&nbsp;number'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a46"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-id">NULL</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a47"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a48"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'DBG'</span><span class="src-sym">]</span><span class="src-sym">-&gt;</span><span class="src-id">debug2</span><span class="src-sym">(</span><span class="src-str">&quot;</span><span class="src-str">input&nbsp;parameters:&nbsp;<span class="src-var">$number</span>,&nbsp;<span class="src-var">$number_country_code</span></span><span class="src-str">&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a49"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a50"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$sql_db&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../framework/core/SQLite_3.html">SQLite_3</a></span><span class="src-sym">(</span><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'config_libphono_connection_string'</span><span class="src-sym">]</span><span class="src-sym">,&nbsp;</span><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'config_debug_level_class'</span><span class="src-sym">]</span><span class="src-sym">,&nbsp;</span><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'DBG'</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a51"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a52"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//</span></div></li>
+<li><div class="src-line"><a name="a53"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;attempt&nbsp;to&nbsp;find&nbsp;the&nbsp;country&nbsp;of&nbsp;the&nbsp;number&nbsp;using&nbsp;the&nbsp;number</span></div></li>
+<li><div class="src-line"><a name="a54"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$query_dialcode&nbsp;</span>=&nbsp;<span class="src-str">&quot;</span><span class="src-str">SELECT&nbsp;*&nbsp;FROM&nbsp;Country_Dialcodes&nbsp;WHERE&nbsp;'{<span class="src-var">$sql_db</span></span><span class="src-sym">-&gt;</span><span class="src-id">escape_string</span><span class="src-sym">(</span><span class="src-var">$number</span><span class="src-sym">)</span><span class="src-str"></span><span class="src-sym">}</span>'&nbsp;LIKE&nbsp;extended_dialcode&nbsp;||&nbsp;'%'&nbsp;ORDER&nbsp;BY&nbsp;LENGTH(extended_dialcode)&nbsp;DESC</span><span class="src-str">&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a55"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a56"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;send&nbsp;query&nbsp;to&nbsp;db&nbsp;and&nbsp;get&nbsp;result</span></div></li>
+<li><div class="src-line"><a name="a57"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$errno&nbsp;</span>=&nbsp;<span class="src-var">$errtext&nbsp;</span>=&nbsp;<span class="src-id">NULL</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a58"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$query_dialcode_result&nbsp;</span>=&nbsp;<span class="src-var">$sql_db</span><span class="src-sym">-&gt;</span><span class="src-id">get_query_result</span><span class="src-sym">(</span><span class="src-var">$query_dialcode</span><span class="src-sym">,&nbsp;</span><span class="src-var">$errno</span><span class="src-sym">,&nbsp;</span><span class="src-var">$errtext</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a59"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a60"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if</span><span class="src-sym">(</span><span class="src-var">$errno&nbsp;</span>!=&nbsp;<span class="src-id">NULL</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line"><a name="a61"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a62"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;Error&nbsp;while&nbsp;query&nbsp;execution</span></div></li>
+<li><div class="src-line"><a name="a63"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$error_list</span><span class="src-sym">[</span><span class="src-sym">]&nbsp;</span>=&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'error_text'&nbsp;</span>=&gt;&nbsp;<span class="src-str">&quot;Internal&nbsp;Error&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-str">'error_code'&nbsp;</span>=&gt;&nbsp;<span class="src-str">&quot;</span><span class="src-str">300.<span class="src-var">$errno</span></span><span class="src-str">&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a64"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$error&nbsp;</span>=&nbsp;<span class="src-id">TRUE</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a65"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'DBG'</span><span class="src-sym">]</span><span class="src-sym">-&gt;</span><span class="src-id">error</span><span class="src-sym">(</span><span class="src-str">&quot;</span><span class="src-str">SQL:&nbsp;<span class="src-var">$errno</span>,&nbsp;<span class="src-var">$errtext</span></span><span class="src-str">&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a66"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-id">FALSE</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a67"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a68"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a69"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$return&nbsp;</span>=&nbsp;<span class="src-str">'ZZZ'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a70"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a71"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if</span><span class="src-sym">(</span><span class="src-var">$query_dialcode_result</span><span class="src-sym">[</span><span class="src-str">'count'</span><span class="src-sym">]&nbsp;</span>&gt;=&nbsp;<span class="src-num">1</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line"><a name="a72"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a73"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'DBG'</span><span class="src-sym">]</span><span class="src-sym">-&gt;</span><span class="src-id">debug2_array</span><span class="src-sym">(</span><span class="src-str">'matche(s)&nbsp;results&nbsp;found:&nbsp;'</span><span class="src-sym">,&nbsp;</span><span class="src-var">$query_dialcode_result</span><span class="src-sym">[</span><span class="src-str">'data'</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a74"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$return&nbsp;</span>=&nbsp;<span class="src-var">$query_dialcode_result</span><span class="src-sym">[</span><span class="src-str">'data'</span><span class="src-sym">]</span><span class="src-sym">[</span><span class="src-num">0</span><span class="src-sym">]</span><span class="src-sym">[</span><span class="src-str">'country_3_letter'</span><span class="src-sym">]</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a75"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a76"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">else</span></div></li>
+<li><div class="src-line"><a name="a77"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a78"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'DBG'</span><span class="src-sym">]</span><span class="src-sym">-&gt;</span><span class="src-id">info</span><span class="src-sym">(</span><span class="src-str">&quot;</span><span class="src-str">No&nbsp;country&nbsp;found&nbsp;for&nbsp;cli_country_code&nbsp;'{<span class="src-var">$number_country_code</span><span class="src-sym">}</span>'</span><span class="src-str">&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a79"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a80"></a>&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a81"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-var">$return</span><span class="src-sym">;&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a82"></a><span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a83"></a><span class="src-php">?&gt;</span></div></li>
+</ol></div>
+</div>
+	<p class="notes" id="credit">
+		Documentation generated on Thu, 14 Jun 2012 07:47:05 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.2</a>
+	</p>
+	</body>
+</html>

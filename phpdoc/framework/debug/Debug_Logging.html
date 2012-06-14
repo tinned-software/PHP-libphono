@@ -1,0 +1,2127 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class Debug_Logging</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class Debug_Logging</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Debug_Logging class to provide easy access to logging functionality.</p>
+<p class="description"><p>The Debug_Logging class provides an easy way to store different kind of  logging information into logfiles or a database. It also supports sending  the log information to the browser or into the FirePHP Firefox extension  (http://www.firephp.org/).</p><p>The different log messages are seperated by log types. The Debug_Logging a  class provides number of differenttypes such as INFO, DEBUG, ERROR, ... and  so on. Additional there are some spezial types like DEBUG_ARRAY where a  complete array of informations can be logged or PERFORMANCE where time  measurements can be made.</p><p>This class supports also the rotation of logfiles. a main feature is the  limit of the logfile to a specific size. When the size of the file exceeds a  configured limit, a new file with a new sequence number is generated.  Additional to this, the Debug_Logging class supports it to keep a  configureable number of logfiles and the posibility to remove/delete all  older logfiles.</p><p>As a special feature it is possible to disable and / or filter the messages  before they are written to the log target. It is possible to disable messages  by their type of the filepath they are origin from. This makes it possible  to reduce the amount of logging information in the log file or the database.</p><p>The output can also be changed by configuring the fields of the log message  to be stored or ignored. This makes it possible to hide unused fields of the  log messages to save logfile space.</p></p>
+	<ul class="tags">
+				<li><span class="field">link:</span> <a href="http://www.firephp.org/">http://www.firephp.org/</a></li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_classes---debug_logging.class.php.html">/classes/debug_logging.class.php</a> (line <span class="field"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a69">69</a></span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$browscap_class_file" title="details" class="var-name">$browscap_class_file</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">integer</span>
+					<a href="#$strlen_diff" title="details" class="var-name">$strlen_diff</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">integer</span>
+					<a href="#$strlen_file" title="details" class="var-name">$strlen_file</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">integer</span>
+					<a href="#$strlen_func" title="details" class="var-name">$strlen_func</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">integer</span>
+					<a href="#$strlen_ip" title="details" class="var-name">$strlen_ip</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">integer</span>
+					<a href="#$strlen_line" title="details" class="var-name">$strlen_line</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">integer</span>
+					<a href="#$strlen_sess" title="details" class="var-name">$strlen_sess</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">integer</span>
+					<a href="#$strlen_type" title="details" class="var-name">$strlen_type</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																																																																																																																																																																																																																																																																																						
+				<div class="method-definition">
+											<span class="method-result">Debug_Logging</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											([<span class="var-type">bool</span>&nbsp;<span class="var-name">$to_file</span> = <span class="var-default">false</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$filenamebase</span> = <span class="var-default">null</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$to_browser</span> = <span class="var-default">false</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#__destruct" title="details" class="method-name">__destruct</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#backtrace" title="details" class="method-name">backtrace</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$msg_text</span>, [<span class="var-type">bool</span>&nbsp;<span class="var-name">$trace_info</span> = <span class="var-default">false</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$add_traceback_index</span> = <span class="var-default">0</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#client_info" title="details" class="method-name">client_info</a>
+											([<span class="var-type">int</span>&nbsp;<span class="var-name">$add_traceback_index</span> = <span class="var-default">0</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#debug" title="details" class="method-name">debug</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$msg_text</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$add_traceback_index</span> = <span class="var-default">0</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#debug2" title="details" class="method-name">debug2</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$msg_text</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$add_traceback_index</span> = <span class="var-default">0</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#debug2_array" title="details" class="method-name">debug2_array</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$msg_text</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$msg_array</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$add_traceback_index</span> = <span class="var-default">0</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#debug_array" title="details" class="method-name">debug_array</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$msg_text</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$msg_array</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$add_traceback_index</span> = <span class="var-default">0</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#error" title="details" class="method-name">error</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$msg_text</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$add_traceback_index</span> = <span class="var-default">0</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#get_catch_php_errors" title="details" class="method-name">get_catch_php_errors</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#get_catch_unhandled_exceptions" title="details" class="method-name">get_catch_unhandled_exceptions</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#get_delete_logfiles" title="details" class="method-name">get_delete_logfiles</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#get_field_seperator" title="details" class="method-name">get_field_seperator</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#get_filepath_filter" title="details" class="method-name">get_filepath_filter</a>
+											(<span class="var-type">$list</span>&nbsp;<span class="var-name">$list</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#get_logcach" title="details" class="method-name">get_logcach</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#get_logcach_content" title="details" class="method-name">get_logcach_content</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#get_logfile_suffix" title="details" class="method-name">get_logfile_suffix</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#get_logging_fields" title="details" class="method-name">get_logging_fields</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$field</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#get_logging_phptypes" title="details" class="method-name">get_logging_phptypes</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$errno</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#get_logging_types" title="details" class="method-name">get_logging_types</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#get_log_target" title="details" class="method-name">get_log_target</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$target</span> = <span class="var-default">&quot;file&quot;</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">int</span>
+										<a href="#get_max_filenumber" title="details" class="method-name">get_max_filenumber</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">int</span>
+										<a href="#get_max_filesize" title="details" class="method-name">get_max_filesize</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#get_sessid_filename" title="details" class="method-name">get_sessid_filename</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#get_session_id" title="details" class="method-name">get_session_id</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#get_time_diff" title="details" class="method-name">get_time_diff</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#info" title="details" class="method-name">info</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$msg_text</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$add_traceback_index</span> = <span class="var-default">0</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#log_as_type" title="details" class="method-name">log_as_type</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$msg_text</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$add_traceback_index</span> = <span class="var-default">0</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#performance" title="details" class="method-name">performance</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$msg_text</span>, [<span class="var-type">sting</span>&nbsp;<span class="var-name">$start</span> = <span class="var-default">&quot;stop&quot;</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$add_traceback_index</span> = <span class="var-default">0</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#set_catch_php_errors" title="details" class="method-name">set_catch_php_errors</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$enable</span>, <span class="var-type">bool</span>&nbsp;<span class="var-name">$enablele</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#set_catch_unhandled_exceptions" title="details" class="method-name">set_catch_unhandled_exceptions</a>
+											(<span class="var-type">bool</span>&nbsp;<span class="var-name">$enable</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#set_delete_logfiles" title="details" class="method-name">set_delete_logfiles</a>
+											([<span class="var-type">bool</span>&nbsp;<span class="var-name">$enabled</span> = <span class="var-default">true</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#set_field_seperator" title="details" class="method-name">set_field_seperator</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$seperator</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#set_filepath_filter" title="details" class="method-name">set_filepath_filter</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$path_regex</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$list</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#set_logcach" title="details" class="method-name">set_logcach</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$type</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$enabled</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$target</span> = <span class="var-default">null</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#set_logfile_suffix" title="details" class="method-name">set_logfile_suffix</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$suffix</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#set_logging_fields" title="details" class="method-name">set_logging_fields</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$field</span>, [<span class="var-type">bool</span>&nbsp;<span class="var-name">$enabled</span> = <span class="var-default">true</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#set_logging_phptypes" title="details" class="method-name">set_logging_phptypes</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$errno</span>, <span class="var-type">bool</span>&nbsp;<span class="var-name">$enable</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#set_logging_types" title="details" class="method-name">set_logging_types</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>, [<span class="var-type">bool</span>&nbsp;<span class="var-name">$enabled</span> = <span class="var-default">true</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#set_log_target" title="details" class="method-name">set_log_target</a>
+											([<span class="var-type">bool</span>&nbsp;<span class="var-name">$to_file</span> = <span class="var-default">false</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$filenamebase</span> = <span class="var-default">null</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$to_browser</span> = <span class="var-default">false</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#set_log_target_db" title="details" class="method-name">set_log_target_db</a>
+											([<span class="var-type">object</span>&nbsp;<span class="var-name">&$to_sqldb</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$to_sqldb_table</span> = <span class="var-default">null</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#set_log_target_firephp" title="details" class="method-name">set_log_target_firephp</a>
+											([<span class="var-type">object</span>&nbsp;<span class="var-name">&$to_firephp</span> = <span class="var-default">null</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#set_max_filenumber" title="details" class="method-name">set_max_filenumber</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$amount</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#set_max_filesize" title="details" class="method-name">set_max_filesize</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$size</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#set_sessid_filename" title="details" class="method-name">set_sessid_filename</a>
+											(<span class="var-type">bool</span>&nbsp;<span class="var-name">$enable</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#set_session_id" title="details" class="method-name">set_session_id</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$session_id</span> = <span class="var-default">FALSE</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#set_time_diff" title="details" class="method-name">set_time_diff</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$option</span>)
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+<a name="var$browscap_class_file" id="$browscap_class_file"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$browscap_class_file</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a136">136</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the browscap class file which is used to parse the browser string if  the php internal function is not available or not configured.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$strlen_diff" id="$strlen_diff"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">integer</span>
+			<span class="var-name">$strlen_diff</span>
+			 = <span class="var-default"> 7</span>			(line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a92">92</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the column length for the time-diff field to a minimum length</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$strlen_file" id="$strlen_file"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">integer</span>
+			<span class="var-name">$strlen_file</span>
+			 = <span class="var-default"> 30</span>			(line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a122">122</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the column length for the file-name field to a minimum length</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$strlen_func" id="$strlen_func"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">integer</span>
+			<span class="var-name">$strlen_func</span>
+			 = <span class="var-default"> 27</span>			(line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a128">128</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the column length for the function-name field to a minimum length</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$strlen_ip" id="$strlen_ip"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">integer</span>
+			<span class="var-name">$strlen_ip</span>
+			 = <span class="var-default"> 15</span>			(line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a104">104</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the column length for the ip-address field to a minimum length</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$strlen_line" id="$strlen_line"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">integer</span>
+			<span class="var-name">$strlen_line</span>
+			 = <span class="var-default"> 5</span>			(line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a116">116</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the column length for the line-number field to a minimum length</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$strlen_sess" id="$strlen_sess"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">integer</span>
+			<span class="var-name">$strlen_sess</span>
+			 = <span class="var-default"> 27</span>			(line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a98">98</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the column length for the session-id field to a minimum length</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$strlen_type" id="$strlen_type"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">integer</span>
+			<span class="var-name">$strlen_type</span>
+			 = <span class="var-default"> 8</span>			(line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a110">110</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the column length for the type field to a minimum length</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a222">222</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor for the class</p>
+<p class="description"><p>The constructor accepts the basic configuration for the log target file  and browser as well as the configuration for the logfile basename. The  basename will be extended by a sequence number followed by the file  extension &quot;.log&quot;.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Debug_Logging</span>
+		<span class="method-name">
+			__construct
+		</span>
+					([<span class="var-type">bool</span>&nbsp;<span class="var-name">$to_file</span> = <span class="var-default">false</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$filenamebase</span> = <span class="var-default">null</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$to_browser</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$to_file</span><span class="var-description">: Write log messages to the logfile</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$filenamebase</span><span class="var-description">: Base of the logfile name containing path and filename without extension.</span>			</li>
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$to_browser</span><span class="var-description">: Write log messages to the browser</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="method__destruct" id="__destruct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Destructor __destruct</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a324">324</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Destructor for the class</p>
+<p class="description"><p>The descructor will send a last log message to the configured log  targets when the object is destroid. The old error and exception handler will also be restored</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			__destruct
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodbacktrace" id="backtrace"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">backtrace</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a2753">2753</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Log message from type TRACE (backtrace)</p>
+<p class="description"><p>This method initiates a complete backtrace to be sent to the logtarget.  This log masseges are from the type TRACE. The backtrace informations  are formated to be easy to read. Providing a traceback index is only  recommended if you want to get the backtrace information from a level  lower then from the file and function where the log message was called  from.</p></p>
+	<ul class="tags">
+				<li><span class="field">link:</span> <a href="http://www.php.net/manual/en/function.debug-backtrace.php">http://www.php.net/manual/en/function.debug-backtrace.php debug_backtrace()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			backtrace
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$msg_text</span>, [<span class="var-type">bool</span>&nbsp;<span class="var-name">$trace_info</span> = <span class="var-default">false</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$add_traceback_index</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$msg_text</span><span class="var-description">: Text message to be logged</span>			</li>
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$trace_info</span><span class="var-description">: Log additional backtrace information</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$add_traceback_index</span><span class="var-description">: Additional index to trace back</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodclient_info" id="client_info"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">client_info</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a2554">2554</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Log message from type CLIENT</p>
+<p class="description"><p>This method initiates a log message of the type CLIENT. This log  information is sent to the configured log target.  The following informations are collected and send to the logtarteg. The  current URL, the URL of the last page if available and the browser  informations.  Providing a traceback index is only recommended if  you want to get the backtrace information from a level lower then from  the file and function where the log message was called from.</p></p>
+	<ul class="tags">
+				<li><span class="field">link:</span> <a href="http://www.php.net/manual/en/function.debug-backtrace.php">http://www.php.net/manual/en/function.debug-backtrace.php debug_backtrace()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			client_info
+		</span>
+					([<span class="var-type">int</span>&nbsp;<span class="var-name">$add_traceback_index</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$add_traceback_index</span><span class="var-description">: Additional index to trace back</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddebug" id="debug"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">debug</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a2421">2421</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Log message from type DEBUG</p>
+<p class="description"><p>This method initiates a log message of the type DEBUG. This log  information is sent to the configured log target. Only the text message  has to be provided. Providing a traceback index is only recommended if  you want to get the backtrace information from a level lower then from  the file and function where the log message was called from.</p></p>
+	<ul class="tags">
+				<li><span class="field">link:</span> <a href="http://www.php.net/manual/en/function.debug-backtrace.php">http://www.php.net/manual/en/function.debug-backtrace.php debug_backtrace()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			debug
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$msg_text</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$add_traceback_index</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$msg_text</span><span class="var-description">: Text message to be logged</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$add_traceback_index</span><span class="var-description">: Additional index to trace back</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddebug2" id="debug2"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">debug2</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a2469">2469</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Log message from type DEBUG2</p>
+<p class="description"><p>This method initiates a log message of the type DEBUG2. This log  information is sent to the configured log target. Only the text message  has to be provided. Providing a traceback index is only recommended if  you want to get the backtrace information from a level lower then from  the file and function where the log message was called from.</p></p>
+	<ul class="tags">
+				<li><span class="field">link:</span> <a href="http://www.php.net/manual/en/function.debug-backtrace.php">http://www.php.net/manual/en/function.debug-backtrace.php debug_backtrace()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			debug2
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$msg_text</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$add_traceback_index</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$msg_text</span><span class="var-description">: Text message to be logged</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$add_traceback_index</span><span class="var-description">: Additional index to trace back</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddebug2_array" id="debug2_array"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">debug2_array</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a2524">2524</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Log message from type DEBUG2_A (debug2 array)</p>
+<p class="description"><p>This method initiates a log message of the type DEBUG2_A. This log  information is sent to the configured log target. Only the text message  and the array/object to be logged has to be provided. Providing a  traceback index is only recommended if you want to get the backtrace  information from a level lower then from the file and function where  the log message was called from.</p></p>
+	<ul class="tags">
+				<li><span class="field">link:</span> <a href="http://www.php.net/manual/en/function.debug-backtrace.php">http://www.php.net/manual/en/function.debug-backtrace.php debug_backtrace()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			debug2_array
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$msg_text</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$msg_array</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$add_traceback_index</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$msg_text</span><span class="var-description">: Text message to be logged</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$msg_array</span><span class="var-description">: array to be logged</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$add_traceback_index</span><span class="var-description">: Additional index to trace back</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddebug_array" id="debug_array"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">debug_array</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a2495">2495</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Log message from type DEBUG_A (debug array)</p>
+<p class="description"><p>This method initiates a log message of the type DEBUG_A. This log  information is sent to the configured log target. Only the text message  and the array/object to be logged has to be provided. Providing a  traceback index is only recommended if you want to get the backtrace  information from a level lower then from the file and function where  the log message was called from.</p></p>
+	<ul class="tags">
+				<li><span class="field">link:</span> <a href="http://www.php.net/manual/en/function.debug-backtrace.php">http://www.php.net/manual/en/function.debug-backtrace.php debug_backtrace()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			debug_array
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$msg_text</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$msg_array</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$add_traceback_index</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$msg_text</span><span class="var-description">: Text message to be logged</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$msg_array</span><span class="var-description">: array to be logged</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$add_traceback_index</span><span class="var-description">: Additional index to trace back</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoderror" id="error"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">error</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a2445">2445</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Log message from type ERROR</p>
+<p class="description"><p>This method initiates a log message of the type ERROR. This log  information is sent to the configured log target. Only the text message  has to be provided. Providing a traceback index is only recommended if  you want to get the backtrace information from a level lower then from  the file and function where the log message was called from.</p></p>
+	<ul class="tags">
+				<li><span class="field">link:</span> <a href="http://www.php.net/manual/en/function.debug-backtrace.php">http://www.php.net/manual/en/function.debug-backtrace.php debug_backtrace()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			error
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$msg_text</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$add_traceback_index</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$msg_text</span><span class="var-description">: Text message to be logged</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$add_traceback_index</span><span class="var-description">: Additional index to trace back</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_catch_php_errors" id="get_catch_php_errors"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_catch_php_errors</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a1069">1069</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get catching of php generated error messages</p>
+<p class="description"><p>This method returns the state if the catching of php internal errors  is enabled. When the catching of php errors is enabled true is returned  false otherwhise.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if catching php error messages is enabled</li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_catch_php_errors">Debug_Logging::set_catch_php_errors()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			get_catch_php_errors
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodget_catch_unhandled_exceptions" id="get_catch_unhandled_exceptions"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_catch_unhandled_exceptions</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a1119">1119</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get catching of unhandled exceptions</p>
+<p class="description"><p>This method returns the state if the catching of unhandled exceptions  is enabled. When the catching of unhandled exceptions is enabled true is  returned false otherwhise.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if catching php error messages is enabled</li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_catch_unhandled_exceptions">Debug_Logging::set_catch_unhandled_exceptions()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			get_catch_unhandled_exceptions
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodget_delete_logfiles" id="get_delete_logfiles"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_delete_logfiles</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a1295">1295</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the state of delete old log files</p>
+<p class="description"><p>This method returns the status of the functionality to delete old  logfiles. If this functionality is enabled true is returned false  otherwhise.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True, if deletion of logfiles is allowed</li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_delete_logfiles">Debug_Logging::set_delete_logfiles()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			get_delete_logfiles
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodget_field_seperator" id="get_field_seperator"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_field_seperator</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a1237">1237</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the seperating characters for the log fields</p>
+<p class="description"><p>This method returns the configured field seperator used to seperate the  log message fields.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> The seperating character(s) for the log fields</li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_field_seperator">Debug_Logging::set_field_seperator()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			get_field_seperator
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodget_filepath_filter" id="get_filepath_filter"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_filepath_filter</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a1314">1314</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get filepath gerular-expression for black- or white-list</p>
+<p class="description"><p>This method returns the configured regex of the filepath filter. The  configured regex string of the provided list is returned. Lists  available are 'white' and 'black'.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> The regular-expression for the origin filepath of the log message</li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodget_filepath_filter">Debug_Logging::get_filepath_filter()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			get_filepath_filter
+		</span>
+					(<span class="var-type">$list</span>&nbsp;<span class="var-name">$list</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$list</span>
+				<span class="var-name">$list</span><span class="var-description">: name of the list (&quot;white&quot;, &quot;black&quot;) for the file / path</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_logcach" id="get_logcach"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_logcach</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a1365">1365</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get log message caching</p>
+<p class="description"><p>This method returnes the log message cach setting of the class. It will  return the onfigured target if enabled or false if disabled. The cached  log messages are returned from get_log_cach_content().</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> The target or false if disabled.</li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_logcach">Debug_Logging::set_logcach()</a></li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodget_logcach_content">Debug_Logging::get_logcach_content()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			get_logcach
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$type</span><span class="var-description">: The type of the logmessages to be cached</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_logcach_content" id="get_logcach_content"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_logcach_content</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a1389">1389</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get log message cach content</p>
+<p class="description"><p>This method allows to enable caching of log messages. If this option is  enabled, every log message is stored within the class. The log messages  can be send during destruction to the log target defined. For the  definition of the target, the following values are available: browser</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> The cach settings as array with 'target', 'enabled' and 'count'</li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_logcach">Debug_Logging::set_logcach()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			get_logcach_content
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$type</span><span class="var-description">: The type of the logmessages to be cached</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_logfile_suffix" id="get_logfile_suffix"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_logfile_suffix</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a1341">1341</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get logfile name suffix</p>
+<p class="description"><p>This method allows to get the define logfile name sufix based on the  log type. If no suffix is set, a empty string is returned.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> The configured sufix for this log message type</li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_logfile_suffix">Debug_Logging::set_logfile_suffix()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			get_logfile_suffix
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$type</span><span class="var-description">: The log type to get the logfile name suffix for</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_logging_fields" id="get_logging_fields"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_logging_fields</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a1188">1188</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get status of field</p>
+<p class="description"><p>Get the current configured status for log message fields. It will return  true if the requested field is enabled and false otherwhise.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Enable (true) or disable (false) logging for this log field</li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_logging_fields">Debug_Logging::set_logging_fields()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			get_logging_fields
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$field</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$field</span><span class="var-description">: Define field of the log message</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_logging_phptypes" id="get_logging_phptypes"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_logging_phptypes</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a1098">1098</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the state of the php error logging</p>
+<p class="description"><p>This method returns the configured state of the php error logging for a  specified error type. This error types can be specified using the  predefined php error constants.</p><p>The following errors can be catched: E_WARNING, E_NOTICE, E_STRICT as well  as the user triggert errors E_USER_ERROR, E_USER_WARNING, E_USER_NOTICE.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Enable (true) or disable (false) logging for this type of error.</li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_catch_php_errors">Debug_Logging::set_catch_php_errors()</a></li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_logging_phptypes">Debug_Logging::set_logging_phptypes()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			get_logging_phptypes
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$errno</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$errno</span><span class="var-description">: the error number. Can be used like E_WARNING or E_NOTICE</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_logging_types" id="get_logging_types"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_logging_types</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a1161">1161</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get status of field</p>
+<p class="description"><p>Get the current configured status for log message types. It will return  true if the requested type is enabled and false otherwhise.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Enable (true) or disable (false) logging for this type of message.</li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_logging_types">Debug_Logging::set_logging_types()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			get_logging_types
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$type</span><span class="var-description">: Define the type of log message</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_log_target" id="get_log_target"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_log_target</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a1029">1029</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get log target configuration</p>
+<p class="description"><p>This method allows to get the current configured log target(s).  Depending on the target, it returns if this target is enabled or  disabled. In case of a non boolean configuration like the file-basename,  it returns the current configuration.</p><p>The available targets to get the configuration for are: file, browser,  basename, firephp, sqldb, sqldb_table</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Enable (true), disable (false) or the configuration element.</li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_log_target_db">Debug_Logging::set_log_target_db()</a></li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_log_target_firephp">Debug_Logging::set_log_target_firephp()</a></li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_log_target">Debug_Logging::set_log_target()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			get_log_target
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$target</span> = <span class="var-default">&quot;file&quot;</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$target</span><span class="var-description">: To check for a specific target</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_max_filenumber" id="get_max_filenumber"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_max_filenumber</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a1277">1277</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the maximum number of files</p>
+<p class="description"><p>This method returns the configured number of files to keep. The number  of files takes only effect when the functionality to deleted old  logfiles are.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> The maximum number of logfiles allowed</li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_max_filenumber">Debug_Logging::set_max_filenumber()</a></li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_delete_logfiles">Debug_Logging::set_delete_logfiles()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int</span>
+		<span class="method-name">
+			get_max_filenumber
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodget_max_filesize" id="get_max_filesize"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_max_filesize</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a1256">1256</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the maximum file size</p>
+<p class="description"><p>This method returns the configured maximum file size. The returns size  is always in bytes.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> The maximum file size in bytes</li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_max_filesize">Debug_Logging::set_max_filesize()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int</span>
+		<span class="method-name">
+			get_max_filesize
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodget_sessid_filename" id="get_sessid_filename"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_sessid_filename</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a1143">1143</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the status if session-id is part of thge logfiles</p>
+<p class="description"><p>This method returns the state of the configuration for the session-id.  This option adds the session-id to the logfile name. When it is enabled,  the method returns true and false otherwhise.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Enable (true) or disable (false) logging for this type of message.</li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_sessid_filename">Debug_Logging::set_sessid_filename()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			get_sessid_filename
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodget_session_id" id="get_session_id"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_session_id</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a1422">1422</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get log message session ID</p>
+<p class="description"><p>This method is used to get the session ID for the log messages. The  session ID appears in a separate field in the log line.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> The session ID as it appears in the log message</li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_session_id">Debug_Logging::set_session_id()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			get_session_id
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodget_time_diff" id="get_time_diff"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_time_diff</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a1217">1217</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get time diff behaviour</p>
+<p class="description"><p>This method returns the status of the diff behaviour. It returns the  configured string 'line' or 'script'.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Returns the string configured for the time-diff behaviour</li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_time_diff">Debug_Logging::set_time_diff()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			get_time_diff
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodinfo" id="info"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">info</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a2397">2397</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Log message from type INFO</p>
+<p class="description"><p>This method initiates a log message of the type INFO. This log  information is sent to the configured log target. Only the text message  has to be provided. Providing a traceback index is only recommended if  you want to get the backtrace information from a level lower then from  the file and function where the log message was called from.</p></p>
+	<ul class="tags">
+				<li><span class="field">link:</span> <a href="http://www.php.net/manual/en/function.debug-backtrace.php">http://www.php.net/manual/en/function.debug-backtrace.php debug_backtrace()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			info
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$msg_text</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$add_traceback_index</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$msg_text</span><span class="var-description">: Text message to be logged</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$add_traceback_index</span><span class="var-description">: Additional index to trace back</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodlog_as_type" id="log_as_type"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">log_as_type</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a3021">3021</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Log message from defied type</p>
+<p class="description"><p>This method initiates a log message of the defined type. This log  information is sent to the configured log target. Only the text message  and the type has to be provided. Providing a traceback index is only  recommended if you want to get the backtrace information from a level  lower then from the file and function where the log message was called  from.</p><p>This is an internal method to integrate other classes to the  logging functionality.</p></p>
+	<ul class="tags">
+				<li><span class="field">link:</span> <a href="http://www.php.net/manual/en/function.debug-backtrace.php">http://www.php.net/manual/en/function.debug-backtrace.php debug_backtrace()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			log_as_type
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$msg_text</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$add_traceback_index</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$type</span><span class="var-description">: The type of the message</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$msg_text</span><span class="var-description">: Text message to be logged</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$add_traceback_index</span><span class="var-description">: Additional index to trace back</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodperformance" id="performance"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">performance</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a2701">2701</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Log message from type PERFORM (Performance)</p>
+<p class="description"><p>This method initiates a log message of the type PERFORM. This log  information is sent to the configured log target. With the start  parameter set to 'start' the measurement can be started and with 'stop'  the measurement is stopped and the log message is written to the log  file. Only when the measurement is stopped a log message is written.  Providing a traceback index is only recommended if you want to get the  backtrace information from a level lower then from the file and function  where the log message was called from.</p></p>
+	<ul class="tags">
+				<li><span class="field">link:</span> <a href="http://www.php.net/manual/en/function.debug-backtrace.php">http://www.php.net/manual/en/function.debug-backtrace.php debug_backtrace()
+
+ Log message from type performance</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			performance
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$msg_text</span>, [<span class="var-type">sting</span>&nbsp;<span class="var-name">$start</span> = <span class="var-default">&quot;stop&quot;</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$add_traceback_index</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$msg_text</span><span class="var-description">: Text message to be logged</span>			</li>
+					<li>
+				<span class="var-type">sting</span>
+				<span class="var-name">$start</span><span class="var-description">: The start or stop command</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$add_traceback_index</span><span class="var-description">: Additional index to trace back</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_catch_php_errors" id="set_catch_php_errors"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">set_catch_php_errors</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a522">522</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set catching of php generated error messages</p>
+<p class="description"><p>With this method the php internal error handler is overridden. It  defines a class method as the error handler. The old error handler is  saved at the class to be able to restore the previous behaviour. When  catching php errors is enabled, all php genereated error messages which  are possible to catch via the defined error handler will be catched and  logged according to the set_logging_phptypes configuration. The  following errors can be catched: E_WARNING, E_NOTICE, E_STRICT as well  as the user triggert errors E_USER_ERROR, E_USER_WARNING, E_USER_NOTICE.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_logging_phptypes">Debug_Logging::set_logging_phptypes()</a></li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodget_catch_php_errors">Debug_Logging::get_catch_php_errors()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_catch_php_errors
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$enable</span>, <span class="var-type">bool</span>&nbsp;<span class="var-name">$enablele</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$enablele</span><span class="var-description">: True To enable catching php generated error messages</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$enable</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_catch_unhandled_exceptions" id="set_catch_unhandled_exceptions"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">set_catch_unhandled_exceptions</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a599">599</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set catching of unhandled exceptions</p>
+<p class="description"><p>With this method the php internal exception handler is overridden. It  defines a class method as the ecxeption handler. The old exception  handler is saved at the class to be able to restore the previous  behaviour. When catching unhandled exceptions is enabled, all exceptions  not handled by a try-catch block are catched via the defined exception  handler and logged to the configured log target. Please keep in mind  that after the excaption handling is finished the script will be  terminated by php.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodget_catch_unhandled_exceptions">Debug_Logging::get_catch_unhandled_exceptions()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_catch_unhandled_exceptions
+		</span>
+					(<span class="var-type">bool</span>&nbsp;<span class="var-name">$enable</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$enable</span><span class="var-description">: Set to True to enable catching unhandled exceptions</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_delete_logfiles" id="set_delete_logfiles"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">set_delete_logfiles</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a852">852</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set to delete old log files</p>
+<p class="description"><p>This method enable the functionality to delete old logfiles. If the  number of logfiles exceeds the configured number of files, they will be  deleted. The files will be sorted by there file date to get the oldest  files deleted.</p><p>ATTENTION: This method will immidiatly trigger the deletion of logfiles.  It is recomended to set the maximum number of files to keep first.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_max_filenumber">Debug_Logging::set_max_filenumber()</a></li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodget_delete_logfiles">Debug_Logging::get_delete_logfiles()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_delete_logfiles
+		</span>
+					([<span class="var-type">bool</span>&nbsp;<span class="var-name">$enabled</span> = <span class="var-default">true</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$enabled</span><span class="var-description">: Set to true to enable deletion of logfiles</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_field_seperator" id="set_field_seperator"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">set_field_seperator</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a754">754</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the seperating characters for the log fields</p>
+<p class="description"><p>This method sets the seperating character for the log message fields. By  default this character is set to '|'. This character can be changed to  ';' (to be able to handle the logfiles like csv files) or to any other  character.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodget_field_seperator">Debug_Logging::get_field_seperator()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_field_seperator
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$seperator</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$seperator</span><span class="var-description">: The seperating character(s) for the log fields</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_filepath_filter" id="set_filepath_filter"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">set_filepath_filter</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a886">886</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set filepath for black- or white-list</p>
+<p class="description"><p>This method allows to define a regex for filtering log messages. It is  possible to define one regular expression for black-list and one regex  for white-list. The regex will be applied to the full file- and pathname  of the log message origin file. The blacklist will avoid logging the log  message and the white-list allows to define a exception from the  black-list.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodget_filepath_filter">Debug_Logging::get_filepath_filter()</a></li>
+				<li><span class="field">link:</span> <a href="http://www.php.net/manual/en/book.pcre.php">http://www.php.net/manual/en/book.pcre.php Regular Expressions (Perl-Compatible)</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_filepath_filter
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$path_regex</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$list</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$path_regex</span><span class="var-description">: regular-expression for the origin filepath of the log message</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$list</span><span class="var-description">: name of the list (&quot;white&quot;, &quot;black&quot;) for the file / path</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_logcach" id="set_logcach"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">set_logcach</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a954">954</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set log message caching</p>
+<p class="description"><p>This method allows to enable caching of log messages. If this option is  enabled, every log message is stored within the class. The log messages  can be send during destruction to the log target defined. If the log  message caching is turned off, the cached log messages will be deleted  to free up memory. For the definition of the target, the following  values are available: browser</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodget_logcach">Debug_Logging::get_logcach()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_logcach
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$type</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$enabled</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$target</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$target</span><span class="var-description">: Define the target where the log messages should be sent to</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$enabled</span><span class="var-description">: Set to true to enable log message caching</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$type</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_logfile_suffix" id="set_logfile_suffix"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">set_logfile_suffix</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a920">920</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set logfile name suffix</p>
+<p class="description"><p>This method allows to define a logfile name sufix based on the log type.  If a new fogfile suffix is set to a log type, the logfile manager  applies the file numbering and triggers also the deletion of old  logfiles if enabled. The suffix is appended to the basename before the  file numbering.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodget_logfile_suffix">Debug_Logging::get_logfile_suffix()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_logfile_suffix
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$suffix</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$type</span><span class="var-description">: The log type to set the logfile name suffix for</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$suffix</span><span class="var-description">: The logfile name suffix to append to the logfile name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_logging_fields" id="set_logging_fields"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">set_logging_fields</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a700">700</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set enabled log message fields for logging</p>
+<p class="description"><p>This method enables or disables specified fields from the log message.  Per default all fields of the log message are enabled. All fields except  the message-text can be disabled. Notice that the sctructure of the  logfile changes when fields are enabled or disabled during runtime. If  you use a log file viewer, this can lead into parsing or presentation  problems. It is recommended to enable or disable the fields before a log  entry is written and not to change them during runtime to keep the  logfiles in consistant format.</p><p>The following fields can be disabled via this method:  datetime, timediff, sessionid, ip, type, line, file, function</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodget_logging_fields">Debug_Logging::get_logging_fields()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_logging_fields
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$field</span>, [<span class="var-type">bool</span>&nbsp;<span class="var-name">$enabled</span> = <span class="var-default">true</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$field</span><span class="var-description">: Define field of the log message</span>			</li>
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$enabled</span><span class="var-description">: enable (true) or disable (false) logging for this log field</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_logging_phptypes" id="set_logging_phptypes"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">set_logging_phptypes</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a573">573</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set logging of php generated error messages</p>
+<p class="description"><p>With this method the catched php errors can be filtered. The different  types of error messages sent by php can be enabled or disabled for  logging to the configured target.</p><p>The following errors can be catched: E_WARNING, E_NOTICE, E_STRICT as well  as the user triggert errors E_USER_ERROR, E_USER_WARNING, E_USER_NOTICE.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_catch_php_errors">Debug_Logging::set_catch_php_errors()</a></li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodget_logging_phptypes">Debug_Logging::get_logging_phptypes()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_logging_phptypes
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$errno</span>, <span class="var-type">bool</span>&nbsp;<span class="var-name">$enable</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$errno</span><span class="var-description">: the error number. Can be used like E_WARNING or E_NOTICE</span>			</li>
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$enable</span><span class="var-description">: True To enable catching php generated error messages</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_logging_types" id="set_logging_types"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">set_logging_types</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a669">669</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set enabled types for logging</p>
+<p class="description"><p>This method provides the basic filter functionality. Each type of  messages can be enabled or disabled independent from all other types. By  default, all types are enabled. When a type is disabled, all log  messages of this type will be discarded.</p><p>The following types can be disabled via this method:  info, debug, debug_array, error, debug2, debug2_array, performance,  backtrace, client_info, php_errors, unh_exceptions</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodget_logging_types">Debug_Logging::get_logging_types()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_logging_types
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>, [<span class="var-type">bool</span>&nbsp;<span class="var-name">$enabled</span> = <span class="var-default">true</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$type</span><span class="var-description">: Define the type of log message</span>			</li>
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$enabled</span><span class="var-description">: enable (true) or disable (false) logging for this type of message.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_log_target" id="set_log_target"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">set_log_target</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a383">383</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the log target for the class</p>
+<p class="description"><p>The set_log_target accepts the basic configuration for the log target  file and browser as well as the configuration for the logfile basename.  The basename will be extended by a sequence number followed by the file  extension &quot;.log&quot;. If the filenamebase is a 'php output stream', the log  messages will be sent to this php output stream as they would been sent  to a file.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodget_log_target">Debug_Logging::get_log_target()</a></li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_log_target_db">Debug_Logging::set_log_target_db()</a></li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_log_target_firephp">Debug_Logging::set_log_target_firephp()</a></li>
+				<li><span class="field">link:</span> <a href="http://www.php.net/manual/en/wrappers.php.php">http://www.php.net/manual/en/wrappers.php.php  List of PHP input/output streams</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_log_target
+		</span>
+					([<span class="var-type">bool</span>&nbsp;<span class="var-name">$to_file</span> = <span class="var-default">false</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$filenamebase</span> = <span class="var-default">null</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$to_browser</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$to_file</span><span class="var-description">: Write log messages to the logfile</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$filenamebase</span><span class="var-description">: Base of the logfile name containing path and filename without extension.</span>			</li>
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$to_browser</span><span class="var-description">: Write log messages to the browser</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_log_target_db" id="set_log_target_db"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">set_log_target_db</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a485">485</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set log target for the class to sql db</p>
+<p class="description"><p>This method will accept a sql object. This object must have a method  called 'query' to send the insert statements with the log messages to.  If the 'query method returns an error, this log target is automatically  disabled by the Debug_Logging class. Any other configured target will  remain enabled.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> MsSQL::query()</li>
+				<li><span class="field">see:</span> <a href="../../framework/core/MySQL.html#methodquery">MySQL::query()</a></li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodget_log_target">Debug_Logging::get_log_target()</a></li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_log_target">Debug_Logging::set_log_target()</a></li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_log_target_firephp">Debug_Logging::set_log_target_firephp()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_log_target_db
+		</span>
+					([<span class="var-type">object</span>&nbsp;<span class="var-name">&$to_sqldb</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$to_sqldb_table</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">&$to_sqldb</span><span class="var-description">: Write log messages to a sql database</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$to_sqldb_table</span><span class="var-description">: Sql database table</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_log_target_firephp" id="set_log_target_firephp"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">set_log_target_firephp</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a454">454</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set log target for the class firephp</p>
+<p class="description"><p>This method will accept a object of the FirePHP type. This object will  be used to send log messages to. Keep in mind that the FirePHP object  will only be anle to sent its log messages as long as the header is not  already sent to the browser. If the header is already sent, this log  target is automatically disabled by the Debug_Logging class. Any other  configured target will remain enabled.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodget_log_target">Debug_Logging::get_log_target()</a></li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_log_target_db">Debug_Logging::set_log_target_db()</a></li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_log_target">Debug_Logging::set_log_target()</a></li>
+				<li><span class="field">link:</span> <a href="http://www.firephp.org/">http://www.firephp.org/</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_log_target_firephp
+		</span>
+					([<span class="var-type">object</span>&nbsp;<span class="var-name">&$to_firephp</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">&$to_firephp</span><span class="var-description">: Write log messages to the FirePHP class (FirePHP Firefox addon)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_max_filenumber" id="set_max_filenumber"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">set_max_filenumber</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a825">825</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the maximum number of files</p>
+<p class="description"><p>This method sets the maxumum number of logfiles to keep. This setting  only takes effet when the functionality to deleted old logfiles are. By  default the option to delete logfiles is disabled. When the option to  delete logfiles is enabled, this option defines the number of old  logfiles to keep. Notice: In the moment of rotating to the next logfile,  it could happen thet there will one file more then configured.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodset_delete_logfiles">Debug_Logging::set_delete_logfiles()</a></li>
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodget_max_filenumber">Debug_Logging::get_max_filenumber()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_max_filenumber
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$amount</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$amount</span><span class="var-description">: number of logfiles allowed</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_max_filesize" id="set_max_filesize"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">set_max_filesize</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a780">780</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the maximum file size</p>
+<p class="description"><p>This method sets the filesize per log file. The logfile size is not an  exact size. The logfile size is checked during initialisation and during  change of the log target. If the file size exceeds during runtime, the  log messages will not go to another logfile. This is to keep all log  messages of a script run together in one log file and makes it easier to  read. The size can be specified in bytes, kilobytes and megabytes. To  specify a size in bytes, simply provide the number of bytes. To specify  megabyte or kilobyte size provide the number and the 'MB' for megabyte  or 'KB' for kilobyte.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodget_max_filesize">Debug_Logging::get_max_filesize()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_max_filesize
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$size</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$size</span><span class="var-description">: defines the maximum size of the log files</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_sessid_filename" id="set_sessid_filename"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">set_sessid_filename</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a633">633</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set if the session id should be part of logfile name</p>
+<p class="description"><p>This method enables the session-id based logfiles. When this option is  enabled, the filename will be extended with the session-id. This helps  debugging because one file contains log entries of one client only. All  log file rotation and log file deletion applies also to the files with  session-id. Enabling this option on productive installation can cause a  huge amount of logfiles which is not recomended.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodget_sessid_filename">Debug_Logging::get_sessid_filename()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_sessid_filename
+		</span>
+					(<span class="var-type">bool</span>&nbsp;<span class="var-name">$enable</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$enable</span><span class="var-description">: Define if this option should be enabled</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_session_id" id="set_session_id"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">set_session_id</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a987">987</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set log message session ID</p>
+<p class="description"><p>This method is used to set the session ID for the log messages. The  session ID appears in a separate field in the log line.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodget_session_id">Debug_Logging::get_session_id()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_session_id
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$session_id</span> = <span class="var-default">FALSE</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$session_id</span><span class="var-description">: The session ID as it appears in the log message</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_time_diff" id="set_time_diff"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">set_time_diff</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework_debug_classesdebug_logging.class.php.html#a732">732</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set time diff behaviour</p>
+<p class="description"><p>This method defines the behaviour of the timediff (time difference)  column. The behaviour can be set to 'line' or 'script'. By default the  behaviour is set to 'script'. If this option is set to 'script', the  time difference is calculated from the first debug line or, if  available, the request time. When this option is set to 'line, the time  difference is calculated from one logging line to the next.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../framework/debug/Debug_Logging.html#methodget_time_diff">Debug_Logging::get_time_diff()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_time_diff
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$option</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$option</span><span class="var-description">: Define logging behaviour for time diff</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Thu, 14 Jun 2012 07:52:16 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.2</a>
+	</p>
+	</div></body>
+</html>

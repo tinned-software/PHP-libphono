@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs for page get_number_country.php</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="file-name">/functions/get_number_country.php</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+									<a href="#sec-includes">Includes</a>
+			|											<a href="#sec-functions">Functions</a>
+			</div>
+	<div class="info-box-body">	
+		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This script's functionality will be moved into the Phone_Number class itself  in the next release of libphono. Relying on it is discouraged.</p>
+<p class="description"><p>A script to find the country code for a particular telephone number</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Tyler Ashton</li>
+				<li><span class="field">version:</span> 1.0.3</li>
+				<li><span class="field">todo:</span> move this functionality into the phone number class (as a static method?)</li>
+				<li><span class="field">filesource:</span> <a href="../../__filesource/fsource_deprecated_phone_number_functionsget_number_country.php.html">Source Code for this file</a></li>
+			</ul>
+		
+			</div>
+</div>
+		
+
+	<a name="sec-includes"></a>	
+	<div class="info-box">
+		<div class="info-box-title">Includes</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Includes</span>
+			|													<a href="#sec-functions">Functions</a>
+					</div>
+		<div class="info-box-body">	
+			<a name="_realpath(dirname(__FILE__)_/__/classes/sqlite3_class_php)"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="include-title">
+			<span class="include-type">include_once</span>
+			(<span class="include-name">realpath(dirname(__FILE__).'/../classes/sqlite3.class.php')</span>)
+			(line <span class="line-number"><a href="../../__filesource/fsource_deprecated_phone_number_functionsget_number_country.php.html#a21">21</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+</div>
+		</div>
+	</div>
+	
+	
+	
+	<a name="sec-functions"></a>	
+	<div class="info-box">
+		<div class="info-box-title">Functions</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-includes">Includes</a>
+				|												<span class="disabled">Functions</span>
+		</div>
+		<div class="info-box-body">	
+			<a name="functionget_number_country" id="functionget_number_country"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="method-title">get_number_country</span> (line <span class="line-number"><a href="../../__filesource/fsource_deprecated_phone_number_functionsget_number_country.php.html#a41">41</a></span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">A function to determine the three letter country code of a particular telephone number</p>
+<p class="description"><p>This function will initiate a CLI verification check for a particular user CLI.  The function will generate and send the verification code using the appropriate  method ( via call or sms ) and return the status of the call or sms.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> ZZZ when no country found, three letter country code of the given phone number, or FALSE if an error ocurred</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			get_number_country
+		</span>
+					(<span class="var-type">$number</span>&nbsp;<span class="var-name">$number</span>, <span class="var-type">$number_country_code</span>&nbsp;<span class="var-name">$number_country_code</span>, <span class="var-type">&$error</span>&nbsp;<span class="var-name">&$error</span>, <span class="var-type">&$error_list</span>&nbsp;<span class="var-name">&$error_list</span>)
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$number</span>
+				<span class="var-name">$number</span><span class="var-description">: string the full telephone number to check</span>			</li>
+					<li>
+				<span class="var-type">$number_country_code</span>
+				<span class="var-name">$number_country_code</span><span class="var-description">: string the leading country code of the number to check</span>			</li>
+					<li>
+				<span class="var-type">&$error</span>
+				<span class="var-name">&$error</span><span class="var-description">: boolean TRUE or FALSE depending on whether an error was encountered or not</span>			</li>
+					<li>
+				<span class="var-type">&$error_list</span>
+				<span class="var-name">&$error_list</span><span class="var-description">: array an array containing the error which was reported by the function</span>			</li>
+				</ul>
+		
+	
+</div>
+		</div>
+	</div>
+	
+	<p class="notes" id="credit">
+		Documentation generated on Thu, 14 Jun 2012 07:52:17 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.2</a>
+	</p>
+	</div></body>
+</html>

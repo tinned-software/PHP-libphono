@@ -1,0 +1,695 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class MySQL</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name"><img src="../../media/images/Class_logo.png"
+														alt=" Class"
+														title=" Class"
+														style="vertical-align: middle"> MySQL</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">MySQL SERVER CONNECTION CLASS</p>
+<p class="description"><p>The MySQL class is an abstraction class to abstract the differences  between different sql type away. This class is abstracting away the MySQL  specific methods to a unified interface.</p><p>ERROR CODES (connect)  100 ... &quot;Missing connection informations (server, db, user or password)&quot;  101 ... &quot;Connect to sql Server Error. ServerHost = $this-&gt;db_host&quot;  102 ... &quot;Connect to DB Error. DBName = $this-&gt;db_name&quot;      ERROR CODES (insert)  103 ... &quot;Insert into $tb_name Error. TableName = $tb_name&quot;      ERROR CODES (update)  104 ... &quot;Update $tb_name Error. TableName = $tb_name&quot;      ERROR CODES (delete)  105 ... &quot;Delete From $tb_name Error. TableName = $tb_name&quot;      ERROR CODES (query)  106 ... &quot;Perform Query Error. Query = $string&quot;      ERROR CODES (nums)  107 ... ---      ERROR CODES (objects)  108 ... ---      ERROR CODES (escape_string)  109 ... Parameter not of type string  110 ... No connection to the database      ERROR CODES (_convert_encoding)  111 ... Invalid character encoding in result      ERROR CODES (_check_prerequisits)  201 ... Pre-requisits not fulfilled</p></p>
+		<p class="notes">
+			Located in <a class="field" href="_classes---mysql.class.php.html">/classes/mysql.class.php</a> (line <span class="field"><a href="../../__filesource/fsource_framework__classesmysql.class.php.html#a54">54</a></span>)
+		</p>
+		
+				
+		<pre><a href="../../framework/core/Main.html">Main</a>
+   |
+   --MySQL</pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">integer</span>
+					<a href="#$sucess_debug" title="details" class="var-name">$sucess_debug</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																<div class="method-definition">
+					<img src="../../media/images/Constructor.png" alt=" "/>
+											<span class="method-result">MySQL</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type">$connection_string</span>&nbsp;<span class="var-name">$connection_string</span>, [<span class="var-type">$dbg_level</span>&nbsp;<span class="var-name">$dbg_level</span> = <span class="var-default">0</span>], [<span class="var-type">$debug_object</span>&nbsp;<span class="var-name">&$debug_object</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../../media/images/Destructor.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#__destruct" title="details" class="method-name">__destruct</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">bool</span>
+										<a href="#connection" title="details" class="method-name">connection</a>
+											(<span class="var-type">$errno</span>&nbsp;<span class="var-name">&$errno</span>, <span class="var-type">$errstr</span>&nbsp;<span class="var-name">&$errstr</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#disconnect" title="details" class="method-name">disconnect</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#escape_string" title="details" class="method-name">escape_string</a>
+											(<span class="var-type">$string</span>&nbsp;<span class="var-name">$string</span>, [<span class="var-type">$errno</span>&nbsp;<span class="var-name">&$errno</span> = <span class="var-default">NULL</span>], [<span class="var-type">$errstr</span>&nbsp;<span class="var-name">&$errstr</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">array</span>
+										<a href="#get_query_result" title="details" class="method-name">get_query_result</a>
+											(<span class="var-type">$string</span>&nbsp;<span class="var-name">$query</span>, [<span class="var-type">$errno</span>&nbsp;<span class="var-name">&$errno</span> = <span class="var-default">NULL</span>], [<span class="var-type">$errstr</span>&nbsp;<span class="var-name">&$errstr</span> = <span class="var-default">NULL</span>], [<span class="var-type">$last_insert_id</span>&nbsp;<span class="var-name">&$last_insert_id</span> = <span class="var-default">FALSE</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">FALSE</span>
+										<a href="#nums" title="details" class="method-name">nums</a>
+											([<span class="var-type">$string</span>&nbsp;<span class="var-name">$string</span> = <span class="var-default">&quot;&quot;</span>], [<span class="var-type">$qid</span>&nbsp;<span class="var-name">$qid</span> = <span class="var-default">&quot;&quot;</span>], <span class="var-type">$errno</span>&nbsp;<span class="var-name">&$errno</span>, <span class="var-type">$errstr</span>&nbsp;<span class="var-name">&$errstr</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">bool</span>
+										<a href="#objects" title="details" class="method-name">objects</a>
+											([<span class="var-type">$string</span>&nbsp;<span class="var-name">$string</span> = <span class="var-default">&quot;&quot;</span>], [<span class="var-type">$qid</span>&nbsp;<span class="var-name">$qid</span> = <span class="var-default">&quot;&quot;</span>], <span class="var-type">$errno</span>&nbsp;<span class="var-name">&$errno</span>, <span class="var-type">$errstr</span>&nbsp;<span class="var-name">&$errstr</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">mixed</span>
+										<a href="#query" title="details" class="method-name">query</a>
+											(<span class="var-type">$string</span>&nbsp;<span class="var-name">$string</span>, <span class="var-type">$errno</span>&nbsp;<span class="var-name">&$errno</span>, <span class="var-type">$errstr</span>&nbsp;<span class="var-name">&$errstr</span>, [<span class="var-type">$last_insert_id</span>&nbsp;<span class="var-name">&$last_insert_id</span> = <span class="var-default">FALSE</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">bool</span>
+										<a href="#row_array_assoc" title="details" class="method-name">row_array_assoc</a>
+											([<span class="var-type">$string</span>&nbsp;<span class="var-name">$string</span> = <span class="var-default">&quot;&quot;</span>], [<span class="var-type">$qid</span>&nbsp;<span class="var-name">$qid</span> = <span class="var-default">&quot;&quot;</span>], <span class="var-type">$errno</span>&nbsp;<span class="var-name">&$errno</span>, <span class="var-type">$errstr</span>&nbsp;<span class="var-name">&$errstr</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#set_connection_string" title="details" class="method-name">set_connection_string</a>
+											(<span class="var-type">$connection_string</span>&nbsp;<span class="var-name">$connection_string</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#set_sql_log_object" title="details" class="method-name">set_sql_log_object</a>
+											(<span class="var-type">object</span>&nbsp;<span class="var-name">$log_object</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$log_as_type</span> = <span class="var-default">'DEBUG'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$success_only</span> = <span class="var-default">TRUE</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$ignore_select</span> = <span class="var-default">TRUE</span>])
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+<a name="var$sucess_debug" id="$sucess_debug"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">integer</span>
+			<span class="var-name">$sucess_debug</span>
+			 = <span class="var-default"> &quot;0&quot;</span>			(line <span class="line-number"><a href="../../__filesource/fsource_framework__classesmysql.class.php.html#a69">69</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This variabte is used to activate the internal debugging code. When set  to 1 success codes will be returned on the same way as error codes.</p>
+<p class="description"><p>These codes start from 901 upwards. See class documentation.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../../framework/core/Main.html">Main</a></span></p>
+					<blockquote>
+													<img src="../../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../../framework/core/Main.html#var$dbg_level">Main::$dbg_level</a></span><br>
+							</span>
+													<img src="../../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../../framework/core/Main.html#var$logging_object">Main::$logging_object</a></span><br>
+							</span>
+													<img src="../../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../../framework/core/Main.html#var$support_level">Main::$support_level</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Constructor.png" />
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework__classesmysql.class.php.html#a125">125</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor</p>
+	
+	<div class="method-signature">
+		<span class="method-result">MySQL</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type">$connection_string</span>&nbsp;<span class="var-name">$connection_string</span>, [<span class="var-type">$dbg_level</span>&nbsp;<span class="var-name">$dbg_level</span> = <span class="var-default">0</span>], [<span class="var-type">$debug_object</span>&nbsp;<span class="var-name">&$debug_object</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$connection_string</span>
+				<span class="var-name">$connection_string</span><span class="var-description">: - The sql connection string</span>			</li>
+					<li>
+				<span class="var-type">$dbg_level</span>
+				<span class="var-name">$dbg_level</span><span class="var-description">: Debug log level</span>			</li>
+					<li>
+				<span class="var-type">$debug_object</span>
+				<span class="var-name">&$debug_object</span><span class="var-description">: Debug object to send log messages to</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="method__destruct" id="__destruct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Destructor.png" />
+		<span class="method-title">Destructor __destruct</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework__classesmysql.class.php.html#a145">145</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Destructor</p>
+<p class="description"><p>The destructor will close the connection to the database server.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			__destruct
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodconnection" id="connection"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">connection</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework__classesmysql.class.php.html#a301">301</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Connect to SQL server</p>
+<p class="description"><p>Connect to the sql server with the configured settings of the class. The  result of the connect will be returned as boolean value. Character set  negotiaton is performed in this method.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> - Sucess of connection</li>
+				<li><span class="field">see:</span> <a href="http://dev.mysql.com/doc/refman/5.0/en/charset-connection.html">http://dev.mysql.com/doc/refman/5.0/en/charset-connection.html</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			connection
+		</span>
+					(<span class="var-type">$errno</span>&nbsp;<span class="var-name">&$errno</span>, <span class="var-type">$errstr</span>&nbsp;<span class="var-name">&$errstr</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$errno</span>
+				<span class="var-name">&$errno</span><span class="var-description">: - Error number if connection failed</span>			</li>
+					<li>
+				<span class="var-type">$errstr</span>
+				<span class="var-name">&$errstr</span><span class="var-description">: - Error text if connection failed</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddisconnect" id="disconnect"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">disconnect</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework__classesmysql.class.php.html#a424">424</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Disconnect from SQL server</p>
+<p class="description"><p>This method is used to disconnect from the configured server.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			disconnect
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodescape_string" id="escape_string"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">escape_string</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework__classesmysql.class.php.html#a881">881</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Escape string for the database</p>
+<p class="description"><p>This method is used to escape all not allowed charatcters of the string.  This escape method is database dependent.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> - escaped string</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			escape_string
+		</span>
+					(<span class="var-type">$string</span>&nbsp;<span class="var-name">$string</span>, [<span class="var-type">$errno</span>&nbsp;<span class="var-name">&$errno</span> = <span class="var-default">NULL</span>], [<span class="var-type">$errstr</span>&nbsp;<span class="var-name">&$errstr</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$string</span>
+				<span class="var-name">$string</span><span class="var-description">: - The string to be escaped</span>			</li>
+					<li>
+				<span class="var-type">$errno</span>
+				<span class="var-name">&$errno</span><span class="var-description">: - Error number if failed</span>			</li>
+					<li>
+				<span class="var-type">$errstr</span>
+				<span class="var-name">&$errstr</span><span class="var-description">: - Error text if failed</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_query_result" id="get_query_result"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">get_query_result</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework__classesmysql.class.php.html#a793">793</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Send query and return data</p>
+<p class="description"><p>This method is used to retrive a result set for a given sql query. This  method will send the query, get the number of results as well as all  result rows and returns it as one assoc. array. This array will contain  the element &quot;count&quot; which contains the number of rows fetched or  affected by the query. The element &quot;data&quot; or the returned array will  contain a list of all result rows.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> - The result array containing &quot;data&quot; and &quot;count&quot;</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			get_query_result
+		</span>
+					(<span class="var-type">$string</span>&nbsp;<span class="var-name">$query</span>, [<span class="var-type">$errno</span>&nbsp;<span class="var-name">&$errno</span> = <span class="var-default">NULL</span>], [<span class="var-type">$errstr</span>&nbsp;<span class="var-name">&$errstr</span> = <span class="var-default">NULL</span>], [<span class="var-type">$last_insert_id</span>&nbsp;<span class="var-name">&$last_insert_id</span> = <span class="var-default">FALSE</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$string</span>
+				<span class="var-name">$query</span><span class="var-description">: - Query string to send to the sql server [optional]</span>			</li>
+					<li>
+				<span class="var-type">$errno</span>
+				<span class="var-name">&$errno</span><span class="var-description">: - Error number if connection failed</span>			</li>
+					<li>
+				<span class="var-type">$errstr</span>
+				<span class="var-name">&$errstr</span><span class="var-description">: - Error text if connection failed</span>			</li>
+					<li>
+				<span class="var-type">$last_insert_id</span>
+				<span class="var-name">&$last_insert_id</span><span class="var-description">: - get the last insert id right after the query is executed</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodnums" id="nums"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">nums</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework__classesmysql.class.php.html#a570">570</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Number of rows returned from Query</p>
+<p class="description"><p>This method is used to get the number of rows effected or returned from  the sent query. If no query-id is given, the id of the last sent query  is used.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> / int - number of returned rows</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">FALSE</span>
+		<span class="method-name">
+			nums
+		</span>
+					([<span class="var-type">$string</span>&nbsp;<span class="var-name">$string</span> = <span class="var-default">&quot;&quot;</span>], [<span class="var-type">$qid</span>&nbsp;<span class="var-name">$qid</span> = <span class="var-default">&quot;&quot;</span>], <span class="var-type">$errno</span>&nbsp;<span class="var-name">&$errno</span>, <span class="var-type">$errstr</span>&nbsp;<span class="var-name">&$errstr</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$string</span>
+				<span class="var-name">$string</span><span class="var-description">: - Query string to send to the sql server [optional]</span>			</li>
+					<li>
+				<span class="var-type">$qid</span>
+				<span class="var-name">$qid</span><span class="var-description">: - query id of a sent query from the sql server [optional]</span>			</li>
+					<li>
+				<span class="var-type">$errno</span>
+				<span class="var-name">&$errno</span><span class="var-description">: - Error number if connection failed</span>			</li>
+					<li>
+				<span class="var-type">$errstr</span>
+				<span class="var-name">&$errstr</span><span class="var-description">: - Error text if connection failed</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodobjects" id="objects"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">objects</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework__classesmysql.class.php.html#a642">642</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returned data from query as object</p>
+<p class="description"><p>This method will fetch one result row from the given result-id and  returns it as an object. If the result-id is not given, the  result-id of the last query is used.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> - Sucess of connection</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			objects
+		</span>
+					([<span class="var-type">$string</span>&nbsp;<span class="var-name">$string</span> = <span class="var-default">&quot;&quot;</span>], [<span class="var-type">$qid</span>&nbsp;<span class="var-name">$qid</span> = <span class="var-default">&quot;&quot;</span>], <span class="var-type">$errno</span>&nbsp;<span class="var-name">&$errno</span>, <span class="var-type">$errstr</span>&nbsp;<span class="var-name">&$errstr</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$string</span>
+				<span class="var-name">$string</span><span class="var-description">: - Query string to send to the sql server [optional]</span>			</li>
+					<li>
+				<span class="var-type">$qid</span>
+				<span class="var-name">$qid</span><span class="var-description">: - query id of a sent query from the sql server [optional]</span>			</li>
+					<li>
+				<span class="var-type">$errno</span>
+				<span class="var-name">&$errno</span><span class="var-description">: - Error number if connection failed</span>			</li>
+					<li>
+				<span class="var-type">$errstr</span>
+				<span class="var-name">&$errstr</span><span class="var-description">: - Error text if connection failed</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodquery" id="query"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">query</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework__classesmysql.class.php.html#a458">458</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Execute query on the SQL server</p>
+<p class="description"><p>This method is used to send a query to the database. The query is sent  to the database server configured for the class. The result-id is  returned on success.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> - FALSE on error or the result-id of the result</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			query
+		</span>
+					(<span class="var-type">$string</span>&nbsp;<span class="var-name">$string</span>, <span class="var-type">$errno</span>&nbsp;<span class="var-name">&$errno</span>, <span class="var-type">$errstr</span>&nbsp;<span class="var-name">&$errstr</span>, [<span class="var-type">$last_insert_id</span>&nbsp;<span class="var-name">&$last_insert_id</span> = <span class="var-default">FALSE</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$string</span>
+				<span class="var-name">$string</span><span class="var-description">: - Query string to send to the sql server</span>			</li>
+					<li>
+				<span class="var-type">$errno</span>
+				<span class="var-name">&$errno</span><span class="var-description">: - Error number if connection failed</span>			</li>
+					<li>
+				<span class="var-type">$errstr</span>
+				<span class="var-name">&$errstr</span><span class="var-description">: - Error text if connection failed</span>			</li>
+					<li>
+				<span class="var-type">$last_insert_id</span>
+				<span class="var-name">&$last_insert_id</span><span class="var-description">: - get the last insert id right after the query is executed</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodrow_array_assoc" id="row_array_assoc"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">row_array_assoc</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework__classesmysql.class.php.html#a716">716</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returned data from query as associated array</p>
+<p class="description"><p>This method will fetch one result row from the given result-id and  returns it as an assoc. array. If the result-id is not given, the  result-id of the last query is used.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> - Sucess of connection</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			row_array_assoc
+		</span>
+					([<span class="var-type">$string</span>&nbsp;<span class="var-name">$string</span> = <span class="var-default">&quot;&quot;</span>], [<span class="var-type">$qid</span>&nbsp;<span class="var-name">$qid</span> = <span class="var-default">&quot;&quot;</span>], <span class="var-type">$errno</span>&nbsp;<span class="var-name">&$errno</span>, <span class="var-type">$errstr</span>&nbsp;<span class="var-name">&$errstr</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$string</span>
+				<span class="var-name">$string</span><span class="var-description">: - Query string to send to the sql server [optional]</span>			</li>
+					<li>
+				<span class="var-type">$qid</span>
+				<span class="var-name">$qid</span><span class="var-description">: - query id of a sent query from the sql server [optional]</span>			</li>
+					<li>
+				<span class="var-type">$errno</span>
+				<span class="var-name">&$errno</span><span class="var-description">: - Error number if connection failed</span>			</li>
+					<li>
+				<span class="var-type">$errstr</span>
+				<span class="var-name">&$errstr</span><span class="var-description">: - Error text if connection failed</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_connection_string" id="set_connection_string"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">set_connection_string</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework__classesmysql.class.php.html#a173">173</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set and parse the connection string</p>
+<p class="description"><p>This method is used to set the connection string. The connection string  contains the server name as well as the port the username and the  password for the connection. The connection string should be formated as  follows:  mysql://username:password@servername:port/database  mysqlp://username:password@servername:port/database</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_connection_string
+		</span>
+					(<span class="var-type">$connection_string</span>&nbsp;<span class="var-name">$connection_string</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$connection_string</span>
+				<span class="var-name">$connection_string</span><span class="var-description">: - The sql connection string</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_sql_log_object" id="set_sql_log_object"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">set_sql_log_object</span> (line <span class="line-number"><a href="../../__filesource/fsource_framework__classesmysql.class.php.html#a266">266</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the sql query log object</p>
+<p class="description"><p>This method is used to set the sql query log object and there settings.  With the parameters you can define if only successful queries should be  logged as well as if SELECT queries should be ignored.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_sql_log_object
+		</span>
+					(<span class="var-type">object</span>&nbsp;<span class="var-name">$log_object</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$log_as_type</span> = <span class="var-default">'DEBUG'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$success_only</span> = <span class="var-default">TRUE</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$ignore_select</span> = <span class="var-default">TRUE</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">$log_object</span><span class="var-description">: Set the logging object</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$log_as_type</span><span class="var-description">: Set to type of logging desired, default is DEBUG</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$success_only</span><span class="var-description">: Set to TRUE to log only successful queries</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$ignore_select</span><span class="var-description">: Set to TRUE to ignore SELECT queries</span>			</li>
+				</ul>
+		
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../framework/core/Main.html">Main</a></span></p>
+					<blockquote>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../framework/core/Main.html#methodcheck_prerequisites">Main::check_prerequisites()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../framework/core/Main.html#methoddebug">Main::debug()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../framework/core/Main.html#methoddebug2">Main::debug2()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../framework/core/Main.html#methoderror">Main::error()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../framework/core/Main.html#methodget_all_errors">Main::get_all_errors()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../framework/core/Main.html#methodget_error">Main::get_error()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../framework/core/Main.html#methodget_last_error">Main::get_last_error()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../framework/core/Main.html#methodhas_error">Main::has_error()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../framework/core/Main.html#methodinfo">Main::info()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../framework/core/Main.html#methodlog_as_type">Main::log_as_type()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../framework/core/Main.html#methodMain_init">Main::Main_init()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../framework/core/Main.html#methodmsec">Main::msec()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../framework/core/Main.html#methodperformance">Main::performance()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../framework/core/Main.html#methodreport_error">Main::report_error()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../framework/core/Main.html#methodreset_errors">Main::reset_errors()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../framework/core/Main.html#methodwarning">Main::warning()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+	
+	<p class="notes" id="credit">
+		Documentation generated on Thu, 14 Jun 2012 07:47:28 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.2</a>
+	</p>
+	</div></body>
+</html>
