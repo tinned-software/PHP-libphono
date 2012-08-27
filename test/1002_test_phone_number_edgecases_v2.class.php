@@ -76,8 +76,6 @@ class kTest
     {
         $this->test_table[$test_number]["stop_time"] = microtime(TRUE);
         $this->test_table[$test_number]["memory_stop"] = memory_get_usage();
-//        $this->test_table[$test_number]["memory_peak"] = memory_get_peak_usage();
-//        $this->test_table[$test_number]["duration"] = number_format($this->test_table[$test_number]["stop_time"] - $$this->test_table[$test_number]["start_time"],4);
         $this->test_table[$test_number]["duration"] = number_format($this->test_table[$test_number]["stop_time"] - $this->test_table[$test_number]["start_time"],8);
         $this->test_table[$test_number]["performance"] = number_format($this->test_table[$test_number]["operations_count"] / $this->test_table[$test_number]["duration"],3);
         $this->test_table[$test_number]["memory_consumption"] = $this->test_table[$test_number]["memory_stop"] - $this->test_table[$test_number]["memory_start"];
@@ -146,27 +144,26 @@ $test = new kTest($log, FALSE);
 
 // --------------------------------------------------------------------------------------------------------------------------------------------
 
-// additional cases          input number
-/*																					googleLibPhoneNumber            same   test code      source
-    italia                  0412770869          ->        390412770869				390412770869                           DONE     13  
-    colombia           		03 76123456 			->			610376123456 		5776123456                            OK        14
-    finland (FI)             0 9 69661	    	->          						358 358 969661                        OK        15    http://www.tld.io/finland/tld/fi.php 
-    australia		     0892588777   		->			                 			61892588777                           OK        16    http://www.tld.io/australia/tld/au.php
-    australia                0383414111                                             61383414111                           OK        17    http://www.tld.io/australia/tld/au.php
-	australia                01300732929                                            611300732929                          OK        18    http://www.tld.io/australia/tld/au.php
-	colombia           		0916169961 			->			             			5716169961                            ΟΚ G      19    http://www.tld.io/colombia/tld/co.php
-    andora                      875274                                              376875274                             OK        20    http://www.tld.io/andorra/tld/ad.php
-    Montserrat (MS/MSR)     16644916386                                        1 664 4916386                           OK        21    http://www.tld.io/montserrat/tld/ms.php
-    american samoa (AS/ASM) 16846335900										        16846335900 			              OK	    22    http://sadieshotels.com/
-	brazil                  02125456500 			->			552125456500		552125456500                          OK        23
-    brazil                  01155093505                                             551155093505                          OK        24    http://www.tld.io/brazil/tld/br.php
-    turkmenistan  (TM/TKM)    812398729												99312398729                           OK        25    http://www.tld.io/turkmenistan/tld/tm.php
-    turkmenistan     	      812381027												99312381027							  OK		26 	  http://www.cbt.tm/
-	italia                   +393895140231                                          393895140231                                    27    from production case
-    vatican city VA/VAT 06 69893461   3790669893461
+// additional cases         input number
+/*                                                                             googleLibPhoneNumber            same   test code      source
+    italia                  0412770869          ->        390412770869         390412770869                    DONE      13
+    colombia                03 76123456         ->        610376123456         5776123456                      OK        14
+    finland (FI)            0 9 69661           ->                             358 358 969661                  OK        15    http://www.tld.io/finland/tld/fi.php
+    australia               0892588777          ->                             61892588777                     OK        16    http://www.tld.io/australia/tld/au.php
+    australia               0383414111                                         61383414111                     OK        17    http://www.tld.io/australia/tld/au.php
+    australia               01300732929                                        611300732929                    OK        18    http://www.tld.io/australia/tld/au.php
+    colombia                0916169961          ->                             5716169961                      ΟΚ        19    http://www.tld.io/colombia/tld/co.php
+    andora                  875274                                             376875274                       OK        20    http://www.tld.io/andorra/tld/ad.php
+    Montserrat (MS/MSR)     16644916386                                        1 664 4916386                   OK        21    http://www.tld.io/montserrat/tld/ms.php
+    american samoa (AS/ASM) 16846335900                                        16846335900                     OK        22    http://sadieshotels.com/
+    brazil                  02125456500         ->              552125456500   552125456500                    OK        23
+    brazil                  01155093505                                        551155093505                    OK        24    http://www.tld.io/brazil/tld/br.php
+    turkmenistan  (TM/TKM)  812398729                                          99312398729                     OK        25    http://www.tld.io/turkmenistan/tld/tm.php
+    turkmenistan            812381027                                          99312381027                     OK        26    http://www.cbt.tm/
+    italia                  +393895140231                                      393895140231                              27    from production case
+    vatican city VA/VAT     06 69893461                                        3790669893461
 
-    turkmenistan  (TM/TKM)    8p10*993812398729		?????										99312398729                                     25    http://www.tld.io/turkmenistan/tld/tm.php
-
+    turkmenistan  (TM/TKM)  8p10*993812398729       ?????                      99312398729                               25    http://www.tld.io/turkmenistan/tld/tm.php
 */
 
 $tests = array(
@@ -188,7 +185,6 @@ $tests = array(
     array(11, "USA","6148895544",         "16148895544","123",   "16148895544"),
     array(12, "USA","16148895544",        "16148895544","123",   "16148895544"),
     array(13, "USA","01143680123456",     "43680123456","123",   "43680123456"),
-    //array(14, "USA","116148895544",        "16148895544","123",   "16148895544"),
 
     array(50, "AND","875274",               "376875274",     "123", "376875274"),
     array(51, "AND","00376875274",          "376875274",     "123", "376875274"),
@@ -225,7 +221,7 @@ $tests = array(
     array(353, "TKM","8p10 993 12381027", "99312381027", "123",    "99312381027"),
 
     array(400, "COL","0376123456",           "5776123456",   "123", "5776123456"),
-    array(402, "COL","00444 57 76123456",    "5776123456",   "123"),
+    array(402, "COL","00444 57 76123456",    "5776123456",   "123" ,""),
     array(404, "COL","0916169961",           "5716169961",   "123", "5716169961"),
     array(406, "COL","0095716169961",      "5716169961",   "123", "5716169961"),
 );
@@ -257,11 +253,11 @@ foreach($tests as $testcase)
         // setup
         if(in_array($test_id, $debug_cases) === TRUE)
         {
-            $number = new Phone_Number(2, $log, $sql_db);
+            $number = new Phone_Number(2, $log, $sql_db, NULL);
         }
         else
         {
-            $number = new Phone_Number(0, $log, $sql_db);
+            $number = new Phone_Number(0, $log, $sql_db, NULL);
         }
         // input
         $number->set_input_number($test_input_number);
@@ -306,12 +302,7 @@ foreach($tests as $testcase)
 $table .= "</table>";
 echo '<script src="sortable.js"></script>';
 echo "<hr>".$table;
-
-// --------------------------------------------------------------------------------------------------------------------------------------------
 echo "<br><hr> case 404 (colombia is a known issue)";
-//$test->final_printout();
-//echo "<pre>".print_r($test->test_table, TRUE)."</pre>";
-
 echo "<br>";
 echo "<b>Test '".basename(__FILE__)."' ... Finished.</b><br/><br/>\n";
 ?>

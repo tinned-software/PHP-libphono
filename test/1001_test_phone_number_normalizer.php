@@ -11,22 +11,17 @@
  * 
 **/
 
+// include required files
 define("ROOTPATH", dirname(__FILE__)."/../");
 require_once(ROOTPATH.'config/php_config.php');
-//
 require_once(ROOTPATH.'src/classes/sqlite3.class.php');
 require_once(ROOTPATH.'src/classes/phone_number.class.php');
 
-
+// start logging
 $GLOBALS['DBG']->info('*** Starting file '.basename(__FILE__));
-
-// $GLOBALS['PRF']->timer_start('T-'.crc32(__FILE__));
-// $GLOBALS['PRF']->memory_start('M-'.crc32(__FILE__));
-// $GLOBALS['PRF']->memory_show('Measurement at the beginning of file '.basename(__FILE__));
 
 //$sql_db = new MySQL($conn_string, $debug_level, $GLOBALS['DBG']);
 $sql_db = new SQLite_3($GLOBALS['config_libphono_connection_string'], $GLOBALS['config_debug_level_class'], $GLOBALS['SQL']);
-
 
 // ===============================================================
 // STEP 0: process POST AJAX input
@@ -46,13 +41,12 @@ if(isset($_POST['nr_custom']))
     $GLOBALS['DBG']->debug2('got cleaned number/iso:'.$nr_int.'/'.$iso_int);
     
     // set and fetch values
-    $phone_number_obj = new Phone_Number(2, $GLOBALS['DBG'], $mysql_db, NULL);
+    $phone_number_obj = new Phone_Number(2, $GLOBALS['DBG'], $sql_db, NULL);
     $phone_number_obj->set_normalized_country($iso_int);
     $phone_number_obj->set_input_number($nr_int);
-    // omitted
     
     $result = $phone_number_obj->get_normalized_number();
-    $result .= "\n---debug-bounds---\n".print_r($phone_number_obj->explain(true, true), true);
+    $result .= "\n---debug-bounds---\n".print_r($phone_number_obj->explain(TRUE, TRUE), TRUE);
     $GLOBALS['DBG']->debug("printed '$result' to the script, and exiting..");
     echo $result;
     
@@ -70,45 +64,39 @@ var iso = '';
 
 function normalizeNumber()
 {
+    alert('hi');
     number = document.getElementById('nr_custom').value;
     iso = document.getElementById('nr_custom_iso').value;
     request = new XMLHttpRequest();
-
     if(!request) {
-        alert("Kann keine XMLHTTP-Instanz erzeugen");
+        alert("Cannot create XMLHTTP-Instance");
         return false;
     } else {
         request.open('post', '<?php echo $_SERVER['PHP_SELF'] ?>', true);
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        //console.log('nr_custom='+encodeURIComponent(number)+'&nr_custom_iso='+encodeURIComponent(iso));
         request.send('nr_custom='+encodeURIComponent(number)+'&nr_custom_iso='+encodeURIComponent(iso));
-        // Request auswerten
+        // evaluate request
         request.onreadystatechange = interpretRequest;
     }
 }
 
 
-// Request auswerten
+// evaluate request
 function interpretRequest() {
-    //console.log('intrepreting request in state:'+request.readyState);
     switch (request.readyState) {
-        // wenn der readyState 4 und der request.status 200 ist, dann ist alles korrekt gelaufen
+        // if readyState 4 and the request.status is 200 ist, everything is ok
         case 4:
             if(request.status != 200) {
-                alert("Der Request wurde abgeschlossen, ist aber nicht OK\nFehler:"+request.status);
+                alert("The request finished but it's not OK\nError:"+request.status);
             } else {
                 var outputTextfield = document.getElementById('custom_output');
                 var outputDebugTextfield = document.getElementById('custom_debug_output');
                 var oldContent = outputTextfield.innerHTML;
                 var responseContent = request.responseText;
-
                 var responseContentParsed = responseContent.split("\n---debug-bounds---\n");
-                //console.log(responseContentParsed);
-
                 var outputContent =  'International Number: +'+responseContentParsed[0]+" (Input: "+number+", normalized using: "+iso.toUpperCase()+")\n"+oldContent
                 var outputDebugContent = responseContentParsed[1];
-
-                // den Inhalt des Requests in das <div> schreiben
+                // output content in the <div>
                 outputTextfield.innerHTML = outputContent;
                 outputDebugTextfield.innerHTML = outputDebugContent;
             }
@@ -121,7 +109,7 @@ function interpretRequest() {
 function toggleElement(elementId)
 {
     var elementToToggle = document.getElementById(elementId)
-    elementToToggle.style.display=(elementToToggle.style.display == 'none' ? 'block' : 'none'); 
+    elementToToggle.style.display=(elementToToggle.style.display == 'none' ? 'block' : 'none');
 }
 
 function resetOutput() {
@@ -137,22 +125,6 @@ function resetOutput() {
 
 echo "<p style='font-weight:700'>This script test the behavior of the normalizaion logic in the phone number class<p/>\n";
 echo "<b>Test '".basename(__FILE__)."' ... Start </b><br/>\n";
-
-function kMemReport()
-{
-    global $mem_usage, $mem_delta, $mem_delta_step, $mem_start;
-    $mem_usage = memory_get_usage();
-    $mem_delta_step = $mem_usage - $mem_start - $mem_delta - 1440; // 1440 is internal cost
-    $mem_delta = $mem_usage - $mem_start;
-    echo "[Mem: ".$mem_usage." Delta: ".$mem_delta." Step Delta = ".$mem_delta_step."]<br>";
-}
-
-global $mem_start;
-global $mem_delta;
-global $mem_delta_step;
-$mem_start = memory_get_usage();
-kMemReport();
-
 echo "______________________<br>\n";
 
 // ===============================================================
@@ -214,14 +186,13 @@ while(($data = fgetcsv($test_file_handle, 1000, $delimiter = ',', $enclosure = '
         //$GLOBALS['DBG']->debug2("known field : {$data[4]}");
         $test_cases[$test_case_index]['known'] = ($data[4] == 0 ? false : true);
     }
-
-    if(isset($data[5])) {
-    	//$GLOBALS['DBG']->debug2("known field : {$data[5]}");
-    	$test_cases[$test_case_index]['fail_reason'] = $data[5];
+    
+    if(isset($data[5]))
+    {
+        $test_cases[$test_case_index]['fail_reason'] = $data[5];
     }
-
-
-   	$GLOBALS['DBG']->debug2("test case with : {$data[0]},{$data[1]},{$data[2]},{$data[3]},{$data[4]},{$data[5]}");
+    
+    $GLOBALS['DBG']->debug2("test case with : {$data[0]},{$data[1]},{$data[2]},{$data[3]},{$data[4]},{$data[5]}");
 
     $test_case_index++;
 }
@@ -241,10 +212,7 @@ foreach($test_cases as $case)
     echo 'number:' . $case['no'] . ' with country code:' . $case['country'] . ' should return:' . $case['ok'] . "<br/>\n";
 }
 echo "</div>\n";
-
 echo "______________________<br>\n";
-
-
 echo "<a href=\"javascript:toggleElement('custom_test')\" >show interactive test</a><br/>\n";
 echo "<div id='custom_test' style='display:none;'>\n";
 echo "<form>";
@@ -276,7 +244,6 @@ echo "  </td></tr></table>";
 echo "  </p>";
 echo "</form>";
 echo "</div>\n";
-
 echo "______________________<br>\n";
 
 
@@ -289,7 +256,6 @@ echo $debug_string."<br>\n";
 $GLOBALS['DBG']->debug2($debug_string);
 
 $result_count = count($test_cases);
-
 $output_debug_info = FALSE;
 
 echo "<table border='2px'>\n";
@@ -303,21 +269,21 @@ for($i=0; $i<$result_count; ++$i)
         $debug = 2;
         $output_debug_info = TRUE;
     }
-
-	$fail_reason = NULL;
-	if(isset($test_cases[$i]['fail_reason']) && empty($test_cases[$i]['fail_reason']) === FALSE)
-	{
-		$GLOBALS['DBG']->debug('failed because...');
-		$fail_reason = $test_cases[$i]['fail_reason'];
-	}
-
-	$phone_number_obj = new Phone_Number($debug, $GLOBALS['DBG'], $sql_db, NULL);
-	$phone_number_obj->set_normalized_country($test_cases[$i]['country']);
-	$phone_number_obj->set_input_number($test_cases[$i]['no']);
+    
+    $fail_reason = NULL;
+    if(isset($test_cases[$i]['fail_reason']) && empty($test_cases[$i]['fail_reason']) === FALSE)
+    {
+        $GLOBALS['DBG']->debug('failed because...');
+        $fail_reason = $test_cases[$i]['fail_reason'];
+    }
+    
+    $phone_number_obj = new Phone_Number($debug, $GLOBALS['DBG'], $sql_db, NULL);
+    $phone_number_obj->set_normalized_country($test_cases[$i]['country']);
+    $phone_number_obj->set_input_number($test_cases[$i]['no']);
     
     $result = $phone_number_obj->get_normalized_number();
     
-    if($phone_number_obj->has_error() !== false)
+    if($phone_number_obj->has_error() !== FALSE)
     {
         echo "error while executing function: </td>". print_r($phone_number_obj->get_error('all'), TRUE);
     }
@@ -335,37 +301,36 @@ for($i=0; $i<$result_count; ++$i)
             echo "***";
         }
         echo "</td>";
-	}
-
-	if(empty($fail_reason) === FALSE)
-	{
-		echo "<td width='100px' style='text-align:left;'>";
-		echo "<a href=\"javascript:toggleElement('test_{$i}')\">why?</a>";
-		echo "<div id='test_{$i}' style='display:none;'>{$fail_reason}</div></td>";
-	}
-	else
-	{
-		echo "<td width='100px'>&nbsp;</td>";	
+    }
+    
+    if(empty($fail_reason) === FALSE)
+    {
+        echo "<td width='100px' style='text-align:left;'>";
+        echo "<a href=\"javascript:toggleElement('test_{$i}')\">why?</a>";
+        echo "<div id='test_{$i}' style='display:none;'>{$fail_reason}</div></td>";
+    }
+    else
+    {
+        echo "<td width='100px'>&nbsp;</td>";
     }
     
     if($debug > 0)
     {
-        echo "<td width='35px' style='text-align:center;color:green;font-weight:700'>dbg*</td>";    
+        echo "<td width='35px' style='text-align:center;color:green;font-weight:700'>dbg*</td>";
     }
     else
     {
-        echo "<td width='35px'>&nbsp;</td>";        
+        echo "<td width='35px'>&nbsp;</td>";
     }
     
     echo " </tr>\n";
-	$phone_number_obj = NULL;
+    $phone_number_obj = NULL;
     unset($phone_number_obj);
 }
 echo "</table>\n";
-    
 
 // ===============================================================
-// READY!
+// DONE!
 // ===============================================================
 
 echo "<p style='font-style:italic'>***indicates that this is a known problem case</p>\n";
@@ -374,8 +339,4 @@ if($output_debug_info)
     echo "<p style='font-style:italic'>*Indicates extra debug output was produced in the logfile.<p/>\n";
 }
 echo "<b>Test '".basename(__FILE__)."' ... End.</b><br/><br/>\n";
-
-//$GLOBALS['PRF']->timer_stop('T-'.crc32(__FILE__), 'Time measurement for file '.basename(__FILE__));
-//$GLOBALS['PRF']->memory_stop('M-'.crc32(__FILE__), 'Memory measurement for file '.basename(__FILE__));
-//$GLOBALS['PRF']->memory_show('Measurement at the end of file '.basename(__FILE__));
 ?>
