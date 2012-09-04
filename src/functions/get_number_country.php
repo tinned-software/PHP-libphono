@@ -33,19 +33,18 @@ $GLOBALS['DBG']->info('*** Starting file '.basename(__FILE__));
  * 
  * 
  * @param $number string the full telephone number to check 
- * @param $number_country_code string the leading country code of the number to check 
  * @param &$error boolean TRUE or FALSE depending on whether an error was encountered or not 
  * @param &$error_list array an array containing the error which was reported by the function 
  * @return mixed ZZZ when no country found, three letter country code of the given phone number, or FALSE if an error ocurred
  **/
-function get_number_country($number, $number_country_code, &$error, &$error_list)
+function get_number_country($number, &$error, &$error_list)
 {
-    if(isset($number) === FALSE || isset($number_country_code) === FALSE)
+    if(isset($number) === FALSE)
     {
         $GLOBALS['DBG']->error('missing parameters, cannot continue to process number');
         return NULL;
     }
-    $GLOBALS['DBG']->debug2("input parameters: $number, $number_country_code");
+    $GLOBALS['DBG']->debug2("input parameters: $number");
 
     $sql_db = new SQLite_3($GLOBALS['config_libphono_connection_string'], $GLOBALS['config_debug_level_class'], $GLOBALS['DBG']);
 
@@ -75,7 +74,7 @@ function get_number_country($number, $number_country_code, &$error, &$error_list
     }
     else
     {
-        $GLOBALS['DBG']->info("No country found for cli_country_code '{$number_country_code}'");
+        $GLOBALS['DBG']->info("No country found for number:{$number}");
     }
     
     return $return; 

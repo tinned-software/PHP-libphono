@@ -6,7 +6,7 @@
  * 
  * @package framework
  * 
- * General Framework initialisation
+ * Test script
  * 
 **/
 
@@ -34,44 +34,44 @@ $GLOBALS['DBG']->debug2($debug_string);
 // ok - the expected response
 
 $test_cases = array(
-    array('no' => '16145554444',   'cc' => '1',   'ok' => 'USA'),
-    array('no' => '13124567891',   'cc' => '1',   'ok' => 'USA'),
-    array('no' => '390399909169',  'cc' => '39',  'ok' => 'ITA'),
-    array('no' => '393920000087',  'cc' => '39',  'ok' => 'ITA'),
-    array('no' => '50370813738',   'cc' => '503', 'ok' => 'SLV'),
-    array('no' => '38640784494',   'cc' => '386', 'ok' => 'SVN'),
-    array('no' => '14163611000',   'cc' => '1',   'ok' => 'CAN'),
-    array('no' => '34677331843',   'cc' => '34',  'ok' => 'ESP'),
-    array('no' => '4917691320507', 'cc' => '49',  'ok' => 'DEU'),
-    array('no' => '4369917200100', 'cc' => '43',  'ok' => 'AUT'),
-    array('no' => '447550664778',  'cc' => '44',  'ok' => 'GBR'),
-    array('no' => '441534664778',  'cc' => '44',  'ok' => 'JEY'),
-    array('no' => '441624664778',  'cc' => '44',  'ok' => 'IMN'),
-    array('no' => '12684445555',   'cc' => '1',   'ok' => 'ATG'),
-    array('no' => '556181183884',  'cc' => '55',  'ok' => 'BRA'),
-    array('no' => '48503501785',   'cc' => '44',  'ok' => 'POL'),
-    array('no' => '573134411648',  'cc' => '57',  'ok' => 'COL'),
-    array('no' => '77774447712',   'cc' => '7',   'ok' => 'KAZ'),
-    array('no' => '77776755557',   'cc' => '7',   'ok' => 'KAZ'),
-    array('no' => '77774881279',   'cc' => '7',   'ok' => 'KAZ'),
-    array('no' => '79093230851',   'cc' => '7',   'ok' => 'RUS'),
-    array('no' => '420605222527',  'cc' => '420', 'ok' => 'CZE'),
-    array('no' => '50255279339',   'cc' => '502', 'ok' => 'GTM'),
-    array('no' => '7636755557',    'cc' => '7',   'ok' => 'KAZ'),
-    array('no' => '9039299518300', 'cc' => '90',  'ok' => 'CYP'),
-    array('no' => '35799518300',   'cc' => '90',  'ok' => 'CYP'),
-    array('no' => '905384383548',  'cc' => '90',  'ok' => 'TUR'),
-    array('no' => '905384383548',  'cc' => '90',  'ok' => 'TUR'),
-    array('no' => '18493095637',   'cc' => '1',   'ok' => 'DOM'),
-    array('no' => '18297746900',   'cc' => '1',   'ok' => 'DOM'),
-    array('no' => '18094313676',   'cc' => '1',   'ok' => 'DOM'),
-    array('no' => '18493095637',   'cc' => '1849','ok' => 'DOM'),
-    array('no' => '18297746900',   'cc' => '1829','ok' => 'DOM'),
-    array('no' => '18094313676',   'cc' => '1809','ok' => 'DOM'),
-    array('no' => '23412779000',   'cc' => '234', 'ok' => 'NGA'), 
-    array('no' => '99912345678',   'cc' => '999', 'ok' => 'ZZZ'),
-    array('no' => '699444444444',  'cc' => '6',   'ok' => 'ZZZ'),
-    array('no' => '889123456789',  'cc' => '89',  'ok' => 'ZZZ'),
+    array('no' => '16145554444',   'ok' => 'USA'),
+    array('no' => '13124567891',   'ok' => 'USA'),
+    array('no' => '390399909169',  'ok' => 'ITA'),
+    array('no' => '393920000087',  'ok' => 'ITA'),
+    array('no' => '50370813738',   'ok' => 'SLV'),
+    array('no' => '38640784494',   'ok' => 'SVN'),
+    array('no' => '14163611000',   'ok' => 'CAN'),
+    array('no' => '34677331843',   'ok' => 'ESP'),
+    array('no' => '4917691320507', 'ok' => 'DEU'),
+    array('no' => '4369917200100', 'ok' => 'AUT'),
+    array('no' => '447550664778',  'ok' => 'GBR'),
+    array('no' => '441534664778',  'ok' => 'JEY'),
+    array('no' => '441624664778',  'ok' => 'IMN'),
+    array('no' => '12684445555',   'ok' => 'ATG'),
+    array('no' => '556181183884',  'ok' => 'BRA'),
+    array('no' => '48503501785',   'ok' => 'POL'),
+    array('no' => '573134411648',  'ok' => 'COL'),
+    array('no' => '77774447712',   'ok' => 'KAZ'),
+    array('no' => '77776755557',   'ok' => 'KAZ'),
+    array('no' => '77774881279',   'ok' => 'KAZ'),
+    array('no' => '79093230851',   'ok' => 'RUS'),
+    array('no' => '420605222527',  'ok' => 'CZE'),
+    array('no' => '50255279339',   'ok' => 'GTM'),
+    array('no' => '7636755557',    'ok' => 'KAZ'),
+    array('no' => '9039299518300', 'ok' => 'CYP'),
+    array('no' => '35799518300',   'ok' => 'CYP'),
+    array('no' => '905384383548',  'ok' => 'TUR'),
+    array('no' => '905384383548',  'ok' => 'TUR'),
+    array('no' => '18493095637',   'ok' => 'DOM'),
+    array('no' => '18297746900',   'ok' => 'DOM'),
+    array('no' => '18094313676',   'ok' => 'DOM'),
+    array('no' => '18493095637',   'ok' => 'DOM'),
+    array('no' => '18297746900',   'ok' => 'DOM'),
+    array('no' => '18094313676',   'ok' => 'DOM'),
+    array('no' => '23412779000',   'ok' => 'NGA'), 
+    array('no' => '99912345678',   'ok' => 'ZZZ'),
+    array('no' => '699444444444',  'ok' => 'ZZZ'),
+    array('no' => '889123456789',  'ok' => 'ZZZ'),
 );
 
 
@@ -79,7 +79,7 @@ echo "<a href=\"javascript:document.getElementById('test_cases').style.display='
 echo "<div id='test_cases' style='display:none;'>\n";
 foreach($test_cases as $case)
 {
-    echo 'number:' . $case['no'] . ' with country code:' . $case['cc'] . ' should return:' . $case['ok'] . "<br/>\n";
+    echo 'Number:' . $case['no'] . ' should return:' . $case['ok'] . "<br/>\n";
 }
 echo "</div>\n";
 
@@ -102,7 +102,7 @@ for($i=0; $i<$result_count; ++$i)
     
     $error = false;
     $error_list = array();
-    $result = get_number_country($test_cases[$i]['no'], $test_cases[$i]['cc'], $error, $error_list);
+    $result = get_number_country($test_cases[$i]['no'], $error, $error_list);
     
     if($error === true)
     {
