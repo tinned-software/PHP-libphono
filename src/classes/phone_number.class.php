@@ -1,20 +1,17 @@
 <?php
 /**
  * 
- * @author     Apostolos Karakousis <apostolos.karakousis@tinned-software.net>
- * @version    1.2.7
+ * @author     Apostolos Karakousis ktolis@ktolis.gr
+ * @version    1.3.1
  * 
- * @package    framework
- * @subpackage phone_number
+ * @package    general_scripts
+ * @subpackage mobile_service
  * @copyright  http://opensource.org/licenses/gpl-license.php GNU Public License
  * 
  * Phone Number representation class
  * 
 **/
 
-/**
- * include files
- **/
 require_once dirname(__FILE__).'/main.class.php';
 
 /**
@@ -69,7 +66,7 @@ require_once dirname(__FILE__).'/main.class.php';
  * 150 ... "sql object not specified in costructor"
  * 201 ... "country_3_letter was set to NULL"
  * 202 ... "input_number was NOT set"
- * 301 ... "Fetching data failed. Internal SQL error ".$errno
+ * 301 ... "Fetching data failed. Internal mysql error ".$errno
  * 401 ... "missing parameters, cannot continue to process number"
  * 402 ... "false exit dialcode array, cannot continue to process number"
  * 403 ... "tried to compare two non-phone number objects"
@@ -278,16 +275,6 @@ class Phone_Number extends Main
     private $_error = NULL;
     
     /**
-     * Internal array used for error handling
-     * 
-     * @access private
-     * @todo remove since we now use the internal error handling reporting mechanism
-     * 
-     * @var array
-    **/
-    private $_error_list = NULL;
-    
-    /**
      * Support level parameter. Used for error reporting/handling.
      * 
      * @access private
@@ -329,8 +316,8 @@ class Phone_Number extends Main
         $this->_sql_db          = $sql_database;
 
         // initialize parent class MainClass
-        parent::Main_init($debug_level, $debug_object);
-            
+        parent::Main_init($debug_level, $debug_object,1);
+
         if(is_object($sql_obj) === FALSE)
         {
             parent::report_error(150, "sql object not specified in costructor");
@@ -642,7 +629,7 @@ class Phone_Number extends Main
                 $success_fetching = $this->_fetch_dialcodes();
             }
             
-            $this->_number_normalized = $this->_normalize_number($this->_validated_number, $this->_trunk_code, $this->_country_code, $this->_exit_dialcode, $this->_error, $this->_error_list);
+            $this->_number_normalized = $this->_normalize_number($this->_validated_number, $this->_trunk_code, $this->_country_code, $this->_exit_dialcode);
         }
         
         parent::debug2("returning '".$this->_number_normalized."'");
@@ -802,7 +789,7 @@ class Phone_Number extends Main
             
             if($errno !== NULL)
             {
-                parent::report_error(301, "Fetching data failed. Internal SQL error ".$errno.': '.$errtext);
+                parent::report_error(301, "Fetching data failed. Internal mysql error ".$errno.': '.$errtext);
                 $this->_error = TRUE;
             }
             
@@ -930,7 +917,7 @@ class Phone_Number extends Main
                 {
                     parent::debug2("fetched dialcodes");
                     // trunk code for now is not used, so it's set to NULL
-                    $number = $this->_normalize_number($number, NULL, $this->_country_code, $this->_exit_dialcode, $this->_error, $this->_error_list);
+                    $number = $this->_normalize_number($number, NULL, $this->_country_code, $this->_exit_dialcode);
                 }
             break;
             case 1:
@@ -1010,22 +997,17 @@ class Phone_Number extends Main
      * @param  array      $trunk_code_array    trunk code to use
      * @param  string     $country_code        country code to use
      * @param  array$     exit_dialcode_array  exit dialcode of country to use
-     * @param  boolean    &$error              
-     * @param  error_list &$error_list         error_list to populate
      * 
      * @return string                          the normalized number
      */
-    private function _normalize_number($the_number = NULL, $trunk_code_array = NULL, $country_code = NULL, $exit_dialcode_array = NULL, &$error, &$error_list)
+    private function _normalize_number($the_number = NULL, $trunk_code_array = NULL, $country_code = NULL, $exit_dialcode_array = NULL)
     {
         parent::debug2("the_number:$the_number trunk_code:$trunk_code_array country_code:$country_code exit_dialcode_array:$exit_dialcode_array");
         
         if(isset($the_number) === FALSE || (isset($trunk_code_array) === FALSE && is_null($trunk_code_array) !== TRUE) || isset($country_code) === FALSE || isset($exit_dialcode_array) === FALSE)
         {
             parent::report_error(401, "missing parameters, cannot continue to process number");
-            
             $error = TRUE;
-            $error_list[] = array('error_number' => '100', 'error_text' => 'missing parameters');
-            
             return NULL;
         }
         
@@ -1240,7 +1222,7 @@ class Phone_Number extends Main
         $explanation["_country_code"]                    = $this->_country_code;
         $explanation["_trunk_code"]                      = $this->_trunk_code;
         $explanation["_exit_dialcode"]                   = $this->_exit_dialcode;
-        $explanation["_error_list"]                      = $this->get_error("all");
+        $explanation["_error_list"]                      = parent::get_all_errors();
         
         parent::debug2("Object: Phone Number -> ".preg_replace("/\n/", "\n ", print_r($explanation, TRUE)));
         return $explanation;
