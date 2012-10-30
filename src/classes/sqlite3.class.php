@@ -17,7 +17,6 @@
 
 
 include_once(dirname(__FILE__).'/main.class.php');
-include_once(dirname(__FILE__).'/debug_logging.interface.php');
 
 
 /**

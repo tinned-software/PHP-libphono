@@ -150,7 +150,7 @@ $test = new kTest($log, FALSE);
     // test variables preparation
     // none
 $test->start($test_id = 1, $description = "creation of a Phone_Number object", $operations_count = 1, "");
-    $result = new Phone_Number(0,$log, $sql_db);
+    $result = new Phone_Number(0, $log, $sql_db, NULL);
 $test->stop($test_id);
 $test->print_result($test_id,
         isset($result) === TRUE && is_object($result) && get_class($result) === "Phone_Number"
@@ -163,7 +163,7 @@ $test_id = $description = $operations_count = $result = NULL;
     $test_country = "AUT";
 $test->start($test_id = 2, $description = "setting country", $operations_count = 1, "");
     // setup
-    $number = new Phone_Number(0,$log, $sql_db);
+    $number = new Phone_Number(0, $log, $sql_db, NULL);
     // input + result
     $result = $number->set_normalized_country($test_country);
 $test->stop($test_id);
@@ -179,7 +179,7 @@ $test_id = $description = $operations_count = $test_country = $number = $result 
     $test_country = "AUT";
 $test->start($test_id = 3, $description = "getting country", $operations_count = 1, "");
     // setup
-    $number = new Phone_Number(0,$log, $sql_db);
+    $number = new Phone_Number(0, $log, $sql_db, NULL);
     // input
     $number->set_normalized_country($test_country);
     // results
@@ -197,7 +197,7 @@ $test_id = $description = $operations_count = $test_country = $number = $result 
     $test_input_number = "06944/651156";
 $test->start($test_id = 4, $description = "set input number", $operations_count = 1, "");
     // setup
-    $number = new Phone_Number(0,$log, $sql_db);
+    $number = new Phone_Number(0, $log, $sql_db, NULL);
     // input + result
     $result = $number->set_input_number($test_input_number);
 $test->stop($test_id);
@@ -212,7 +212,7 @@ $test_id = $description = $operations_count = $test_input_number = $number = $re
     $test_input_number = "06944/651156";
 $test->start($test_id = 5, $description = "get input number", $operations_count = 1, "");
     // setup
-    $number = new Phone_Number(0,$log, $sql_db);
+    $number = new Phone_Number(0, $log, $sql_db, NULL);
     // input
     $number->set_input_number($test_input_number);
     // results
@@ -231,7 +231,7 @@ $test_id = $description = $operations_count = $test_input_number = $number = $re
     $test_validated_number = "06944651156";
 $test->start($test_id = 6, $description = "get validated input number", $operations_count = 1, "");
     // setup
-    $number = new Phone_Number(0,$log, $sql_db);
+    $number = new Phone_Number(0, $log, $sql_db, NULL);
     // input
     $number->set_input_number($test_input_number);
     // results
@@ -251,7 +251,7 @@ $test_id = $description = $operations_count = $test_input_number = $test_validat
     $test_international_number = "00436944651156";
 $test->start($test_id = 7, $description = "get international number", $operations_count = 1, "");
     // setup
-    $number = new Phone_Number(0,$log, $sql_db);
+    $number = new Phone_Number(0, $log, $sql_db, NULL);
     // input
     $number->set_input_number($test_input_number);
     $number->set_normalized_country($test_input_country );
@@ -271,7 +271,7 @@ $test_id = $description = $operations_count = $test_input_number = $test_input_c
     $test_normalized_international_number = "+436944651156";
 $test->start($test_id = 8, $description = "get normalized international number", $operations_count = 1, "");
     // setup
-    $number = new Phone_Number(0,$log, $sql_db);
+    $number = new Phone_Number(0, $log, $sql_db, NULL);
     // input
     $number->set_input_number($test_input_number);
     $number->set_normalized_country($test_input_country);
@@ -291,7 +291,7 @@ $test_id = $description = $operations_count = $test_input_number = $test_input_c
 
 $test->start($test_id = 9, $description = "get normalized number", $operations_count = 1, "");
     // setup
-    $number = new Phone_Number(0, $log, $sql_db);
+    $number = new Phone_Number(0, $log, $sql_db, NULL);
     // input
     $number->set_input_number($test_input_number );
     $number->set_normalized_country($test_input_country);
@@ -311,7 +311,7 @@ $test_id = $description = $operations_count = $test_input_number = $test_input_c
 
 $test->start($test_id = 10, $description = "get normalized number only", $operations_count = 1, "");
     // setup
-    $number = new Phone_Number(2, $log, $sql_db);
+    $number = new Phone_Number(2, $log, $sql_db, NULL);
     // input
     $number->set_input_number($test_input_number );
     $number->set_normalized_country($test_input_country);
@@ -335,7 +335,7 @@ $test_id = $description = $operations_count = $test_input_number = $test_input_c
 
 $test->start($test_id = 11, $description = "get normalized number only (should not be normalizable)", $operations_count = 1, "");
     // setup
-    $number = new Phone_Number(2, $log, $sql_db);
+    $number = new Phone_Number(2, $log, $sql_db, NULL);
     // input
     $number->set_input_number($test_input_number );
     $number->set_normalized_country($test_input_country);
@@ -359,7 +359,7 @@ $test_id = $description = $operations_count = $test_input_number = $test_input_c
 
 $test->start($test_id = 12, $description = "get local number", $operations_count = 1, "");
 // setup
-    $number = new Phone_Number(0, $log, $sql_db);
+    $number = new Phone_Number(0, $log, $sql_db, NULL);
     // input
     $number->set_input_number($test_input_number);
     $number->set_normalized_country($test_input_country);
@@ -382,7 +382,7 @@ $test_id = $description = $operations_count = $test_input_number = $test_input_c
     $test_local_number = "06944651156";
 $test->start($test_id = 13, $description = "complete test with test number '$test_input_number'  and country '$test_input_country'", 1, "");
     // setup
-    $number = new Phone_Number(0, $log, $sql_db);
+    $number = new Phone_Number(0, $log, $sql_db, NULL);
     // input
     $number->set_input_number($test_input_number);
     $number->set_normalized_country($test_input_country);
