@@ -318,7 +318,7 @@ class Phone_Number extends Main
      * @param  string  sql_database  The sql database name to use
      * @return void
     **/
-    public function __construct($debug_level, &$debug_object, &$sql_obj, $sql_database)
+    public function __construct()
     {
         // copy over the variable contents
         $this->_debug_level     = $debug_level;
@@ -338,6 +338,89 @@ class Phone_Number extends Main
         {
             parent::debug('WARNING: SQL Database Name was not set or empty');
         }
+    }
+    
+    
+        
+    ////////////////////////////////////////////////////////////////////////////
+    // FACTORY methods of the class
+    ////////////////////////////////////////////////////////////////////////////
+    
+    /**
+     * A factory method to get a Phone_Number Object using a E.164 Number
+     * 
+     * @access public
+     * 
+     * @see http://www.itu.int/rec/T-REC-E.164
+     * @see http://en.wikipedia.org/wiki/E.164
+     *
+     * @param  string  $e164_number   The E.164 normalized number (international format without leading plus)
+     * @param  integer $debug_level   Debugging level
+     * @param  object  &$debug_object The Debugging object
+     * @param  object  &$sql_obj      The SQL object
+     * @param  string  $sql_database  The sql database name to use
+     * @return Phone_Number returns a Phone_Number object
+    **/
+    static public function object_with_e164_number($e164_number, $debug_level = 0, &$debug_object, &$sql_obj, $sql_database = '')
+    {
+        if(isset($e164_number) === FALSE)
+        {
+            $debug_object->error('missing e164_number parameter, cannot continue to process number');
+            return NULL;
+        }
+        if(isset($debug_object) === FALSE)
+        {
+            $debug_object->error('missing debug_object parameter, cannot continue to process number');
+            return NULL;
+        }
+        if(isset($sql_obj) === FALSE)
+        {
+            $debug_object->error('missing sql_obj parameter, cannot continue to process number');
+            return NULL;
+        }
+        $debug_object->debug2("input parameter: $e164_number");
+
+        //
+        // attempt to find the country of the number using the number
+        if(get_class($sql_obj) == 'SQLite_3')
+        {
+            $query_dialcode = "SELECT * FROM Country_Dialcodes WHERE '{$sql_obj->escape_string($e164_number)}' LIKE extended_dialcode || '%' ORDER BY LENGTH(extended_dialcode) DESC";
+        }
+        else
+        {
+            $query_dialcode = "SELECT * FROM Country_Dialcodes WHERE '{$sql_obj->escape_string($e164_number)}' LIKE CONCAT(extended_dialcode, '%') ORDER BY LENGTH(extended_dialcode) DESC";
+        }
+            
+
+        // send query to db and get result
+        $errno = $errtext = NULL;
+        $query_dialcode_result = $sql_obj->get_query_result($query_dialcode, $errno, $errtext);
+
+        if($errno != NULL)
+        {
+            // Error while query execution
+            $error_list[] = array('error_text' => "Internal Error", 'error_code' => "300.$errno");
+            $error = TRUE;
+            $debug_object->error("SQL: $errno, $errtext");
+            return FALSE;
+        }
+
+        $return_obj = new Phone_Number($debug_level = 0, $debug_object, $sql_obj, $sql_database);
+
+        if($query_dialcode_result['count'] >= 1)
+        {
+            $debug_object->debug2_array('matche(s) results found: ', $query_dialcode_result['data']);
+            $return_obj->set_normalized_country($query_dialcode_result['data'][0]['country_3_letter']);
+            $return_obj->set_input_number('+' . $e164_number);
+        }
+        else
+        {
+            $debug_object->info("No country found for number:{$e164_number}");
+            $return_obj->set_normalized_country('ZZZ');
+            // $return_obj->set_input_number('+' . $e164_number);
+        }
+        
+        return $return_obj; 
     }
     
     
