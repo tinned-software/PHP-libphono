@@ -2,7 +2,7 @@
 /**
  * 
  * @author     Apostolos Karakousis ktolis@ktolis.gr
- * @version    1.3.1
+ * @version    1.3.3
  * 
  * @package    general_scripts
  * @subpackage mobile_service
@@ -134,6 +134,17 @@ class Phone_Number extends Main
      * @var string
     **/
     private $_input_number = NULL;
+    
+    // database state information
+    
+    /**
+     * Indicates whether information has been fetched from the database.
+     * 
+     * @access private
+     *
+     * @var boolean
+     **/
+    private $_db_dialcodes_fetched = FALSE;
     
     // normalized formats
     
@@ -323,9 +334,9 @@ class Phone_Number extends Main
             parent::report_error(150, "sql object not specified in costructor");
         }
 
-        if(is_null($sql_database) === TRUE)
+        if(is_null($sql_database) === TRUE || empty($sql_database) === TRUE)
         {
-            parent::debug('WARNING: SQL Database Name was not set');
+            parent::debug('WARNING: SQL Database Name was not set or empty');
         }
     }
     
@@ -376,12 +387,13 @@ class Phone_Number extends Main
         parent::debug2("Called with parameters: country_3_letter = '".$country_3_letter."'");
         
         // clear cache for old country_3_letter (both if was set or was set to NULL)
-        if($this->_country_3_letter !== $country_3_letter)
+        if($this->_db_dialcodes_fetched === TRUE && $this->_country_3_letter !== $country_3_letter)
         {
             parent::debug2("country_3_letter was modified, forcing a flush on all calculations");
             $this->_unset_all();
-            $this->_country_3_letter = $country_3_letter;
         }
+        
+        $this->_country_3_letter = $country_3_letter;
         
         return TRUE;
     }
@@ -425,12 +437,13 @@ class Phone_Number extends Main
         parent::debug2("called with parameters: input_number = '".$input_number."'");
         
         // reset ALL variables if was not null to reset the normalization
-        if(strcmp($this->_input_number, $input_number) !== 0)
+        if($this->_db_dialcodes_fetched === TRUE && strcmp($this->_input_number, $input_number) !== 0)
         {
             parent::debug2("input_number was modified, forcing a flush on all calculations");
             $this->_unset_all();
-            $this->_input_number = $input_number;
         }
+        
+        $this->_input_number = $input_number;
         
         return TRUE;
     }
@@ -752,6 +765,12 @@ class Phone_Number extends Main
     **/
     private function _fetch_dialcodes()
     {
+        if($this->_db_dialcodes_fetched === TRUE)
+        {
+            parent::debug2('database information already fetched, returning');
+            return TRUE;
+        }
+        
         // step 1: make sure we have the country_3_letter code AND the validated version of the number
         $this->_country_3_letter = $this->get_normalized_country();
         
@@ -780,6 +799,7 @@ class Phone_Number extends Main
                     ."WHERE  ".$db_name."Country_Exit_Dialcode.country_3_letter = '".$this->_country_3_letter."' AND \n"
                     ."       ".$db_name."Country_Dialcodes.country_3_letter = '".$this->_country_3_letter."' AND \n"
                     ."       ".$db_name."Country_Trunk_Code.country_3_letter = '".$this->_country_3_letter."'";
+                    //." -- object_id:".spl_object_hash($this).' '.microtime(). ' '.$this->_input_number;
             
             // send query to db and get result
             $errno = NULL;
@@ -821,6 +841,8 @@ class Phone_Number extends Main
             {
                 parent::debug2("no exit dialcode / country code information found in DB, cannot normalize number, EXIT NOW !!!");
             }
+            
+            $this->_db_dialcodes_fetched = TRUE;
             
             return TRUE;
         }
@@ -871,6 +893,8 @@ class Phone_Number extends Main
     private function _unset_all()
     {
         parent::debug2("setting all internal variables to NULL");
+        
+        $this->_db_dialcodes_fetched = FALSE;
         
         $this->_validated_number = NULL;
         $this->_international_number = NULL;
