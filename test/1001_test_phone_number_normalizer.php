@@ -64,7 +64,6 @@ var iso = '';
 
 function normalizeNumber()
 {
-    alert('hi');
     number = document.getElementById('nr_custom').value;
     iso = document.getElementById('nr_custom_iso').value;
     request = new XMLHttpRequest();
