@@ -3,6 +3,9 @@
 -- SQLLite
 -- 
 
+CREATE TABLE Country_Tables_Version (version_number INTEGER NOT NULL, changed_date datetime default current_timestamp, version_text varchar(255) NOT NULL);
+CREATE UNIQUE INDEX Country_Tables_version_number_id ON Country_Tables_Version (version_number);
+
 CREATE TABLE Country_Codes (id  INTEGER NOT NULL, country_3_letter varchar(3) NOT NULL, country_2_letter varchar(2), PRIMARY KEY (id));
 CREATE UNIQUE INDEX Country_Codes_id ON Country_Codes (id);
 CREATE UNIQUE INDEX Country_Codes_country_3_letter ON Country_Codes (country_3_letter);

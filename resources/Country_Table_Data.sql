@@ -1,5 +1,13 @@
 
 --
+-- DB Version history data for table `Country_Codes`
+--
+
+INSERT INTO `Country_Tables_Version` (version_number, changed_date, version_text) VALUES (1000, '2013-04-10 14:40:53','Initial versioned dbdes and two letter ISO');
+INSERT INTO `Country_Tables_Version` (version_number, changed_date, version_text) VALUES (1001, '2013-04-08 16:40:00','added PSE trunk / exit dialcodes and two letter ISO');
+
+
+--
 -- Dumping data for table `Country_Codes`
 --
 
@@ -183,6 +191,7 @@ INSERT INTO `Country_Codes` (country_3_letter,country_2_letter) VALUES ('PRI','P
 INSERT INTO `Country_Codes` (country_3_letter,country_2_letter) VALUES ('PRK','KP');
 INSERT INTO `Country_Codes` (country_3_letter,country_2_letter) VALUES ('PRT','PT');
 INSERT INTO `Country_Codes` (country_3_letter,country_2_letter) VALUES ('PRY','PY');
+INSERT INTO `Country_Codes` (country_3_letter,country_2_letter) VALUES ('PSE','PS');
 INSERT INTO `Country_Codes` (country_3_letter,country_2_letter) VALUES ('PYF','PF');
 INSERT INTO `Country_Codes` (country_3_letter,country_2_letter) VALUES ('QAT','QA');
 INSERT INTO `Country_Codes` (country_3_letter,country_2_letter) VALUES ('REU','RE');
@@ -1008,6 +1017,7 @@ INSERT INTO `Country_Exit_Dialcode` (country_3_letter,exit_dialcode) VALUES ('PE
 INSERT INTO `Country_Exit_Dialcode` (country_3_letter,exit_dialcode) VALUES ('PHL','00');
 INSERT INTO `Country_Exit_Dialcode` (country_3_letter,exit_dialcode) VALUES ('POL','00');
 INSERT INTO `Country_Exit_Dialcode` (country_3_letter,exit_dialcode) VALUES ('PRT','00');
+INSERT INTO `Country_Exit_Dialcode` (country_3_letter,exit_dialcode) VALUES ('PSE','00');
 INSERT INTO `Country_Exit_Dialcode` (country_3_letter,exit_dialcode) VALUES ('QAT','00');
 INSERT INTO `Country_Exit_Dialcode` (country_3_letter,exit_dialcode) VALUES ('ROU','00');
 INSERT INTO `Country_Exit_Dialcode` (country_3_letter,exit_dialcode) VALUES ('RUS','8p10');
@@ -1590,4 +1600,5 @@ INSERT INTO `Country_Trunk_Code` VALUES (230,'WLF',NULL);
 INSERT INTO `Country_Trunk_Code` VALUES (231,'YEM','0');
 INSERT INTO `Country_Trunk_Code` VALUES (232,'ZMB','0');
 INSERT INTO `Country_Trunk_Code` VALUES (233,'ZWE','0');
+INSERT INTO `Country_Trunk_Code` VALUES (234,'PSE','0');
 
