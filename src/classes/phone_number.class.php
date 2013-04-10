@@ -318,7 +318,7 @@ class Phone_Number extends Main
      * @param  string  sql_database  The sql database name to use
      * @return void
     **/
-    public function __construct($debug_level, &$debug_object, &$sql_obj, $sql_database)
+    public function __construct()
     {
         // copy over the variable contents
         $this->_debug_level     = $debug_level;
