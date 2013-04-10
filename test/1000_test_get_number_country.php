@@ -12,8 +12,7 @@
 
 define("ROOTPATH", dirname(__FILE__)."/../");
 require_once(ROOTPATH.'config/php_config.php');
-require_once(ROOTPATH.'src/classes/sqlite3.class.php');
-require_once(ROOTPATH.'src/classes/phone_number.class.php');
+require_once(ROOTPATH.'src/functions/get_number_country.php');
 
 $GLOBALS['DBG']->info('*** Starting file '.basename(__FILE__));
 
@@ -96,8 +95,6 @@ $GLOBALS['DBG']->debug2($debug_string);
 
 $result_count = count($test_cases);
 
-$sql_db = new SQLite_3($GLOBALS['config_libphono_connection_string'], $GLOBALS['config_debug_level_class'], $GLOBALS['DBG']);
-
 echo "<table>\n";
 for($i=0; $i<$result_count; ++$i)
 {
@@ -105,8 +102,7 @@ for($i=0; $i<$result_count; ++$i)
     
     $error = false;
     $error_list = array();
-    $result_obj = Phone_Number::object_with_e164_number($test_cases[$i]['no'], $GLOBALS['config_debug_level_class'], $GLOBALS['DBG'], $sql_db);
-    $result = $result_obj->get_normalized_country();
+    $result = get_number_country($test_cases[$i]['no'], $error, $error_list);
     
     if($error === true)
     {
