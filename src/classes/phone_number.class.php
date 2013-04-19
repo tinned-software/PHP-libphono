@@ -2,7 +2,7 @@
 /**
  * 
  * @author     Apostolos Karakousis ktolis@ktolis.gr
- * @version    1.3.3
+ * @version    1.3.4
  * 
  * @package    general_scripts
  * @subpackage mobile_service
@@ -389,8 +389,9 @@ class Phone_Number extends Main
         // clear cache for old country_3_letter (both if was set or was set to NULL)
         if($this->_db_dialcodes_fetched === TRUE && $this->_country_3_letter !== $country_3_letter)
         {
-            parent::debug2("country_3_letter was modified, forcing a flush on all calculations");
+            parent::debug2("country_3_letter was modified: forcing a flush on all calculations and cached database information");
             $this->_unset_all();
+            $this->_unset_all_db();
         }
         
         $this->_country_3_letter = $country_3_letter;
@@ -881,7 +882,7 @@ class Phone_Number extends Main
     
     
     /**
-     * Reset all class properties
+     * Reset all class properties, non database related
      * 
      * This method unsets all internal variables in order to do a recalculation
      * on them on the next run of any processing function.
@@ -894,8 +895,6 @@ class Phone_Number extends Main
     {
         parent::debug2("setting all internal variables to NULL");
         
-        $this->_db_dialcodes_fetched = FALSE;
-        
         $this->_validated_number = NULL;
         $this->_international_number = NULL;
         $this->_international_number_normalized = NULL;
@@ -903,11 +902,29 @@ class Phone_Number extends Main
         $this->_local_number = NULL;
         $this->_normalize_success = FALSE;
         
+        $this->_all_formats = NULL;
+    }
+    
+    
+        
+    /**
+     * Reset all class properties which were fetched from the database
+     * 
+     * This method unsets all internal variables fetched from the database
+     * 
+     * @access private
+     * 
+     * @param void
+    **/
+    private function _unset_all_db()
+    {
+        parent::debug2("setting all internal database variables to NULL");
+        
+        $this->_db_dialcodes_fetched = FALSE;
+        
         $this->_country_code = NULL;
         $this->_trunk_code = NULL;
         $this->_exit_dialcode = NULL;
-        
-        $this->_all_formats = NULL;
     }
     
     
