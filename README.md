@@ -34,7 +34,7 @@ All countries which have publicly available information related to their dial pl
 A new version of PHP (the library has been tested with 5.1.6 and 5.3.3.
 PHP must include the following modules:
 - MySQL or SQLite3 (to provide access to data)
-- Tinned Framework ( http:// ) (required files already included)
+- [Tinned Framework](http://www.tinned-software.net/) (required files already included)
 
 ## Something not working right?
 
