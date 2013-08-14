@@ -45,7 +45,7 @@
 "89104071427","RUS","79104071427","0","0",""
 "8p1099312381027","RUS","99312381027","0","0",""
 "8,1099312381027","RUS","99312381027","0","0",""
-"81099312381027","RUS","99312381027","0","1","Missing pause symbol causes an invalid normalization of the number."
+"81099312381027","RUS","99312381027","0","1","Missing pause symbol causes an invalid normalization of the number, should be a 8 &lt;pause&gt; 10 before international numbers."
 "89104071427","RUS","79104071427","0","0",""
 "004445776123456","COL","5776123456","0","0",""
 "0095716169961","COL","5716169961","0","0",""
