@@ -2,7 +2,7 @@
 /**
  * 
  * @author     Apostolos Karakousis ktolis@ktolis.gr
- * @version    1.3.5
+ * @version    1.3.6
  * 
  * @package    general_scripts
  * @subpackage mobile_service
@@ -58,13 +58,13 @@ require_once dirname(__FILE__).'/main.class.php';
  * 
  * 
  * Error codes:
- * 101 ... "country_3_letter was not set"
- * 102 ... "country_3_letter was not string"
- * 103 ... "parameter country_3_letter was not a 3 letter string"
+ * 101 ... "iso_3166_code was not set"
+ * 102 ... "iso_3166_code was not string"
+ * 103 ... "parameter iso_3166_code was not a 3 letter string"
  * 104 ... "input_number was not set"
  * 105 ... "input_number was not string"
  * 150 ... "sql object not specified in costructor"
- * 201 ... "country_3_letter was set to NULL"
+ * 201 ... "iso_3166_code was set to NULL"
  * 202 ... "input_number was NOT set"
  * 301 ... "Fetching data failed. Internal sql error ".$errno
  * 302 ... "_iso_3166_code type not recognized, see class constants for allowed values"
@@ -131,8 +131,8 @@ class Phone_Number extends Main
     private $_iso_3166_code = NULL;
 
     /**
-     * Internal ISO 3611 country code type, see class constants for possible
-     * values. Default is 'unknown';
+     * Internal ISO 3611 country code type.
+     * See class constants for possible values. Default is 'unknown';
      * 
      * @access private
      * 
@@ -509,11 +509,11 @@ class Phone_Number extends Main
     {
         if(isset($this->_iso_3166_code) === FALSE)
         {
-            parent::report_error(201, "country_3_letter was set to NULL");
+            parent::report_error(201, "iso_3166_code was set to NULL");
             return FALSE;
         }
         
-        parent::debug2("returning country_3_letter: '".$this->_iso_3166_code."'");
+        parent::debug2("returning iso_3166_code: '".$this->_iso_3166_code."'");
         
         return $this->_iso_3166_code;
     }
@@ -670,7 +670,7 @@ class Phone_Number extends Main
             parent::debug2("_number_normalized was set to NULL, recalculating");
             
             // make sure we got the validated number AND the country code
-            $this->_country_3_letter = $this->get_normalized_country();
+            $this->_iso_3166_code = $this->get_normalized_country();
             $this->_validated_number = $this->get_validated_input_number();
             
             if(isset($this->_exit_dialcode) === FALSE)
@@ -809,8 +809,8 @@ class Phone_Number extends Main
             return TRUE;
         }
         
-        // step 1: make sure we have the country_3_letter code AND the validated version of the number
-        $this->_country_3_letter = $this->get_normalized_country();
+        // step 1: make sure we have the iso 3166 code AND the validated version of the number
+        $this->_iso_3166_code = $this->get_normalized_country();
         
         if(isset($this->_iso_3166_code) === TRUE /*&& isset($this->_validated_number) === TRUE*/ && (isset($this->_country_code) === FALSE))
         {
@@ -860,7 +860,7 @@ class Phone_Number extends Main
     
 
     /**
-     * Generate query to get the data using the ISO input given
+     * Generate query to get the data using the ISO input given.
      * 
      * @access private
      * 
