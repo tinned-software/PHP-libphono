@@ -2,7 +2,7 @@
 /**
  * 
  * @author     Apostolos Karakousis ktolis@ktolis.gr
- * @version    1.3.4
+ * @version    1.3.5
  * 
  * @package    general_scripts
  * @subpackage mobile_service
@@ -378,7 +378,7 @@ class Phone_Number extends Main
         }
         
         // $country_3_letter should have characters a-z, A-Z and should be exactly 3 characters
-        if(preg_match("/[a-zA-Z]{3}/", $country_3_letter) === FALSE)
+        if(preg_match("/[a-zA-Z]{3}/", $country_3_letter) !== 1)
         {
             parent::report_error(103, "parameter country_3_letter was not a 3 letter string, it was '$country_3_letter");
             return FALSE;
