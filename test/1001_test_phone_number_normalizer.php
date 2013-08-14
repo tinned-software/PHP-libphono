@@ -32,17 +32,34 @@ $sql_db = new SQLite_3($GLOBALS['config_libphono_connection_string'], $GLOBALS['
 //
 if(isset($_POST['nr_custom']))
 {
+    $GLOBALS['DBG']->debug2('got POST '.print_r($_POST, true));
     $GLOBALS['DBG']->debug2('got POST number/iso:'.$_POST['nr_custom'].'/'.$_POST['nr_custom_iso']);
+    $iso_type_list = array(
+        'alpha2' => Phone_Number::INPUT_ISO_3166_ALPHA2,
+        'alpha3' => Phone_Number::INPUT_ISO_3166_ALPHA3,
+        );
     
+    // generate internal variables from post input
     $nr_int = preg_replace('/[^\x20-\x7e]/', '', $_POST['nr_custom']);
     $iso_int = preg_replace('/[^a-zA-Z]/', '', $_POST['nr_custom_iso']);
     $iso_int = strtoupper($iso_int);
+
+    // do iso type calculations, default to three letter if not available / valid
+    $iso_type_int = $_POST['nr_custom_iso_type'];
+    if(array_key_exists($iso_type_int, $iso_type_list) === TRUE)
+    {
+        $iso_type_int = $iso_type_list[$iso_type_int];
+    }
+    else
+    {
+        $iso_type_int = $iso_type_list['alpha3'];
+    }
     
     $GLOBALS['DBG']->debug2('got cleaned number/iso:'.$nr_int.'/'.$iso_int);
-    
+
     // set and fetch values
     $phone_number_obj = new Phone_Number(2, $GLOBALS['DBG'], $sql_db, NULL);
-    $phone_number_obj->set_normalized_country($iso_int);
+    $phone_number_obj->set_normalized_country($iso_int, $iso_type_int);
     $phone_number_obj->set_input_number($nr_int);
     
     $result = $phone_number_obj->get_normalized_number();
@@ -66,6 +83,7 @@ function normalizeNumber()
 {
     number = document.getElementById('nr_custom').value;
     iso = document.getElementById('nr_custom_iso').value;
+    iso_type = document.getElementById('nr_custom_iso_type').value;
     request = new XMLHttpRequest();
     if(!request) {
         alert("Cannot create XMLHTTP-Instance");
@@ -73,7 +91,7 @@ function normalizeNumber()
     } else {
         request.open('post', '<?php echo $_SERVER['PHP_SELF'] ?>', true);
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        request.send('nr_custom='+encodeURIComponent(number)+'&nr_custom_iso='+encodeURIComponent(iso));
+        request.send('nr_custom='+encodeURIComponent(number)+'&nr_custom_iso='+encodeURIComponent(iso)+'&nr_custom_iso_type='+encodeURIComponent(iso_type));
         // evaluate request
         request.onreadystatechange = interpretRequest;
     }
@@ -214,7 +232,7 @@ echo "</div>\n";
 echo "______________________<br>\n";
 echo "<a href=\"javascript:toggleElement('custom_test')\" >show interactive test</a><br/>\n";
 echo "<div id='custom_test' style='display:none;'>\n";
-echo "<form>";
+echo "<form method='post'>";
 echo "<p>";
 echo "  Specify a Phone Number:";
 echo "  <input type='text' name='nr_custom' id='nr_custom' value='+18001236547' size='25' />";
@@ -222,7 +240,12 @@ echo "  </p>";
 echo "  <p>";
 echo "  Specify a Default Country:";
 echo "  <input type='text' name='nr_custom_iso' id='nr_custom_iso' value='USA' size='2' />";
-echo "  (ISO 3166-1 three-letter country code)";
+echo "  </p>";
+echo "  <p>Specify Input Type:";
+echo " <select name='nr_custom_iso_type' id='nr_custom_iso_type'> ";
+echo "    <option value='alpha3' selected='selected'>ISO 3166 Alpha3</option>";
+echo "    <option value='alpha2'>ISO 3166 Alpha2</option>";
+echo " </select> ";
 echo "  </p>";
 //echo "  <p>";
 //echo "  Specify a Carrier Code:";

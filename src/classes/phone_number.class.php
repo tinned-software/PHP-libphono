@@ -66,7 +66,8 @@ require_once dirname(__FILE__).'/main.class.php';
  * 150 ... "sql object not specified in costructor"
  * 201 ... "country_3_letter was set to NULL"
  * 202 ... "input_number was NOT set"
- * 301 ... "Fetching data failed. Internal mysql error ".$errno
+ * 301 ... "Fetching data failed. Internal sql error ".$errno
+ * 302 ... "_iso_3166_code type not recognized, see class constants for allowed values"
  * 401 ... "missing parameters, cannot continue to process number"
  * 402 ... "false exit dialcode array, cannot continue to process number"
  * 403 ... "tried to compare two non-phone number objects"
@@ -76,7 +77,10 @@ class Phone_Number extends Main
     ////////////////////////////////////////////////////////////////////////////
     // PROPERTIES of the class
     ////////////////////////////////////////////////////////////////////////////
-    
+
+    const INPUT_ISO_3166_ALPHA2 = 'alpha2';
+    const INPUT_ISO_3166_ALPHA3 = 'alpha3';
+
     // base properties (debugging, db connectivity)
     
     /**
@@ -118,13 +122,23 @@ class Phone_Number extends Main
     // normalization input parameters
     
     /**
-     * Internal ISO3 country name. Used for normalization.
+     * Internal ISO 3611 country name. Used for normalization.
      * 
      * @access private
      * 
      * @var string
     **/
-    private $_country_3_letter = NULL;
+    private $_iso_3166_code = NULL;
+
+    /**
+     * Internal ISO 3611 country code type, see class constants for possible
+     * values. Default is 'unknown';
+     * 
+     * @access private
+     * 
+     * @var string
+    **/
+    private $_iso_3166_code_type = 'unknown';
     
     /**
      * Internal input number parameter. Used for the normalization.
@@ -354,47 +368,68 @@ class Phone_Number extends Main
      * This method is used to set the 3 letter country code that is used to normalize
      * the number. If for some reason the parameters are not correctly set a boolean FALSE
      * is returned and an error is reported within the class.
+     *
+     * Currently supported input formats are: ISO 3166 Alpha2 or Alpha3 codes, e.g.
+     * US, or USA, DE or DEU.
      * 
      * @access public
      * 
      * @see    get_normalized_country()
      * 
-     * @param  string  country_3_letter 3-letter ISO code
+     * @param  string $iso_code ISO 3166 conform code
+     * @param  string $type optional ISO 3166 type, default is ISO 3166 Alpha3. Use class constants.
      * @return boolean
     **/
-    public function set_normalized_country($country_3_letter = NULL)
+    public function set_normalized_country($iso_3166_code = NULL, $type = self::INPUT_ISO_3166_ALPHA3)
     {
         // must be string
-        if(isset($country_3_letter) === FALSE)
+        if(isset($iso_3166_code) === FALSE)
         {
-            parent::report_error(101, "country_3_letter was not set");
+            parent::report_error(101, "iso_3166_code was not set");
             return FALSE;
         }
         
-        if(is_string($country_3_letter) === FALSE)
+        if(is_string($iso_3166_code) === FALSE)
         {
-            parent::report_error(102, "country_3_letter was not string, it was : '$country_3_letter'");
+            parent::report_error(102, "iso_3166_code was not string, it was : '$iso_3166_code'");
             return FALSE;
         }
-        
-        // $country_3_letter should have characters a-z, A-Z and should be exactly 3 characters
-        if(preg_match("/[a-zA-Z]{3}/", $country_3_letter) !== 1)
+
+        $validate_regex_list = array(
+            self::INPUT_ISO_3166_ALPHA3 => "/^[a-zA-Z]{3}$/",
+            self::INPUT_ISO_3166_ALPHA2 => "/^[a-zA-Z]{2}$/",
+            'unknown' => '/^$/'
+            );
+
+        if(array_key_exists($type, $validate_regex_list) == TRUE)
         {
-            parent::report_error(103, "parameter country_3_letter was not a 3 letter string, it was '$country_3_letter");
+            $validate_regex = $validate_regex_list[$type];
+        }
+        else
+        {
+            $validate_regex = $validate_regex_list['unknown'];
+        }
+
+        // check the $iso_3166_code using the appropriate regex set above
+        if(preg_match($validate_regex, $iso_3166_code) !== 1)
+        {
+            parent::report_error(103, "parameter iso_3166_code did not conform to the given input parameter");
             return FALSE;
         }
+
+        parent::debug2($validate_regex);        
+        parent::debug2("Called with parameters: iso_3166_code = '".$iso_3166_code."'");
         
-        parent::debug2("Called with parameters: country_3_letter = '".$country_3_letter."'");
-        
-        // clear cache for old country_3_letter (both if was set or was set to NULL)
-        if($this->_db_dialcodes_fetched === TRUE && $this->_country_3_letter !== $country_3_letter)
+        // clear cache for old iso_3166_code (both if was set or was set to NULL)
+        if($this->_db_dialcodes_fetched === TRUE && $this->_iso_3166_code !== $iso_3166_code)
         {
-            parent::debug2("country_3_letter was modified: forcing a flush on all calculations and cached database information");
+            parent::debug2("iso_3166_code was modified: forcing a flush on all calculations and cached database information");
             $this->_unset_all();
             $this->_unset_all_db();
         }
         
-        $this->_country_3_letter = $country_3_letter;
+        $this->_iso_3166_code = $iso_3166_code;
+        $this->_iso_3166_code_type = $type;
         
         return TRUE;
     }
@@ -472,15 +507,15 @@ class Phone_Number extends Main
     **/
     public function get_normalized_country()
     {
-        if(isset($this->_country_3_letter) === FALSE)
+        if(isset($this->_iso_3166_code) === FALSE)
         {
             parent::report_error(201, "country_3_letter was set to NULL");
             return FALSE;
         }
         
-        parent::debug2("returning country_3_letter: '".$this->_country_3_letter."'");
+        parent::debug2("returning country_3_letter: '".$this->_iso_3166_code."'");
         
-        return $this->_country_3_letter;
+        return $this->_iso_3166_code;
     }
     
     
@@ -568,7 +603,7 @@ class Phone_Number extends Main
             parent::debug2("_international_number was set to NULL, recalculating");
             
             // make sure we got the validated number and the country code
-            $this->_country_3_letter = $this->get_normalized_country();
+            $this->_iso_3166_code = $this->get_normalized_country();
             $this->_validated_number = $this->get_validated_input_number();
             
             // make sure we have the exit code for this country
@@ -605,7 +640,7 @@ class Phone_Number extends Main
             parent::debug2("_international_number_normalized was set to NULL, recalculating");
             
             // make sure we got the validated number and the country code
-            $this->_country_3_letter = $this->get_normalized_country();
+            $this->_iso_3166_code = $this->get_normalized_country();
             $this->_validated_number = $this->get_validated_input_number();
             $this->_international_number_normalized = "+".$this->get_normalized_number();
         }
@@ -701,7 +736,7 @@ class Phone_Number extends Main
             parent::debug2("local_number was set to NULL, recalculating");
             
             // make sure we got the validated number and the country code
-            $this->_country_3_letter = $this->get_normalized_country();
+            $this->_iso_3166_code = $this->get_normalized_country();
             $this->_validated_number = $this->get_validated_input_number();
             
             // make sure we have the exit code for this country
@@ -756,8 +791,10 @@ class Phone_Number extends Main
      *  Country_Dialcodes
      *  Country_Trunk_Code
      * to fetch the required information for the country specified in the
-     * parameter $this->_country_3_letter. If the correct fields could be retrieved
-     * then we can continue processing the validated input number and normalize it.
+     * parameter $this->_iso_3166_code and $this->_iso_3166_code_type.
+     * 
+     * If the correct fields could be retrieved then we can continue 
+     * processing the validated input number and normalize it.
      * 
      * @access private
      * 
@@ -775,64 +812,31 @@ class Phone_Number extends Main
         // step 1: make sure we have the country_3_letter code AND the validated version of the number
         $this->_country_3_letter = $this->get_normalized_country();
         
-        if(isset($this->_country_3_letter) === TRUE /*&& isset($this->_validated_number) === TRUE*/ && (isset($this->_country_code) === FALSE))
+        if(isset($this->_iso_3166_code) === TRUE /*&& isset($this->_validated_number) === TRUE*/ && (isset($this->_country_code) === FALSE))
         {
-            // step 2: fetch from the database the exit_dialcode, international_dialcode, extended_dialcode, trunk_dialcode for this specific country
-            parent::debug2("trying to fetch data from mysql");
+
+            // get array of information from the datasource
+            $dialcode_info = $this->_fetch_info_sql();
             
-            // just in case someone forgot to pass us a database name we use a default value here
-            $db_name = '';
-            if(isset($this->_sql_db) === TRUE && is_null($this->_sql_db) === FALSE)
+            if($dialcode_info['count'] > 0)
             {
-                $db_name = $this->_sql_db . '.';
-            }
-            // get the country_3_letter, country exit_dialcode, country international_dialcode, country extended_dialcode
-            // trunk dialcode for a specific country to normalize the received number into international format before
-            // further processing is possible
-            $query = "SELECT ".$db_name."Country_Exit_Dialcode.country_3_letter, \n"
-                    ."       ".$db_name."Country_Exit_Dialcode.exit_dialcode, \n"
-                    ."       ".$db_name."Country_Dialcodes.international_dialcode, \n"
-                    ."       ".$db_name."Country_Dialcodes.extended_dialcode, \n"
-                    ."       ".$db_name."Country_Trunk_Code.trunk_dialcode \n"
-                    ."FROM   ".$db_name."Country_Exit_Dialcode, \n"
-                    ."       ".$db_name."Country_Dialcodes, \n"
-                    ."       ".$db_name."Country_Trunk_Code \n"
-                    ."WHERE  ".$db_name."Country_Exit_Dialcode.country_3_letter = '".$this->_country_3_letter."' AND \n"
-                    ."       ".$db_name."Country_Dialcodes.country_3_letter = '".$this->_country_3_letter."' AND \n"
-                    ."       ".$db_name."Country_Trunk_Code.country_3_letter = '".$this->_country_3_letter."'";
-                    //." -- object_id:".spl_object_hash($this).' '.microtime(). ' '.$this->_input_number;
-            
-            // send query to db and get result
-            $errno = NULL;
-            $errtext = NULL;
-            
-            $query_result = $this->_sql_obj->get_query_result($query, $errno, $errtext);
-            
-            if($errno !== NULL)
-            {
-                parent::report_error(301, "Fetching data failed. Internal mysql error ".$errno.': '.$errtext);
-                $this->_error = TRUE;
-            }
-            
-            if($query_result['count'] > 0)
-            {
-                parent::debug2("Found CLI Country information: ". print_r($query_result['data'], TRUE));
-                parent::debug2("trunk code = '".$query_result['data'][0]['trunk_dialcode']."'");
-                parent::debug2("trunk type= '".gettype($query_result['data'][0]['trunk_dialcode'])."'");
+                parent::debug2("Found CLI Country information: ". print_r($dialcode_info['data'], TRUE));
+                parent::debug2("trunk code = '".$dialcode_info['data'][0]['trunk_dialcode']."'");
+                parent::debug2("trunk type= '".gettype($dialcode_info['data'][0]['trunk_dialcode'])."'");
                 
-                $this->_country_code = $query_result['data'][0]['international_dialcode'];
+                $this->_country_code = $dialcode_info['data'][0]['international_dialcode'];
                 $this->_exit_dialcode = array();
                 $this->_trunk_code = array();
                 
-                for($i = 0; $i < $query_result['count']; $i++)
+                for($i = 0; $i < $dialcode_info['count']; $i++)
                 {
-                    if(in_array($query_result['data'][$i]['exit_dialcode'], $this->_exit_dialcode) === FALSE)
+                    if(in_array($dialcode_info['data'][$i]['exit_dialcode'], $this->_exit_dialcode) === FALSE)
                     {
-                        $this->_exit_dialcode[] = $query_result['data'][$i]['exit_dialcode'];
+                        $this->_exit_dialcode[] = $dialcode_info['data'][$i]['exit_dialcode'];
                     }
-                    if(in_array($query_result['data'][$i]['trunk_dialcode'], $this->_trunk_code) === FALSE)
+                    if(in_array($dialcode_info['data'][$i]['trunk_dialcode'], $this->_trunk_code) === FALSE)
                     {
-                        $this->_trunk_code[] = $query_result['data'][$i]['trunk_dialcode'];
+                        $this->_trunk_code[] = $dialcode_info['data'][$i]['trunk_dialcode'];
                     }
                 }
                 // sort array (order is important for normalization)
@@ -852,6 +856,85 @@ class Phone_Number extends Main
             parent::debug2("could not find country code in countries table! !!!");
             return FALSE;
         }
+    }
+    
+
+    /**
+     * Generate query to get the data using the ISO input given
+     * 
+     * @access private
+     * 
+     * @param void
+     * @return array()
+    **/
+    private function _fetch_info_sql()
+    {
+
+        $return_array = array();
+
+        // step 2: fetch from the database the exit_dialcode, international_dialcode, extended_dialcode, trunk_dialcode for this specific country
+        parent::debug2("trying to fetch data from data source");
+        
+        // just in case someone forgot to pass us a database name we use a default value here
+        $db_name = '';
+        if(isset($this->_sql_db) === TRUE && is_null($this->_sql_db) === FALSE)
+        {
+            $db_name = $this->_sql_db . '.';
+        }
+        // get the country_iso, country exit_dialcode, country international_dialcode, country extended_dialcode
+        // trunk dialcode for a specific country to normalize the received number into international format before
+        // further processing is possible
+
+        $select_field_list = array(
+            self::INPUT_ISO_3166_ALPHA2 => 'country_2_letter',
+            self::INPUT_ISO_3166_ALPHA3 => 'country_3_letter',
+            );
+
+        if(array_key_exists($this->_iso_3166_code_type, $select_field_list) === TRUE)
+        {
+            $select_field = $select_field_list[$this->_iso_3166_code_type];
+        }
+        else
+        {
+            parent::report_error(302, "Fetching data failed, _iso_3166_code given to class is unknown");
+            $this->_error = TRUE;
+            return $return_array;
+        }
+
+        $query = "SELECT ".$db_name."Country_Exit_Dialcode.country_3_letter, \n"
+                ."       ".$db_name."Country_Exit_Dialcode.exit_dialcode, \n"
+                ."       ".$db_name."Country_Dialcodes.international_dialcode, \n"
+                ."       ".$db_name."Country_Dialcodes.extended_dialcode, \n"
+                ."       ".$db_name."Country_Trunk_Code.trunk_dialcode \n"
+                ."FROM   ".$db_name."Country_Exit_Dialcode, \n"
+                ."       ".$db_name."Country_Dialcodes, \n"
+                ."       ".$db_name."Country_Trunk_Code, \n"
+                ."       ".$db_name."Country_Codes \n"
+                ."WHERE  ".$db_name."Country_Exit_Dialcode.country_3_letter = Country_Codes.country_3_letter AND \n"
+                ."       ".$db_name."Country_Dialcodes.country_3_letter = Country_Codes.country_3_letter AND \n"
+                ."       ".$db_name."Country_Trunk_Code.country_3_letter = Country_Codes.country_3_letter AND \n"
+                ."       ".$db_name."Country_Codes.{$select_field} = '{$this->_iso_3166_code}'";
+                //." -- object_id:".spl_object_hash($this).' '.microtime(). ' '.$this->_input_number;
+        
+        //parent::debug($query);
+        // send query to db and get result
+        $errno = NULL;
+        $errtext = NULL;
+        
+        $query_result = $this->_sql_obj->get_query_result($query, $errno, $errtext);
+        
+        if($errno !== NULL)
+        {
+            parent::report_error(301, "Fetching data failed. Internal sql error ".$errno.': '.$errtext);
+            $this->_error = TRUE;
+        }
+
+        if(isset($query_result['data'][0]) === TRUE)
+        {
+            $return_array = $query_result['data'][0];
+        }
+
+        return $query_result;
     }
     
     
@@ -1242,9 +1325,10 @@ class Phone_Number extends Main
         {
             $this->_process_all_formats();
         }
-        
+
         $explanation = array ();
-        $explanation["_country_3_letter"]                = $this->_country_3_letter;
+        $explanation["_iso_3166_code"]                   = $this->_iso_3166_code;
+        $explanation["_iso_3166_code_type"]              = $this->_iso_3166_code_type;
         $explanation["_input_number"]                    = $this->_input_number;
         $explanation["_validated_number"]                = $this->_validated_number;
         $explanation["_international_number"]            = $this->_international_number;
