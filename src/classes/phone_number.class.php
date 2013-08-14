@@ -1,8 +1,9 @@
 <?php
 /**
  * 
- * @author     Apostolos Karakousis ktolis@ktolis.gr
- * @version    1.3.7
+ * @author     Apostolos Karakousis ktolis@ktolis [dot] gr
+ * @author     Tyler Ashton tdashton@gmail [dot] com
+ * @version    1.3.8
  * 
  * @package    general_scripts
  * @subpackage mobile_service
@@ -118,7 +119,16 @@ class Phone_Number extends Main
      * @var string
     **/
     private $_sql_db = NULL;
-    
+
+    /**
+     * Internal counter used to track how many times the object accessed the datasource.
+     * 
+     * @access private
+     * 
+     * @var integer
+    **/
+    private $_database_hits = 0;
+
     // normalization input parameters
     
     /**
@@ -924,6 +934,7 @@ class Phone_Number extends Main
         $errtext = NULL;
         
         $query_result = $this->_sql_obj->get_query_result($query, $errno, $errtext);
+        $this->_database_hits++;
         
         if($errno !== NULL)
         {
@@ -1349,6 +1360,7 @@ class Phone_Number extends Main
         $explanation["_country_code"]                    = $this->_country_code;
         $explanation["_trunk_code"]                      = $this->_trunk_code;
         $explanation["_exit_dialcode"]                   = $this->_exit_dialcode;
+        $explanation["_database_hits"]                   = $this->_database_hits;
         $explanation["_error_list"]                      = parent::get_all_errors();
         
         parent::debug2("Object: Phone Number -> ".preg_replace("/\n/", "\n ", print_r($explanation, TRUE)));
