@@ -2,7 +2,7 @@
 /**
  * 
  * @author     Apostolos Karakousis ktolis@ktolis.gr
- * @version    1.3.6
+ * @version    1.3.7
  * 
  * @package    general_scripts
  * @subpackage mobile_service
@@ -823,10 +823,13 @@ class Phone_Number extends Main
                 parent::debug2("trunk code = '".$dialcode_info['data'][0]['trunk_dialcode']."'");
                 parent::debug2("trunk type= '".gettype($dialcode_info['data'][0]['trunk_dialcode'])."'");
                 
+                // can only be one international dialcode (i.e. 43 for Austria, 1 for USA)
                 $this->_country_code = $dialcode_info['data'][0]['international_dialcode'];
+                // can be multiple trunk and exit codes for each dialplan
                 $this->_exit_dialcode = array();
                 $this->_trunk_code = array();
-                
+
+                // interate over the results to extract all trunk and exit codes                
                 for($i = 0; $i < $dialcode_info['count']; $i++)
                 {
                     if(in_array($dialcode_info['data'][$i]['exit_dialcode'], $this->_exit_dialcode) === FALSE)
@@ -928,12 +931,12 @@ class Phone_Number extends Main
             $this->_error = TRUE;
         }
 
-        if(isset($query_result['data'][0]) === TRUE)
+        if(isset($query_result['data']) === TRUE)
         {
-            $return_array = $query_result['data'][0];
+            $return_array = $query_result;
         }
 
-        return $query_result;
+        return $return_array;
     }
     
     
