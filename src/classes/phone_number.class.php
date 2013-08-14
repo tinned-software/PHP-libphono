@@ -417,7 +417,6 @@ class Phone_Number extends Main
             return FALSE;
         }
 
-        parent::debug2($validate_regex);        
         parent::debug2("Called with parameters: iso_3166_code = '".$iso_3166_code."'");
         
         // clear cache for old iso_3166_code (both if was set or was set to NULL)
@@ -513,7 +512,7 @@ class Phone_Number extends Main
             return FALSE;
         }
         
-        parent::debug2("returning iso_3166_code: '".$this->_iso_3166_code."'");
+        parent::debug2("returning iso_3166_code: '".$this->_iso_3166_code."', iso_3166_code_type: '".$this->_iso_3166_code_type."'");
         
         return $this->_iso_3166_code;
     }
