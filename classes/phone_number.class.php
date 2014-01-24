@@ -13,7 +13,7 @@
  * 
 **/
 
-require_once dirname(__FILE__).'/main.class.php';
+include_once(dirname(__FILE__).'/../../PHP-Tinned-Core/classes/main.class.php');
 
 /**
  * Phone Number representation class
