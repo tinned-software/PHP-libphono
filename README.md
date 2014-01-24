@@ -21,6 +21,10 @@ Specific information is not supported, such as:
 * DOES NOT: convert numbers into formatted strings, e.g. "+1 (614) 544 5874".
 * DOES NOT: provide plausability check for numbers - syntax check for specific countries, areas, number length, etc…
 
+## I've downloaded it and it isn't working!
+
+Please see the Requirements section in this document.
+
 ## How do I use libphono?
 
 Please see the API documentation for a description of how to use the class. There is also a quickstart file included in the repository to help you get started.
@@ -34,7 +38,8 @@ All countries which have publicly available information related to their dial pl
 A new version of PHP (the library has been tested with 5.1.6 and 5.3.3.
 PHP must include the following modules:
 - MySQL or SQLite3 (to provide access to data)
-- [Tinned Framework](http://www.tinned-software.net/) (required files already included)
+- [PHP-Tinned Core](https://github.com/tinned-software/PHP-Tinned-Core)
+- [PHP-Tinned SQL](https://github.com/tinned-software/PHP-Tinned-SQL)
 
 ## Something not working right?
 

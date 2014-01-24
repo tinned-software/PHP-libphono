@@ -1,7 +1,9 @@
 # Quick Start 
 
 1. Download the source locally to a web-available directory with a PHP server running.
-2. Point your browser to the ./test/ directory to see examples of how the class works.
+2. Download the PHP-Tinned Core and SQL Modules locally to the same directory.
+for more info see: https://github.com/tinned-software/PHP-Tinned-Core
+3. Point your browser to the ./test/ directory to see examples of how the class works.
 
 ## Example Code
 
