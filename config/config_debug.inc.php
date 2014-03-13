@@ -1,7 +1,7 @@
 <?php
 /**
  * 
- * @author Gerhard STEINBEIS ( gerhard . steinbeis [at] tinned-software [.] net )
+ * @author Gerhard STEINBEIS ( info [at] tinned-software [.] net )
  * @version 0.8.1
  * 
  * Cteation of all required objects for configuration items storage and 
