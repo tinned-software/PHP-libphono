@@ -5,9 +5,9 @@ Pronounced "/ lib fo no /", libphono is a PHP library used for E.164 phone numbe
 
 ## What is libphono?
 
-The library is designed to be simple to use, small and fast. libphono is intended as a library which allows numbers to be converted from local or national format into an international number which conforms to the E 164 standard. This is achieved using a data set which contains information about published dial plans.
+The library is designed to be simple to use, small and fast. libphono a library which allows phone numbers to be converted from local or national format into an international number which conforms to the E.164 standard. This is achieved using a data set which contains information about published dial plans.
 
-The library allows an input number to be converted into a variety of different formats, e.g. local, national or E.164 international.
+libphono allows an input number to be converted into a variety of different formats, e.g. local, national or E.164 international.
 
 In contrast to other implementations, logic for country specific dial plan specifics is encapsulated in the class itself and does not need to be handled by the developer. This brings us to...
 
@@ -27,7 +27,7 @@ Please see the Requirements section in this document.
 
 ## How do I use libphono?
 
-Please see the API documentation for a description of how to use the class. There is also a quickstart file included in the repository to help you get started.
+Please see the class documentation in the phpdoc subdirectory for a description of how to use the class. There is also a quickstart file (README-quickstart.md) included in the repository to help you get started.
 
 ## What countries / dial plans does libphono cover?
 
@@ -35,12 +35,12 @@ All countries which have publicly available information related to their dial pl
 
 ## What's Required
 
-A new version of PHP (the library has been tested with 5.1.6 and 5.3.3.
-PHP must include the following modules:
+1) A new version of PHP (the library has been tested with 5.1.6 and 5.3.3, including the following modules (`php -m'):
 - MySQL or SQLite3 (to provide access to data)
-- [PHP-Tinned Core](https://github.com/tinned-software/PHP-Tinned-Core)
-- [PHP-Tinned SQL](https://github.com/tinned-software/PHP-Tinned-SQL)
+2) PHP-Tinned modules: simply clone all repositories on the same directory level.
+- [PHP-Tinned SQL](/tinned-software/PHP-Tinned-SQL)
+- [PHP-Tinned Core](/tinned-software/PHP-Tinned-Core) (see [here](/tinned-software/PHP-Tinned-Core/blob/master/README.md#using-the-tinned-core-with-other-modules) for instructions)
 
 ## Something not working right?
 
-If there is missing or incorrect information please contact us.
+If there is missing or you find incorrect information please contact us.
