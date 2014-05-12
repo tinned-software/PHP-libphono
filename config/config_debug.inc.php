@@ -13,7 +13,8 @@
 // set the timezone to avoid strict warnings
 date_default_timezone_set(@date_default_timezone_get());
 
-include_once(dirname(__FILE__).'/../src/classes/debug_logging.class.php');
+include_once(dirname(__FILE__).'/../../PHP-Tinned-Core/classes/debug_logging.class.php');
+
 
 
 
@@ -44,7 +45,7 @@ if(isset($GLOBALS['DBG']) == FALSE)
     $GLOBALS['DBG']->set_delete_logfiles        (TRUE);
     
     // Set the logging targets
-    $GLOBALS['DBG']->set_log_target             (TRUE, dirname(__FILE__).'/../log/global_log', FALSE);
+    $GLOBALS['DBG']->set_log_target             (TRUE, dirname(__FILE__).'/../../log/libphono_log', FALSE);
     
 
 

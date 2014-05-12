@@ -10,9 +10,9 @@
  * 
 **/
 
-define("ROOTPATH", dirname(__FILE__)."/../");
-require_once(ROOTPATH.'config/php_config.php');
-require_once(ROOTPATH.'src/functions/get_number_country.php');
+
+require_once(dirname(__FILE__).'/../config/php_config.php');
+require_once(dirname(__FILE__).'/../functions/get_number_country.php');
 
 $GLOBALS['DBG']->info('*** Starting file '.basename(__FILE__));
 
