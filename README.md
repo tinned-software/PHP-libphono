@@ -38,8 +38,8 @@ All countries which have publicly available information related to their dial pl
 1) A new version of PHP (the library has been tested with 5.1.6 and 5.3.3, including the following modules (`php -m'):
 - MySQL or SQLite3 (to provide access to data)
 2) PHP-Tinned modules: simply clone all repositories on the same directory level.
-- [PHP-Tinned SQL](/tinned-software/PHP-Tinned-SQL)
-- [PHP-Tinned Core](/tinned-software/PHP-Tinned-Core) (see [here](/tinned-software/PHP-Tinned-Core/blob/master/README.md#using-the-tinned-core-with-other-modules) for instructions)
+- [PHP-Tinned SQL](https://github.com/tinned-software/PHP-Tinned-SQL)
+- [PHP-Tinned Core](https://github.com/tinned-software/PHP-Tinned-Core) (see [here](https://github.com/tinned-software/PHP-Tinned-Core/#using-the-tinned-core-with-other-modules) for instructions)
 
 ## Something not working right?
 
