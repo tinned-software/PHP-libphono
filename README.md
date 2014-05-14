@@ -1,5 +1,4 @@
 # PHP-libphono
-============
 
 Pronounced "/ lib fo no /", libphono is a PHP library used for E.164 phone number normalization. It is intended to be a small, fast way to work with telephone numbers.
 
