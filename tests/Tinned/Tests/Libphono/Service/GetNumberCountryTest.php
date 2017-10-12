@@ -1,6 +1,7 @@
 <?php
 
 namespace Tinned\Tests\Libphono\Service;
+
 use Tinned\Libphono\DataProvider\SQLiteDataProvider;
 use Tinned\Libphono\Service\LibphonoService;
 
