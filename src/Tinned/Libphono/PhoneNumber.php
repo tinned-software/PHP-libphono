@@ -76,7 +76,7 @@ use Tinned\Libphono\DataProvider\DataProviderInterface;
  * 402 ... "false exit dialcode array, cannot continue to process number"
  * 403 ... "tried to compare two non-phone number objects"
 **/
-class PhoneNumber
+class PhoneNumber implements PhoneNumberInterface
 {
     ////////////////////////////////////////////////////////////////////////////
     // PROPERTIES of the class

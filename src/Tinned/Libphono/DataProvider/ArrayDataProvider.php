@@ -5,6 +5,7 @@ namespace Tinned\Libphono\DataProvider;
 /**
  * Class ArrayDataProvider
  *
+ * @todo this needs to be completed with the data from the database
  * @package Tinned\Libphono\DataProvider
  */
 class ArrayDataProvider implements DataProviderInterface
