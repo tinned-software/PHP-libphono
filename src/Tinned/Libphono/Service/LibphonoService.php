@@ -1,6 +1,7 @@
 <?php
 
 namespace Tinned\Libphono\Service;
+
 use Tinned\Libphono\DataProvider\DataProviderInterface;
 use Tinned\Libphono\PhoneNumber;
 
@@ -43,7 +44,7 @@ class LibphonoService
      */
     public function getNumberCountry($number)
     {
-        if (isset($number) === FALSE) {
+        if (isset($number) === false) {
             throw new \LogicException('missing parameters, cannot continue to process number');
         }
         return $this->dataProvider->getCountryForNumber($number);

@@ -9,5 +9,4 @@ namespace Tinned\Libphono;
  */
 interface PhoneNumberInterface
 {
-
 }

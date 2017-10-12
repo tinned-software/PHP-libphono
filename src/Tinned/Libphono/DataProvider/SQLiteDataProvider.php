@@ -9,8 +9,6 @@ namespace Tinned\Libphono\DataProvider;
  */
 class SQLiteDataProvider implements DataProviderInterface
 {
-
-
     const INPUT_ISO_3166_ALPHA2 = 'alpha2';
     const INPUT_ISO_3166_ALPHA3 = 'alpha3';
 
@@ -66,12 +64,9 @@ class SQLiteDataProvider implements DataProviderInterface
             self::INPUT_ISO_3166_ALPHA3 => 'country_3_letter',
         );
 
-        if(array_key_exists($iso3166CodeType, $select_field_list) === TRUE)
-        {
+        if (array_key_exists($iso3166CodeType, $select_field_list) === true) {
             $select_field = $select_field_list[$iso3166CodeType];
-        }
-        else
-        {
+        } else {
             throw new \Exception(302, "Fetching data failed, _iso_3166_code given to class is unknown");
         }
 
