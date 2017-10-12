@@ -1,23 +1,41 @@
 # Quick Start 
 
-1. Download the source locally to a web-available directory with a PHP server running.
-2. Download the PHP-Tinned Core and SQL Modules locally to the same directory. For more info see: https://github.com/tinned-software/PHP-Tinned-Core
-3. Point your browser to the ./test/ directory to see examples of how the class works.
+1. Add package to composer
+```json
+{
+  "require": {
+    "tinned-software/PHP-libphono": "*"
+  }
+}
+```
+2. run `composer install`
+
 
 ## Example Code
 
 ```php
-// set up objects
-$debug_level = 0;
-$debug_object = new Debug_Logging(TRUE, 'php://stderr', FALSE);
-$sql_db = new SQLite_3('sqlite3://path/to/sqlite/db', $debug_level, $debug_object);
-$phone_number_obj = new Phone_Number($debug_level, $debug_object, $sql_db, NULL);
+require_once 'vendor/autoload.php';
 
-// configure phone number object
-$phone_number_obj->set_normalized_country('AUT');
-$phone_number_obj->set_input_number('0123456789');
+$path = dirname(__FILE__) . '/resources/Country_Information.sqlite3';
 
-// get result
-$result = $phone_number_obj->get_normalized_number(); // returns 43123456789
-$result = $phone_number_obj->get_normalized_international_number(); // returns +43123456789
+$obj = new \Tinned\Libphono\PhoneNumber(
+    new \Tinned\Libphono\DataProvider\ArrayDataProvider()
+);
+
+$sqlProvider = new \Tinned\Libphono\DataProvider\SQLiteDataProvider($path);
+$obj = new \Tinned\Libphono\PhoneNumber(
+    $sqlProvider
+);
+
+$res = $sqlProvider->fetchDataForISOCode('US', \Tinned\Libphono\PhoneNumber::INPUT_ISO_3166_ALPHA2);
+
+var_dump($res);
+
+$service = new \Tinned\Libphono\Service\LibphonoService(
+    $sqlProvider
+);
+
+$phoneObj = $service->getPhoneNumber('06801111111', 'AUT', \Tinned\Libphono\PhoneNumber::INPUT_ISO_3166_ALPHA3);
+
+print_r($phoneObj->get_normalized_international_number());
 ```
