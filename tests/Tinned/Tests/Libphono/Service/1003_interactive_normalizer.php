@@ -12,8 +12,8 @@
 **/
 
 // include required files
-require_once(dirname(__FILE__).'/../config/php_config.php');
-require_once(dirname(__FILE__).'/../classes/phone_number.class.php');
+require_once(dirname(__FILE__) . '/../config/php_config.php');
+require_once(dirname(__FILE__).'/../classes/PhoneNumber.php');
 require_once(dirname(__FILE__).'/../../PHP-Tinned-SQL/classes/mysql.class.php');
 require_once(dirname(__FILE__).'/../../PHP-Tinned-SQL/classes/sqlite3.class.php');
 
