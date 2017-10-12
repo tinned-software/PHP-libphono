@@ -339,11 +339,11 @@ class PhoneNumber implements PhoneNumberInterface
     {
         // must be string
         if (isset($iso_3166_code) === false) {
-            throw new \LogicException(101, "iso_3166_code was not set");
+            throw new \LogicException("iso_3166_code was not set", 101);
         }
         
         if (is_string($iso_3166_code) === false) {
-            throw new \LogicException(102, "iso_3166_code was not string, it was : '$iso_3166_code'");
+            throw new \LogicException("riso_3166_code was not string, it was : '$iso_3166_code'", 101);
         }
 
         $validate_regex_list = array(
@@ -360,7 +360,7 @@ class PhoneNumber implements PhoneNumberInterface
 
         // check the $iso_3166_code using the appropriate regex set above
         if (preg_match($validate_regex, $iso_3166_code) !== 1) {
-            throw new \LogicException(103, "parameter iso_3166_code did not conform to the given input parameter");
+            throw new \LogicException("parameter iso_3166_code did not conform to the given input parameter", 103);
         }
 
 //        parent::debug2("Called with parameters: iso_3166_code = '".$iso_3166_code."'");
@@ -398,11 +398,11 @@ class PhoneNumber implements PhoneNumberInterface
     {
         // must be string
         if (isset($input_number) === false) {
-            throw new \LogicException(104, "input_number was not set");
+            throw new \LogicException("input_number was not set", 104);
         }
         
         if (is_string($input_number) === false) {
-            throw new \LogicException(105, "input_number was not string");
+            throw new \LogicException("input_number was not string", 105);
         }
         
         if (strlen($input_number) > $this->_max_input_length) {
@@ -446,7 +446,7 @@ class PhoneNumber implements PhoneNumberInterface
     public function get_normalized_country()
     {
         if (isset($this->_iso_3166_code) === false) {
-            throw new \LogicException(201, "iso_3166_code was set to NULL");
+            throw new \LogicException("iso_3166_code was set to NULL", 201);
         }
         
 //        parent::debug2("returning iso_3166_code: '".$this->_iso_3166_code."', iso_3166_code_type: '".$this->_iso_3166_code_type."'");
@@ -472,7 +472,7 @@ class PhoneNumber implements PhoneNumberInterface
     public function get_input_number()
     {
         if (isset($this->_input_number) === false) {
-            throw new \LogicException(202, "input_number was NOT set");
+            throw new \LogicException("input_number was NOT set", 202);
         }
 //        parent::debug2("returning input_number: '".$this->_input_number."'");
         
@@ -967,12 +967,12 @@ class PhoneNumber implements PhoneNumberInterface
 //        parent::debug2("the_number:$the_number trunk_code:$trunk_code_array country_code:$country_code exit_dialcode_array:$exit_dialcode_array");
         
         if (isset($the_number) === false || (isset($trunk_code_array) === false && is_null($trunk_code_array) !== true) || isset($country_code) === false || isset($exit_dialcode_array) === false) {
-            throw new \LogicException(401, "missing parameters, cannot continue to process number");
+            throw new \LogicException("missing parameters, cannot continue to process number", 401);
         }
         
         if (is_array($exit_dialcode_array) === false || is_array($trunk_code_array) === false) {
 //            parent::debug2("the_number:$the_number trunk_code:$trunk_code_array country_code:$country_code exit_dialcode_array:$exit_dialcode_array");
-            throw new \LogicException(402, "false exit or trunk dialcode array, cannot continue to process number");
+            throw new \LogicException("false exit or trunk dialcode array, cannot continue to process number", 402);
         }
         
         // sort the array from lowest to highest dialcode length
@@ -1104,7 +1104,7 @@ class PhoneNumber implements PhoneNumberInterface
     public function is_equal_to_number(&$number)
     {
         if (is_object($number) === true && get_class($this) !== get_class($number)) {
-            throw new \LogicException(403, "class of input parameter does not match: ".get_class($this).' !== '.get_class($number));
+            throw new \LogicException("class of input parameter does not match: ".get_class($this).' !== '.get_class($number), 403);
         }
         if (strcmp($this->get_normalized_number(), $number->get_normalized_number()) === 0) {
 //            parent::debug2("returning TRUE");

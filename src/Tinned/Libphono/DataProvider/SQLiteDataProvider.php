@@ -67,7 +67,7 @@ class SQLiteDataProvider implements DataProviderInterface
         if (array_key_exists($iso3166CodeType, $select_field_list) === true) {
             $select_field = $select_field_list[$iso3166CodeType];
         } else {
-            throw new \Exception(302, "Fetching data failed, _iso_3166_code given to class is unknown");
+            throw new \Exception("Fetching data failed, _iso_3166_code given to class is unknown", 302);
         }
 
         $query = "SELECT ".$db_name."Country_Exit_Dialcode.country_3_letter, \n"

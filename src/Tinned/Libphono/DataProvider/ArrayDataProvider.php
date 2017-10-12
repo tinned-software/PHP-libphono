@@ -34,12 +34,12 @@ class ArrayDataProvider implements DataProviderInterface
     {
         if ($iso3166CodeType == \Tinned\Libphono\PhoneNumber::INPUT_ISO_3166_ALPHA2) {
             if (!isset($this->mapping[$isoCode])) {
-                throw new \Exception(1000, 'ISO Code not found');
+                throw new \Exception('ISO Code not found', 1000);
             }
             $isoCode = $this->mapping[$isoCode];
         }
         if (!isset($this->data[$isoCode])) {
-            throw new \Exception(1000, 'ISO Code not found');
+            throw new \Exception('ISO Code not found', 1000);
         }
         return array_map(
             function ($element) {
