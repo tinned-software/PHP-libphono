@@ -90,44 +90,6 @@ class PhoneNumber
      */
     protected $dataProvider;
 
-    // base properties (debugging, db connectivity)
-    
-    /**
-     * Internal debug level. Used to debug the class.
-     *
-     * @access private
-     *
-     * @var integer
-    **/
-    private $_debug_level = null;
-    
-    /**
-     * Internal debug object. Used to debug the class.
-     *
-     * @access private
-     *
-     * @var object
-    **/
-    private $_debug_object = null;
-    
-    /**
-     * Internal mysql object to access the database tables.
-     *
-     * @access private
-     *
-     * @var object
-    **/
-    private $_sql_obj = null;
-    
-    /**
-     * Internal database name. We access this database to extract dialcodes etc.
-     *
-     * @access private
-     *
-     * @var string
-    **/
-    private $_sql_db = null;
-
     /**
      * Internal counter used to track how many times the object accessed the datasource.
      *
@@ -232,7 +194,7 @@ class PhoneNumber
      *
      * @access private
      *
-     * @var string
+     * @var array
     **/
     private $_all_formats = null;
     
@@ -337,41 +299,14 @@ class PhoneNumber
     // CONSTRUCTOR & DESCTRUCTOR methods of the class
     ////////////////////////////////////////////////////////////////////////////
 
-
-
     /**
-     * Constructor to set the initial values for the class
+     * PhoneNumber constructor.
      *
-     * @access public
-     *
-     * @param  integer debug_level   Debugging level
-     * @param  object  &debug_object The Debugging object
-     * @param  object  &sql_obj      The SQL object
-     * @param  string  sql_database  The sql database name to use
-     * @return void
-    **/
-//    public function __construct($debug_level, &$debug_object, &$sql_obj, $sql_database)
+     * @param \Tinned\Libphono\DataProvider\DataProviderInterface $dataProvider
+     */
     public function __construct(DataProviderInterface $dataProvider)
     {
         $this->dataProvider = $dataProvider;
-//        // copy over the variable contents
-//        $this->_debug_level     = $debug_level;
-//        $this->_debug_object    = $debug_object;
-//        $this->_sql_obj         = $sql_obj;
-//        $this->_sql_db          = $sql_database;
-//
-//        // initialize parent class MainClass
-//        parent::Main_init($debug_level, $debug_object,1);
-//
-//        if(is_object($sql_obj) === FALSE)
-//        {
-//            parent::report_error(150, "sql object not specified in costructor");
-//        }
-//
-//        if(is_null($sql_database) === TRUE || empty($sql_database) === TRUE)
-//        {
-//            parent::debug('WARNING: SQL Database Name was not set or empty');
-//        }
     }
 
 
@@ -858,7 +793,6 @@ class PhoneNumber
      * @access private
      *
      * @param void
-     * @return string
     **/
     private function _process_all_formats()
     {
@@ -975,7 +909,7 @@ class PhoneNumber
                     'g' => '4','h' => '4','i' => '4', 'G' => '4','H' => '4','I' => '4',
                     'j' => '5','k' => '5','l' => '5', 'J' => '5','K' => '5','L' => '5',
                     'm' => '6','n' => '6','o' => '6', 'M' => '6','N' => '6','O' => '6',
-                    'p' => '7','q' => '7','r' => '7', 's' => '7','Q' => '7','Q' => '7','R' => '2','S' => '7',
+                    'p' => '7','q' => '7','r' => '7', 's' => '7','Q' => '7','R' => '2','S' => '7',
                     't' => '8','u' => '8','v' => '8', 'T' => '8','U' => '8','V' => '8',
                     'x' => '9','y' => '9','z' => '9', 'X' => '9','Y' => '9','Z' => '9'
                 );
