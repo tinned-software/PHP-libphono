@@ -432,7 +432,6 @@ class PhoneNumber
         if(preg_match($validate_regex, $iso_3166_code) !== 1)
         {
             throw new \LogicException(103, "parameter iso_3166_code did not conform to the given input parameter");
-            return FALSE;
         }
 
 //        parent::debug2("Called with parameters: iso_3166_code = '".$iso_3166_code."'");
@@ -827,42 +826,34 @@ class PhoneNumber
         
         if(isset($this->_iso_3166_code) === TRUE /*&& isset($this->_validated_number) === TRUE*/ && (isset($this->_country_code) === FALSE))
         {
-
             // get array of information from the datasource
             $dialcode_info = $this->_fetch_info_sql();
-            
-            if($dialcode_info['count'] > 0)
-            {
+
 //                parent::debug2("Found CLI Country information: ". print_r($dialcode_info['data'], TRUE));
 //                parent::debug2("trunk code = '".$dialcode_info['data'][0]['trunk_dialcode']."'");
 //                parent::debug2("trunk type= '".gettype($dialcode_info['data'][0]['trunk_dialcode'])."'");
-                
-                // can only be one international dialcode (i.e. 43 for Austria, 1 for USA)
-                $this->_country_code = $dialcode_info['data'][0]['international_dialcode'];
-                // can be multiple trunk and exit codes for each dialplan
-                $this->_exit_dialcode = array();
-                $this->_trunk_code = array();
 
-                // interate over the results to extract all trunk and exit codes                
-                for($i = 0; $i < $dialcode_info['count']; $i++)
-                {
-                    if(in_array($dialcode_info['data'][$i]['exit_dialcode'], $this->_exit_dialcode) === FALSE)
-                    {
-                        $this->_exit_dialcode[] = $dialcode_info['data'][$i]['exit_dialcode'];
-                    }
-                    if(in_array($dialcode_info['data'][$i]['trunk_dialcode'], $this->_trunk_code) === FALSE)
-                    {
-                        $this->_trunk_code[] = $dialcode_info['data'][$i]['trunk_dialcode'];
-                    }
-                }
-                // sort array (order is important for normalization)
-                usort($this->_trunk_code, array($this, '_sort_dialcode'));
-            }
-            else
+            // can only be one international dialcode (i.e. 43 for Austria, 1 for USA)
+            $this->_country_code = $dialcode_info[0]['international_dialcode'];
+            // can be multiple trunk and exit codes for each dialplan
+            $this->_exit_dialcode = array();
+            $this->_trunk_code = array();
+
+            // interate over the results to extract all trunk and exit codes
+            for($i = 0; $i < count($dialcode_info); $i++)
             {
-//                parent::debug2("no exit dialcode / country code information found in DB, cannot normalize number, EXIT NOW !!!");
+                if(in_array($dialcode_info[$i]['exit_dialcode'], $this->_exit_dialcode) === FALSE)
+                {
+                    $this->_exit_dialcode[] = $dialcode_info[$i]['exit_dialcode'];
+                }
+                if(in_array($dialcode_info[$i]['trunk_dialcode'], $this->_trunk_code) === FALSE)
+                {
+                    $this->_trunk_code[] = $dialcode_info[$i]['trunk_dialcode'];
+                }
             }
-            
+            // sort array (order is important for normalization)
+            usort($this->_trunk_code, array($this, '_sort_dialcode'));
+
             $this->_db_dialcodes_fetched = TRUE;
             
             return TRUE;
@@ -885,9 +876,7 @@ class PhoneNumber
     **/
     private function _fetch_info_sql()
     {
-        $return_array = $this->dataProvider->fetchDataForISOCode($this->_iso_3166_code);
-
-        return $return_array;
+        return $this->dataProvider->fetchDataForISOCode($this->_iso_3166_code, $this->_iso_3166_code_type);
     }
     
     

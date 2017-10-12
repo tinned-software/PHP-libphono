@@ -1,5 +1,5 @@
 {
-  "name": "PHP-libphono",
+  "name": "tinned-software/PHP-libphono",
   "description": "libphono is library which allows numbers to be converted from local or national format into an international number which conforms to the E 164 standard",
   "version": "1.0.0",
   "type": "library",
@@ -8,7 +8,20 @@
     {"name": "Tyler Ashton"},
     {"name": "Gerhard Steinbeis"}
   ],
+  "autoload": {
+    "psr-4": {
+      "Tinned\\": "src/Tinned/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tinned\\Tests\\": "tests/"
+    }
+  },
   "require": {
-
+    "ext-pdo_sqlite": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "6.2.0"
   }
 }

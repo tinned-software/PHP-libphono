@@ -15,6 +15,13 @@ interface DataProviderInterface
      *
      * @return array
      */
-    public function fetchDataForISOCode($isoCode);
+    public function fetchDataForISOCode($isoCode, $iso3166CodeType);
+
+    /**
+     * @param string $number
+     *
+     * @return string
+     */
+    public function getCountryForNumber($number);
 
 }
