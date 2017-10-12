@@ -1,0 +1,14 @@
+{
+  "name": "PHP-libphono",
+  "description": "libphono is library which allows numbers to be converted from local or national format into an international number which conforms to the E 164 standard",
+  "version": "1.0.0",
+  "type": "library",
+  "license": "GPL-3.0",
+  "authors": [
+    {"name": "Tyler Ashton"},
+    {"name": "Gerhard Steinbeis"}
+  ],
+  "require": {
+
+  }
+}
