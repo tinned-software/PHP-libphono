@@ -24,11 +24,19 @@ class SQLiteDataProvider implements DataProviderInterface
      */
     protected $dbPath;
 
+    /**
+     * SQLiteDataProvider constructor.
+     *
+     * @param string $dbPath
+     */
     public function __construct($dbPath)
     {
         $this->dbPath = $dbPath;
     }
 
+    /**
+     *
+     */
     protected function initialize()
     {
         if (is_null($this->dbObject)) {
@@ -87,7 +95,7 @@ class SQLiteDataProvider implements DataProviderInterface
         $query_result = $this->dbObject->query($query, \PDO::FETCH_ASSOC);
 
         if (!$query_result) {
-            throw new \Exception(301, "Fetching data failed. Internal sql error");
+            throw new \Exception("Fetching data failed. Internal sql error", 301);
         }
 
 //        print_r($query_result->fetchAll());
@@ -115,12 +123,11 @@ class SQLiteDataProvider implements DataProviderInterface
         }
 
         $return = 'ZZZ';
-
-        if($query_result['count'] >= 1)
-        {
-//            $GLOBALS['DBG']->debug2_array('matche(s) results found: ', $query_dialcode_result['data']);
-            $return = $query_result['data'][0]['country_3_letter'];
+        $res = $query_result->fetchAll();
+        if (count($res) > 0) {
+            $return = $res[0]['country_3_letter'];
         }
+
         return $return;
     }
 }

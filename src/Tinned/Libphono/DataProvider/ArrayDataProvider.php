@@ -9,7 +9,6 @@ namespace Tinned\Libphono\DataProvider;
  */
 class ArrayDataProvider implements DataProviderInterface
 {
-
     // indexes: three letter, exit dialcode, international dialcode, extended dialcode, trunk dialcode
     protected $data = [
         'USA' => [
@@ -41,7 +40,18 @@ class ArrayDataProvider implements DataProviderInterface
         if (!isset($this->data[$isoCode])) {
             throw new \Exception(1000, 'ISO Code not found');
         }
-        return $this->data[$isoCode];
+        return array_map(
+            function ($element) {
+                return [
+                    'country_3_letter' => $element[0],
+                    'exit_dialcode' => $element[1],
+                    'international_dialcode' => $element[2],
+                    'extended_dialcode' => $element[3],
+                    'trunk_dialcod' => $element[4],
+                ];
+            },
+            $this->data[$isoCode]
+        );
     }
 
     /**
@@ -51,6 +61,6 @@ class ArrayDataProvider implements DataProviderInterface
      */
     public function getCountryForNumber($number)
     {
-        return '';
+        throw new \Exception('Not implemented');
     }
 }
