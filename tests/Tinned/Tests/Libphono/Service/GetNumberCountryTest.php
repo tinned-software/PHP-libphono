@@ -15,26 +15,14 @@ use Tinned\Libphono\Service\LibphonoService;
  * Test script
  * 
 **/
-
-
-//require_once(dirname(__FILE__) . '/../config/php_config.php');
-//require_once(dirname(__FILE__) . '/../functions/get_number_country.php');
-
-//$GLOBALS['DBG']->info('*** Starting file '.basename(__FILE__));
-
-//echo "<b>Test '".basename(__FILE__)."' ... Start </b><br/>\n";
-//echo "______________________<br>\n";
-
-// ===============================================================
-// STEP 1: Generate a list of test cases
-// ===============================================================
-
-//$debug_string = "Generating test cases";
-//echo $debug_string."<br>\n";
-//$GLOBALS['DBG']->debug2($debug_string);
-
 class GetNumberCountryTest extends \PHPUnit\Framework\TestCase
 {
+
+    // array of arrays in the form :
+    //      array('no' => '16145554444', 'cc' => 1, 'ok' => 'USA'))
+    // no - the number
+    // cc - the country code of the number
+    // ok - the expected response
     protected $test_cases = array(
         array('no' => '16145554444',   'ok' => 'USA'),
         array('no' => '13124567891',   'ok' => 'USA'),
@@ -90,47 +78,10 @@ class GetNumberCountryTest extends \PHPUnit\Framework\TestCase
             new SQLiteDataProvider($this->dbPath)
         );
 
-//        foreach($this->test_cases as $case)
-//        {
-//            echo 'Number:' . $case['no'] . ' should return:' . $case['ok'] . "<br/>\n";
-//        }
-
         $result_count = count($this->test_cases);
         for ($i = 0; $i < $result_count; ++$i) {
             $result = $service->getNumberCountry($this->test_cases[$i]['no']);
-//            var_dump($result);
             $this->assertEquals($this->test_cases[$i]['ok'], $result, "Test $i failed...");
         }
     }
 }
-
-// array of arrays in the form :
-//      array('no' => '16145554444', 'cc' => 1, 'ok' => 'USA'))
-// no - the number
-// cc - the country code of the number
-// ok - the expected response
-
-//
-//echo "</div>\n";
-//
-//echo "______________________<br>\n";
-//
-//// ===============================================================
-//// STEP 2: Perform tests
-//// ===============================================================
-//
-//$debug_string = "Performing tests... (first column is calculated result, second is expected)";
-//echo $debug_string."<br>\n";
-//$GLOBALS['DBG']->debug2($debug_string);
-//
-//$result_count = count($test_cases);
-//
-//echo "<table>\n";
-//
-//echo "</table>\n";
-//
-//// ===============================================================
-//// DONE!
-//// ===============================================================
-//
-//echo "<b>Test '".basename(__FILE__)."' ... End.</b><br/><br/>\n";

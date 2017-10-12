@@ -31,11 +31,17 @@ class PhoneNumberClassTest extends \PHPUnit\Framework\TestCase
     public $log = NULL;
     public $endresults_to_log = FALSE;
     
+    function test_true()
+    {
+        $this->assertTrue(true);
+    }
+
     function kTest($log, $endresults_to_log = FALSE)
     {
         $this->log = $log;
         $this->endresults_to_log = $endresults_to_log;
     }
+
     function start($test_number, $test_description, $operations_count, $test_expected)
     {
         $this->test_table[$test_number]["description"] = $test_description;
