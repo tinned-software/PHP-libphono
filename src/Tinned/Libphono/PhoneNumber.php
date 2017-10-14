@@ -684,8 +684,7 @@ class PhoneNumber implements PhoneNumberInterface
         
         if (isset($this->_iso_3166_code) === true /*&& isset($this->_validated_number) === TRUE*/ && (isset($this->_country_code) === false)) {
             // get array of information from the datasource
-            $dialcode_info = $this->_fetch_info_sql();
-
+            $dialcode_info = $this->dataProvider->fetchDataForISOCode($this->_iso_3166_code, $this->_iso_3166_code_type);
 
             // can only be one international dialcode (i.e. 43 for Austria, 1 for USA)
             $this->_country_code = $dialcode_info[0]['international_dialcode'];
@@ -711,19 +710,6 @@ class PhoneNumber implements PhoneNumberInterface
         } else {
             return false;
         }
-    }
-
-    /**
-     * Generate query to get the data using the ISO input given.
-     *
-     * @access private
-     *
-     * @param void
-     * @return array()
-    **/
-    private function _fetch_info_sql()
-    {
-        return $this->dataProvider->fetchDataForISOCode($this->_iso_3166_code, $this->_iso_3166_code_type);
     }
 
     /**
@@ -1054,7 +1040,6 @@ class PhoneNumber implements PhoneNumberInterface
         $explanation["_trunk_code"]                      = $this->_trunk_code;
         $explanation["_exit_dialcode"]                   = $this->_exit_dialcode;
         $explanation["_database_hits"]                   = $this->_database_hits;
-        $explanation["_error_list"]                      = parent::get_all_errors();
         
         return $explanation;
     }
