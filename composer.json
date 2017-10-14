@@ -5,8 +5,12 @@
   "type": "library",
   "license": "GPL-3.0",
   "authors": [
-    {"name": "Tyler Ashton"},
-    {"name": "Gerhard Steinbeis"}
+    {
+      "name": "Tyler Ashton"
+    },
+    {
+      "name": "Gerhard Steinbeis"
+    }
   ],
   "autoload": {
     "psr-4": {
@@ -23,6 +27,6 @@
     "ext-pdo_sqlite": "*"
   },
   "require-dev": {
-    "phpunit/phpunit": "6.2.0"
+    "phpunit/phpunit": "4.8.*"
   }
 }
