@@ -34,15 +34,19 @@ Please see the class documentation in the phpdoc subdirectory for a description 
 
 All countries which have publicly available information related to their dial plans. 235 countries are currently included.
 
+## Information missing?
+
+Create an issue in the github repository, we will update as soon as possible!
+
 ## Requirements
 
-1) A PHP > 5.6.x including the following modules (`php -m'):
-- MySQL or SQLite3 (to provide access to data)
-2) Add Composer Requirement to your composer.json
+1) PHP cooresponding to the version listed in this project's `composer.json`,
+2) PHP modules for MySQL or SQLite3 (to provide access to data),
+3) and composer `require` in your composer.json
 ```json
 {
   "require": {
-    "tinned-software/PHP-libphono": "*"
+    "tinned-software/php-libphono": "dev-master"
   }
 }
 ```
