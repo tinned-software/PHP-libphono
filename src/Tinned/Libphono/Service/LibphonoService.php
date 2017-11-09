@@ -30,8 +30,8 @@ class LibphonoService
     public function getPhoneNumber($number, $isoCode, $iso3166CodeType)
     {
         $ret = new PhoneNumber($this->dataProvider);
-        $ret->set_input_number($number);
-        $ret->set_normalized_country($isoCode, $iso3166CodeType);
+        $ret->setInputNumber($number);
+        $ret->setNormalizedCountry($isoCode, $iso3166CodeType);
         return $ret;
     }
 

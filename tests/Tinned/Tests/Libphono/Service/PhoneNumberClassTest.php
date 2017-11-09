@@ -160,7 +160,7 @@ class PhoneNumberClassTest extends \PHPUnit\Framework\TestCase
         // setup
         $number = new PhoneNumber(0, $log, $sql_db, NULL);
         // input + result
-        $result = $number->set_normalized_country($test_country);
+        $result = $number->setNormalizedCountry($test_country);
         $this->stop($test_id);
         $this->print_result($test_id,
             isset($result) === TRUE && is_bool($result) && $result === TRUE
@@ -176,9 +176,9 @@ class PhoneNumberClassTest extends \PHPUnit\Framework\TestCase
         // setup
         $number = new PhoneNumber(0, $log, $sql_db, NULL);
         // input
-        $number->set_normalized_country($test_country);
+        $number->setNormalizedCountry($test_country);
         // results
-        $result = $number->get_normalized_country();
+        $result = $number->getNormalizedCountry();
         $this->stop($test_id);
         $this->print_result($test_id,
             isset($result) === TRUE && is_string($result) && $result === $test_country
@@ -194,7 +194,7 @@ class PhoneNumberClassTest extends \PHPUnit\Framework\TestCase
         // setup
         $number = new PhoneNumber(0, $log, $sql_db, NULL);
         // input + result
-        $result = $number->set_input_number($test_input_number);
+        $result = $number->setInputNumber($test_input_number);
         $this->stop($test_id);
         $this->print_result($test_id,
             isset($result) === TRUE && is_bool($result) && $result === TRUE
@@ -209,9 +209,9 @@ class PhoneNumberClassTest extends \PHPUnit\Framework\TestCase
         // setup
         $number = new PhoneNumber(0, $log, $sql_db, NULL);
         // input
-        $number->set_input_number($test_input_number);
+        $number->setInputNumber($test_input_number);
         // results
-        $result = $number->get_input_number();
+        $result = $number->getInputNumber();
         $this->stop($test_id);
         $this->print_result($test_id,
             isset($result) === TRUE && is_string($result) && $result === $test_input_number
@@ -228,9 +228,9 @@ class PhoneNumberClassTest extends \PHPUnit\Framework\TestCase
         // setup
         $number = new PhoneNumber(0, $log, $sql_db, NULL);
         // input
-        $number->set_input_number($test_input_number);
+        $number->setInputNumber($test_input_number);
         // results
-        $result = $number->get_validated_input_number();
+        $result = $number->getValidatedInputNumber();
         $this->stop($test_id);
         $this->print_result($test_id,
             isset($result) === TRUE && is_string($result) && $result === $test_validated_number
@@ -248,10 +248,10 @@ class PhoneNumberClassTest extends \PHPUnit\Framework\TestCase
         // setup
         $number = new PhoneNumber(0, $log, $sql_db, NULL);
         // input
-        $number->set_input_number($test_input_number);
-        $number->set_normalized_country($test_input_country );
+        $number->setInputNumber($test_input_number);
+        $number->setNormalizedCountry($test_input_country );
         // results
-        $result = $number->get_international_number();
+        $result = $number->getInternationalNumber();
         $this->stop($test_id);
         $this->print_result($test_id,
             isset($result) === TRUE && is_string($result) && $result === $test_international_number
@@ -268,10 +268,10 @@ class PhoneNumberClassTest extends \PHPUnit\Framework\TestCase
         // setup
         $number = new PhoneNumber(0, $log, $sql_db, NULL);
         // input
-        $number->set_input_number($test_input_number);
-        $number->set_normalized_country($test_input_country);
+        $number->setInputNumber($test_input_number);
+        $number->setNormalizedCountry($test_input_country);
         // results
-        $result = $number->get_normalized_international_number();
+        $result = $number->getNormalizedInternationalNumber();
         $this->stop($test_id);
         $this->print_result($test_id,
             isset($result) === TRUE && is_string($result) && $result === $test_normalized_international_number
@@ -288,10 +288,10 @@ class PhoneNumberClassTest extends \PHPUnit\Framework\TestCase
         // setup
         $number = new PhoneNumber(0, $log, $sql_db, NULL);
         // input
-        $number->set_input_number($test_input_number );
-        $number->set_normalized_country($test_input_country);
+        $number->setInputNumber($test_input_number );
+        $number->setNormalizedCountry($test_input_country);
         // results
-        $result = $number->get_normalized_number();
+        $result = $number->getNormalizedNumber();
         $this->stop($test_id);
         $this->print_result($test_id,
             isset($result) === TRUE && is_string($result) && $result === $test_normalized_number
@@ -308,10 +308,10 @@ class PhoneNumberClassTest extends \PHPUnit\Framework\TestCase
         // setup
         $number = new PhoneNumber(2, $log, $sql_db, NULL);
         // input
-        $number->set_input_number($test_input_number );
-        $number->set_normalized_country($test_input_country);
+        $number->setInputNumber($test_input_number );
+        $number->setNormalizedCountry($test_input_country);
         // results
-        $result = $number->get_normalized_number_only();
+        $result = $number->getNormalizedNumberOnly();
         $this->stop($test_id);
         $this->print_result($test_id,
             isset($result) === TRUE && is_string($result) && $result === $test_normalized_number
@@ -332,10 +332,10 @@ class PhoneNumberClassTest extends \PHPUnit\Framework\TestCase
         // setup
         $number = new PhoneNumber(2, $log, $sql_db, NULL);
         // input
-        $number->set_input_number($test_input_number );
-        $number->set_normalized_country($test_input_country);
+        $number->setInputNumber($test_input_number );
+        $number->setNormalizedCountry($test_input_country);
         // results
-        $result = $number->get_normalized_number_only();
+        $result = $number->getNormalizedNumberOnly();
         $this->stop($test_id);
         $this->print_result($test_id,
             isset($result) === TRUE && is_string($result) && $result === $test_normalized_number
@@ -356,10 +356,10 @@ class PhoneNumberClassTest extends \PHPUnit\Framework\TestCase
 // setup
         $number = new PhoneNumber(0, $log, $sql_db, NULL);
         // input
-        $number->set_input_number($test_input_number);
-        $number->set_normalized_country($test_input_country);
+        $number->setInputNumber($test_input_number);
+        $number->setNormalizedCountry($test_input_country);
         // results
-        $result = $number->get_local_number();
+        $result = $number->getLocalNumber();
         $this->stop($test_id);
         $this->print_result($test_id,
             isset($result) === TRUE && is_string($result) && $result === $test_local_number
@@ -379,15 +379,15 @@ class PhoneNumberClassTest extends \PHPUnit\Framework\TestCase
         // setup
         $number = new PhoneNumber(0, $log, $sql_db, NULL);
         // input
-        $number->set_input_number($test_input_number);
-        $number->set_normalized_country($test_input_country);
+        $number->setInputNumber($test_input_number);
+        $number->setNormalizedCountry($test_input_country);
         // results
-        $result_country_name = $number->get_normalized_country();
-        $result_input_number = $number->get_input_number();
-        $result_international_number= $number->get_international_number();
-        $result_normalized_international_number = $number->get_normalized_international_number();
-        $result_normalized_number = $number->get_normalized_number();
-        $result_local_number = $number->get_local_number();
+        $result_country_name = $number->getNormalizedCountry();
+        $result_input_number = $number->getInputNumber();
+        $result_international_number= $number->getInternationalNumber();
+        $result_normalized_international_number = $number->getNormalizedInternationalNumber();
+        $result_normalized_number = $number->getNormalizedNumber();
+        $result_local_number = $number->getLocalNumber();
         $this->stop($test_id);
         $this->print_result($test_id,
             isset($result_country_name) === TRUE && is_string($result_country_name) && $result_country_name === $test_input_country &&

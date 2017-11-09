@@ -59,10 +59,10 @@ if(isset($_POST['nr_custom']))
 
     // set and fetch values
     $phone_number_obj = new Phone_Number(2, $GLOBALS['DBG'], $sql_db, NULL);
-    $phone_number_obj->set_normalized_country($iso_int, $iso_type_int);
-    $phone_number_obj->set_input_number($nr_int);
+    $phone_number_obj->setNormalizedCountry($iso_int, $iso_type_int);
+    $phone_number_obj->setInputNumber($nr_int);
     
-    $result = $phone_number_obj->get_normalized_number();
+    $result = $phone_number_obj->getNormalizedNumber();
     $result .= "\n---debug-bounds---\n".print_r($phone_number_obj->explain(TRUE, TRUE), TRUE);
     $GLOBALS['DBG']->debug("printed '$result' to the script, and exiting..");
     echo $result;

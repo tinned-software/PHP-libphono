@@ -260,10 +260,10 @@ foreach($tests as $testcase)
             $number = new Phone_Number(0, $log, $sql_db, NULL);
         }
         // input
-        $number->set_input_number($test_input_number);
-        $number->set_normalized_country($test_input_country);
+        $number->setInputNumber($test_input_number);
+        $number->setNormalizedCountry($test_input_country);
         // results
-        $result = $number->get_normalized_number();
+        $result = $number->getNormalizedNumber();
     $test->stop($test_id);
     $test->print_result($test_id,
             isset($result) === TRUE && is_string($result) && $result === $test_expected_normalized
@@ -282,9 +282,9 @@ foreach($tests as $testcase)
         {
             $table .= '<td bgcolor="red">'.$result.'</td>';
         }
-    $table .= '<td>'.$number->get_validated_input_number().'</td>
-        <td>'.$number->get_normalized_international_number().'</td>
-        <td>'.$number->get_international_number().'</td>';
+    $table .= '<td>'.$number->getValidatedInputNumber().'</td>
+        <td>'.$number->getNormalizedInternationalNumber().'</td>
+        <td>'.$number->getInternationalNumber().'</td>';
         if($result === $test_google)
         {
             $table .= '<td bgcolor="green">'.$test_google.'</td>';

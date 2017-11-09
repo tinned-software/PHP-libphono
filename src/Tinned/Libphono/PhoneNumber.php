@@ -325,13 +325,13 @@ class PhoneNumber implements PhoneNumberInterface
      *
      * @access public
      *
-     * @see    get_normalized_country()
+     * @see    getNormalizedCountry()
      *
      * @param  string $iso_code ISO 3166 conform code
      * @param  string $type optional ISO 3166 type, default is ISO 3166 Alpha3. Use class constants.
      * @return boolean
     **/
-    public function set_normalized_country($iso_3166_code = null, $type = self::INPUT_ISO_3166_ALPHA3)
+    public function setNormalizedCountry($iso_3166_code = null, $type = self::INPUT_ISO_3166_ALPHA3)
     {
         // must be string
         if (isset($iso_3166_code) === false) {
@@ -361,8 +361,8 @@ class PhoneNumber implements PhoneNumberInterface
         
         // clear cache for old iso_3166_code (both if was set or was set to NULL)
         if ($this->_db_dialcodes_fetched === true && $this->_iso_3166_code !== $iso_3166_code) {
-            $this->_unset_all();
-            $this->_unset_all_db();
+            $this->_unsetAll();
+            $this->_unsetAllDb();
         }
         
         $this->_iso_3166_code = $iso_3166_code;
@@ -380,12 +380,12 @@ class PhoneNumber implements PhoneNumberInterface
      *
      * @access public
      *
-     * @see    get_input_number()
+     * @see    getInputNumber()
      *
      * @param  string  input_number the input number
      * @return boolean
     **/
-    public function set_input_number($input_number = null)
+    public function setInputNumber($input_number = null)
     {
         // must be string
         if (isset($input_number) === false) {
@@ -402,7 +402,7 @@ class PhoneNumber implements PhoneNumberInterface
         
         // reset ALL variables if was not null to reset the normalization
         if ($this->_db_dialcodes_fetched === true && strcmp($this->_input_number, $input_number) !== 0) {
-            $this->_unset_all();
+            $this->_unsetAll();
         }
         
         $this->_input_number = $input_number;
@@ -422,12 +422,12 @@ class PhoneNumber implements PhoneNumberInterface
      *
      * @access public
      *
-     * @see    set_normalized_country()
+     * @see    setNormalizedCountry()
      *
      * @param  void
      * @return string
     **/
-    public function get_normalized_country()
+    public function getNormalizedCountry()
     {
         if (isset($this->_iso_3166_code) === false) {
             throw new \LogicException("iso_3166_code was set to NULL", 201);
@@ -445,12 +445,12 @@ class PhoneNumber implements PhoneNumberInterface
      *
      * @access public
      *
-     * @see set_input_number()
+     * @see setInputNumber()
      *
      * @param  void
      * @return string
     **/
-    public function get_input_number()
+    public function getInputNumber()
     {
         if (isset($this->_input_number) === false) {
             throw new \LogicException("input_number was NOT set", 202);
@@ -467,17 +467,17 @@ class PhoneNumber implements PhoneNumberInterface
      *
      * @access public
      *
-     * @see get_input_number()
-     * @see set_input_number()
+     * @see getInputNumber()
+     * @see setInputNumber()
      *
      * @param  void
      * @return string
     **/
-    public function get_validated_input_number()
+    public function getValidatedInputNumber()
     {
         if (isset($this->_validated_number) === false) {
             
-            $tmp_number = $this->get_input_number();
+            $tmp_number = $this->getInputNumber();
             
             // replace *known pause character with an internal representation
             $pause_replace_preg = '/[' . implode('', $this->_pause_characters) . ']/';
@@ -503,20 +503,20 @@ class PhoneNumber implements PhoneNumberInterface
      * @param  void
      * @return string
     **/
-    public function get_international_number()
+    public function getInternationalNumber()
     {
         if (isset($this->_international_number) === false) {
             
             // make sure we got the validated number and the country code
-            $this->_iso_3166_code = $this->get_normalized_country();
-            $this->_validated_number = $this->get_validated_input_number();
+            $this->_iso_3166_code = $this->getNormalizedCountry();
+            $this->_validated_number = $this->getValidatedInputNumber();
             
             // make sure we have the exit code for this country
             if (isset($this->_exit_dialcode) === false) {
-                $this->_fetch_dialcodes();
+                $this->_fetchDialcodes();
             }
             
-            $this->_international_number = $this->_exit_dialcode[0].$this->get_normalized_number();
+            $this->_international_number = $this->_exit_dialcode[0].$this->getNormalizedNumber();
         }
         
         
@@ -534,14 +534,14 @@ class PhoneNumber implements PhoneNumberInterface
      * @param  void
      * @return string
     **/
-    public function get_normalized_international_number()
+    public function getNormalizedInternationalNumber()
     {
         if (isset($this->_international_number_normalized) === false) {
             
             // make sure we got the validated number and the country code
-            $this->_iso_3166_code = $this->get_normalized_country();
-            $this->_validated_number = $this->get_validated_input_number();
-            $this->_international_number_normalized = "+".$this->get_normalized_number();
+            $this->_iso_3166_code = $this->getNormalizedCountry();
+            $this->_validated_number = $this->getValidatedInputNumber();
+            $this->_international_number_normalized = "+".$this->getNormalizedNumber();
         }
 
         return $this->_international_number_normalized;
@@ -558,19 +558,19 @@ class PhoneNumber implements PhoneNumberInterface
      * @param  void
      * @return string
     **/
-    public function get_normalized_number()
+    public function getNormalizedNumber()
     {
         if (isset($this->_number_normalized) === false) {
             
             // make sure we got the validated number AND the country code
-            $this->_iso_3166_code = $this->get_normalized_country();
-            $this->_validated_number = $this->get_validated_input_number();
+            $this->_iso_3166_code = $this->getNormalizedCountry();
+            $this->_validated_number = $this->getValidatedInputNumber();
             
             if (isset($this->_exit_dialcode) === false) {
-                $success_fetching = $this->_fetch_dialcodes();
+                $success_fetching = $this->_fetchDialcodes();
             }
             
-            $this->_number_normalized = $this->_normalize_number($this->_validated_number, $this->_trunk_code, $this->_country_code, $this->_exit_dialcode);
+            $this->_number_normalized = $this->_normalizeNumber($this->_validated_number, $this->_trunk_code, $this->_country_code, $this->_exit_dialcode);
         }
 
         return $this->_number_normalized;
@@ -579,20 +579,20 @@ class PhoneNumber implements PhoneNumberInterface
     /**
      * This method is used to get the number in "normalized" E.164 format if successful
      *
-     * This method serves the same function as the get_normalized_number() method, with
+     * This method serves the same function as the getNormalizedNumber() method, with
      * the additional feature that it only returns a number if the normalization was
      * deemed as a success in the class. Otherwise it returns an empty string.
      *
      * @access public
      *
-     * @see    get_normalized_number()
+     * @see    getNormalizedNumber()
      *
      * @param  void
      * @return string the normalized number in string format, can be empty if normalization failed
     **/
-    public function get_normalized_number_only()
+    public function getNormalizedNumberOnly()
     {
-        $number_return = $this->get_normalized_number();
+        $number_return = $this->getNormalizedNumber();
         
         if ($this->_normalize_success === true) {
             return $number_return;
@@ -612,20 +612,20 @@ class PhoneNumber implements PhoneNumberInterface
      * @param  void
      * @return string
     **/
-    public function get_local_number()
+    public function getLocalNumber()
     {
         if (isset($this->local_number) === false) {
             
             // make sure we got the validated number and the country code
-            $this->_iso_3166_code = $this->get_normalized_country();
-            $this->_validated_number = $this->get_validated_input_number();
+            $this->_iso_3166_code = $this->getNormalizedCountry();
+            $this->_validated_number = $this->getValidatedInputNumber();
             
             // make sure we have the exit code for this country
             if (isset($this->_exit_dialcode) === false) {
-                $this->_fetch_dialcodes();
+                $this->_fetchDialcodes();
             }
             
-            $this->_local_number = $this->_trunk_code[0].substr($this->get_normalized_number(), strlen($this->_country_code));
+            $this->_local_number = $this->_trunk_code[0].substr($this->getNormalizedNumber(), strlen($this->_country_code));
         }
         
         return $this->_local_number;
@@ -642,10 +642,10 @@ class PhoneNumber implements PhoneNumberInterface
      * @param  void
      * @return array
     **/
-    public function dump_formats()
+    public function dumpFormats()
     {
         if (isset($this->_all_formats) === false) {
-            $this->_process_all_formats();
+            $this->_processAllFormats();
         }
         
         return $this->_all_formats;
@@ -673,14 +673,14 @@ class PhoneNumber implements PhoneNumberInterface
      * @param  void
      * @return boolean
     **/
-    private function _fetch_dialcodes()
+    private function _fetchDialcodes()
     {
         if ($this->_db_dialcodes_fetched === true) {
             return true;
         }
         
         // step 1: make sure we have the iso 3166 code AND the validated version of the number
-        $this->_iso_3166_code = $this->get_normalized_country();
+        $this->_iso_3166_code = $this->getNormalizedCountry();
         
         if (isset($this->_iso_3166_code) === true /*&& isset($this->_validated_number) === TRUE*/ && (isset($this->_country_code) === false)) {
             // get array of information from the datasource
@@ -702,7 +702,7 @@ class PhoneNumber implements PhoneNumberInterface
                 }
             }
             // sort array (order is important for normalization)
-            usort($this->_trunk_code, array($this, '_sort_dialcode'));
+            usort($this->_trunk_code, array($this, '_sortDialcode'));
 
             $this->_db_dialcodes_fetched = true;
             
@@ -722,15 +722,15 @@ class PhoneNumber implements PhoneNumberInterface
      *
      * @param void
     **/
-    private function _process_all_formats()
+    private function _processAllFormats()
     {
         $this->_all_formats = array(
-                "INPUT_NUMBER"                    => $this->get_input_number(),
-                "INPUT_NUMBER_VALIDATED"          => $this->get_validated_input_number(),
-                "INTERNATIONAL_NUMBER"            => $this->get_international_number(),
-                "INTERNATIONAL_NUMBER_NORMALIZED" => $this->get_normalized_international_number(),
-                "NORMALIZED_NUMBER"               => $this->get_normalized_number(),
-                "LOCAL_NUMBER"                    => $this->get_local_number()
+                "INPUT_NUMBER"                    => $this->getInputNumber(),
+                "INPUT_NUMBER_VALIDATED"          => $this->getValidatedInputNumber(),
+                "INTERNATIONAL_NUMBER"            => $this->getInternationalNumber(),
+                "INTERNATIONAL_NUMBER_NORMALIZED" => $this->getNormalizedInternationalNumber(),
+                "NORMALIZED_NUMBER"               => $this->getNormalizedNumber(),
+                "LOCAL_NUMBER"                    => $this->getLocalNumber()
         );
     }
 
@@ -744,7 +744,7 @@ class PhoneNumber implements PhoneNumberInterface
      *
      * @param void
     **/
-    private function _unset_all()
+    private function _unsetAll()
     {
         $this->_validated_number = null;
         $this->_international_number = null;
@@ -764,7 +764,7 @@ class PhoneNumber implements PhoneNumberInterface
      *
      * @param void
     **/
-    private function _unset_all_db()
+    private function _unsetAllDb()
     {
         $this->_db_dialcodes_fetched = false;
         $this->_country_code = null;
@@ -784,7 +784,7 @@ class PhoneNumber implements PhoneNumberInterface
      * @param void
      * @return string
     **/
-    private function _input_to_valid($number, $method = 0)
+    private function _inputToValid($number, $method = 0)
     {
         if (isset($method) === false) {
             $method = 0;
@@ -792,10 +792,10 @@ class PhoneNumber implements PhoneNumberInterface
         
         switch ($method) {
             case 0:
-                $success_fetching = $this->_fetch_dialcodes();
+                $success_fetching = $this->_fetchDialcodes();
                 if ($success_fetching) {
                     // trunk code for now is not used, so it's set to NULL
-                    $number = $this->_normalize_number($number, null, $this->_country_code, $this->_exit_dialcode);
+                    $number = $this->_normalizeNumber($number, null, $this->_country_code, $this->_exit_dialcode);
                 }
             break;
             case 1:
@@ -871,7 +871,7 @@ class PhoneNumber implements PhoneNumberInterface
      *
      * @return string                          the normalized number
      */
-    private function _normalize_number($the_number = null, $trunk_code_array = null, $country_code = null, $exit_dialcode_array = null)
+    private function _normalizeNumber($the_number = null, $trunk_code_array = null, $country_code = null, $exit_dialcode_array = null)
     {
         if (isset($the_number) === false || (isset($trunk_code_array) === false && is_null($trunk_code_array) !== true) || isset($country_code) === false || isset($exit_dialcode_array) === false) {
             throw new \LogicException("missing parameters, cannot continue to process number", 401);
@@ -883,7 +883,7 @@ class PhoneNumber implements PhoneNumberInterface
         
         // sort the array from lowest to highest dialcode length
         //   (NULLs must be at the highest index in the array)
-        usort($trunk_code_array, array($this, '_sort_dialcode'));
+        usort($trunk_code_array, array($this, '_sortDialcode'));
         
         // save the number for logging
         $the_number_original = $the_number;
@@ -938,7 +938,7 @@ class PhoneNumber implements PhoneNumberInterface
      * @access private
      *
      **/
-    private function _sort_dialcode($nr_a, $nr_b)
+    private function _sortDialcode($nr_a, $nr_b)
     {
         if (is_null($nr_a)) {
             return 1;
@@ -973,7 +973,7 @@ class PhoneNumber implements PhoneNumberInterface
     **/
     public function __toString()
     {
-        return (string) $this->get_normalized_international_number();
+        return (string) $this->getNormalizedInternationalNumber();
     }
 
     /**
@@ -990,12 +990,12 @@ class PhoneNumber implements PhoneNumberInterface
      * @param  PhoneNumber &$number a phone number object with which to compare
      * @return boolean               TRUE if matched, FALSE if the comparison failed or numbers do not match
     **/
-    public function is_equal_to_number(&$number)
+    public function isEqualToNumber(&$number)
     {
         if (is_object($number) === true && get_class($this) !== get_class($number)) {
             throw new \LogicException("class of input parameter does not match: ".get_class($this).' !== '.get_class($number), 403);
         }
-        if (strcmp($this->get_normalized_number(), $number->get_normalized_number()) === 0) {
+        if (strcmp($this->getNormalizedNumber(), $number->getNormalizedNumber()) === 0) {
             return true;
         } else {
             return false;
@@ -1018,7 +1018,7 @@ class PhoneNumber implements PhoneNumberInterface
     public function explain($return_result = false, $force_calculation = false)
     {
         if ($force_calculation === true) {
-            $this->_process_all_formats();
+            $this->_processAllFormats();
         }
 
         $explanation = array();

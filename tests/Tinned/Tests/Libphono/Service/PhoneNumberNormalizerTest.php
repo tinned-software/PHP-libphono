@@ -99,7 +99,7 @@ class PhoneNumberNormalizerTest extends \PHPUnit\Framework\TestCase
                 PhoneNumber::INPUT_ISO_3166_ALPHA3
             );
 
-            $result = $phone_number_obj->get_normalized_number();
+            $result = $phone_number_obj->getNormalizedNumber();
 
             if (empty($fail_reason)) {
                 $this->assertEquals($test_cases[$i]['ok'], $result, "Test $i Failed");
