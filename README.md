@@ -46,7 +46,7 @@ Create an issue in the github repository, we will update as soon as possible!
 ```json
 {
   "require": {
-    "tinned-software/php-libphono": "~1.0.0"
+    "tinned-software/php-libphono": "~2.0.0"
   }
 }
 ```
