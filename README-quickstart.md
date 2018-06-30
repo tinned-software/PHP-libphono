@@ -37,5 +37,5 @@ $service = new \Tinned\Libphono\Service\LibphonoService(
 
 $phoneObj = $service->getPhoneNumber('06801111111', 'AUT', \Tinned\Libphono\PhoneNumber::INPUT_ISO_3166_ALPHA3);
 
-print_r($phoneObj->get_normalized_international_number());
+print_r($phoneObj->getNormalizedInternationalNumber());
 ```
