@@ -17,7 +17,7 @@ In contrast to other implementations, logic for country specific dial plan speci
 
 Specific information is not supported, such as:
 * DOES NOT: provide specific information regarding geographic / carrier information about a number,
-* DOES NOT: provide information about whether the number is a fixed line or mobile device is also not included,
+* DOES NOT: provide information about whether the number is a fixed line or mobile device,
 * DOES NOT: convert numbers into formatted strings, e.g. "+1 (614) 544 5874",
 * DOES NOT: provide plausability check for numbers - syntax check for specific countries, areas, number length, etc...
 
@@ -40,7 +40,7 @@ Create an issue in the github repository, we will update as soon as possible!
 
 ## Requirements
 
-1) PHP cooresponding to the version listed in this project's `composer.json`,
+1) PHP corresponding to the version listed in this project's `composer.json`,
 2) PHP modules for MySQL or SQLite3 (to provide access to data),
 3) and composer `require` in your composer.json
 ```json
